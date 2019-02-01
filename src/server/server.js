@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const test = require('./routes/test.route'); // Imports routes for the punches
 
 // const users = require('./routes/api/users');
 // const profile = require('./routes/api/profile');
@@ -9,10 +10,14 @@ const passport = require("passport");
 
 const app = express();
 
-app.get("/", (req, res) => res.send("hello world!"));
+// app.get("/", (req, res) => res.send("hello world!"));
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+//ROUTES
+app.use('/api', test);
+
+
 
 // DB Config
 const db = require("./config/keys").mongoURI;
