@@ -22,7 +22,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client-install": "cd .. && cd client && npm install",
-    "client": " cd .. && cd client && npm start " ,
+    "client": " cd .. && cd client && npm start ",
     "dev": "concurrently \"npm run server \" \"npm run client\""
   },
   "author": "",
