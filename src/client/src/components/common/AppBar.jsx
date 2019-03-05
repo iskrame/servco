@@ -4,7 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+// import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = {
   root: {
@@ -19,7 +21,7 @@ const styles = {
   }
 };
 
-function Footer(props) {
+function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
@@ -29,23 +31,28 @@ function Footer(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="Menu"
-          />
+          >
+            {/* <MenuIcon /> */}
+          </IconButton>
           <Typography
             variant="h6"
-            align="center"
+            align="left"
             color="inherit"
             className={classes.grow}
           >
-            Copyright &copy; {new Date().getFullYear()} SPARK TECHNOLOGIES
+            News
           </Typography>
+          <Button color="inherit" onClick={props.onClick}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
 
-Footer.propTypes = {
+ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Footer);
+export default withStyles(styles)(ButtonAppBar);
