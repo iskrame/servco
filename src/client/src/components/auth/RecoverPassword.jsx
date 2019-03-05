@@ -22,7 +22,7 @@ class recoverPassword extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/login");
+      this.props.history.push("/");
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -39,7 +39,7 @@ class recoverPassword extends Component {
     this.props.UpdatePassword(newPassword);
     this.setState({ open: true });
 
-    this.props.history.push("/login");
+    this.props.history.push("/");
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
