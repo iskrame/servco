@@ -57,7 +57,6 @@ export const sendEmail = userData => dispatch => {
 
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
-  console.log(userData);
   axios
     .post("/api/users/login", userData)
     .then(res => {

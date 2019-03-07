@@ -19,7 +19,7 @@ module.exports = function validateUsersRegisterInput(data) {
     errors.password = "Contraseña requerida";
   }
 
-  if (Validator.isLength(data.password, { min: 8, max: 50 })) {
+  if (!Validator.isLength(data.password, { min: 8, max: 50 })) {
     errors.password = "Contraseña tiene que tener entre 8 y 50 caracteres";
   }
 

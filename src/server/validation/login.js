@@ -41,6 +41,9 @@ module.exports = function ValidateLoginInput(data) {
   if (Validator.isEmpty(data.password)) {
     errors.password = "Contraseña requerida";
   }
+  // if (!Validator.isAlphanumeric(data.password)) {
+  //   errors.password = "Contraseña no permite caractere especiales";
+  // }
   //This validation chek if the value of object errors are empty
   //If it have an empty value return true  else return false
   return {

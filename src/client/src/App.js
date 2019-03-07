@@ -46,7 +46,7 @@ class App extends Component {
               path="/recoverPassword/:token/:id"
               component={recoverPassword}
             />
-            <Redirect to="/login"/>
+            <Redirect from="/" to="/login" />
           </div>
         </Router>
       </Provider>
