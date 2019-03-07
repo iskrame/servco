@@ -16,6 +16,11 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  appBar: {
+    top: 'auto',
+    bottom: 0,
+    background: "#1e305f"
   }
 };
 
@@ -23,7 +28,7 @@ function Footer(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ background: "#1e305f" }}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
             className={classes.menuButton}
