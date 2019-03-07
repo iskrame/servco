@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/autActions";
@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Login from "./components/auth/Login";
-import Dashboard from "./dasboard/Dasboard";
+import Dashboard from "./dashboard/Dashboard";
 import recoverPassword from "./components/auth/RecoverPassword";
 import "./App.css";
 
@@ -37,7 +37,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Route exact path="/" component={Login} />
+            <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
@@ -46,6 +46,7 @@ class App extends Component {
               path="/recoverPassword/:token/:id"
               component={recoverPassword}
             />
+            <Redirect to="/login"/>
           </div>
         </Router>
       </Provider>

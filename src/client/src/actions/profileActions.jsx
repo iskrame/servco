@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import {
-  // GET_PROFILE,
+  //GET_PROFILE,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
@@ -10,21 +10,21 @@ import {
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
-  //   dispatch(setProfileLoading());
-  //   axios
-  //     .get("/api/profile")
-  //     .then(res => {
-  //       dispatch({
-  //         type: GET_PROFILE,
-  //         payload: res.data
-  //       });
-  //     })
-  //     .catch(err =>
-  //       dispatch({
-  //         type: GET_PROFILE,
-  //         payload: {}
-  //       })
-  //     );
+    // dispatch(setProfileLoading());
+    // axios
+    //   .get("/api/profile")
+    //   .then(res => {
+    //     dispatch({
+    //       type: GET_PROFILE,
+    //       payload: res.data
+    //     });
+    //   })
+    //   .catch(err =>
+    //     dispatch({
+    //       type: GET_PROFILE,
+    //       payload: {}
+    //     })
+    //   );
 };
 
 export const createProfile = (profileData, history) => dispatch => {
