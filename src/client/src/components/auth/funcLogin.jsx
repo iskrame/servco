@@ -9,6 +9,8 @@ import img from "../../img/logoSPARK132.png";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
 import RecoverPassword from "./Poppop";
+import classNames from "classnames";
+
 const styles = theme => ({
   main: {
     width: "auto",
@@ -43,6 +45,13 @@ const styles = theme => ({
   link: {
     margin: theme.spacing.unit,
     cursor: "pointer"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  dense: {
+    marginTop: 19
   }
 });
 function SignIn(props) {
@@ -57,6 +66,9 @@ function SignIn(props) {
           <FormControl margin="normal" fullWidth>
             <InputLabel htmlFor="email">Usuario</InputLabel>
             <Input
+              inputProps={{
+                maxLength: 50
+              }}
               id="email"
               name="email"
               autoComplete="email"
@@ -68,11 +80,18 @@ function SignIn(props) {
           <FormControl margin="normal" fullWidth>
             <InputLabel htmlFor="password">Contraseña</InputLabel>
             <Input
+              inputProps={{
+                maxLength: 25
+              }}
+              label="Contraseña"
+              className={classNames(classes.textField, classes.dense)}
               name="password"
               type="password"
               id="password"
+              value={props.value}
               autoComplete="current-password"
               onChange={props.onChange}
+              fullWidth
             />
             <span style={{ color: "red" }}>{props.errors.password}</span>
           </FormControl>
@@ -84,7 +103,7 @@ function SignIn(props) {
             className={classes.submit}
             style={{ background: "#941a1f" }}
           >
-            Sign in
+            Ingresar
           </Button>
         </form>
         <form onSubmit={props.onSubmitEmail}>

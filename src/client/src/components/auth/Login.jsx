@@ -8,8 +8,8 @@ import { loginUser, sendEmail } from "../../actions/autActions";
 import SignIn from "./funcLogin";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       recoverEmail: "",
@@ -20,6 +20,7 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onSubmitEmail = this.onSubmitEmail.bind(this);
+    // this.onKeypress = this.onKeypress.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +45,7 @@ class Login extends Component {
   toggleShow = show => {
     this.setState({ show });
   };
+
   onSubmit(e) {
     e.preventDefault();
 
@@ -51,12 +53,15 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
+    console.log(userData);
     this.props.loginUser(userData);
   }
+
   onClose = () => {
     this.toggleShow(false);
     this.setState({ errors: { recoverEmail: "" } });
   };
+
   onSubmitEmail(e) {
     e.preventDefault();
     const userEmail = {
@@ -68,12 +73,14 @@ class Login extends Component {
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    const { value, name } = e.target;
+    if (name === "password") {
+      if (!/[_\W]/.test(e.target.value)) this.setState({ [name]: value });
+    } else this.setState({ [name]: value });
   }
-
+  // onKeypress(e) {}
   render() {
-    const { errors, email, show } = this.state;
-
+    const { errors, email, show, password } = this.state;
     return (
       <div className="login">
         <div className="container">
@@ -84,6 +91,7 @@ class Login extends Component {
                 onChange={this.onChange}
                 errors={errors}
                 data={email}
+                value={password}
                 onClick={() => this.toggleShow(true)}
                 show={show}
                 onClose={this.onClose}
