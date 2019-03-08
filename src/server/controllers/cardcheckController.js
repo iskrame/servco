@@ -64,7 +64,7 @@ const findByPeriod = (body, callback) => {
       let found = -1;
 
       for (check of checks) {
-        if (check.created === created) {
+        if (check.day === created) {
           found = index;
           break;
         }
@@ -73,7 +73,7 @@ const findByPeriod = (body, callback) => {
 
       if (found == -1) {
         checks.push({
-          created: created,
+          day: created,
           punches: [punch]
         });
       } else {
@@ -81,6 +81,7 @@ const findByPeriod = (body, callback) => {
       }
 
     });
+    
 
     callback(checks);
   });
@@ -88,7 +89,13 @@ const findByPeriod = (body, callback) => {
 
 exports.punchtimes = (req, res) => {
   findByPeriod(req.body, checks => {
-    res.json(checks);
+
+    //transform array to csv
+    for(i in checks){
+      checks[i].punches = checks[i].punches.join(",");
+    }
+
+    res.json({GridData : checks});
   })
 }
 
