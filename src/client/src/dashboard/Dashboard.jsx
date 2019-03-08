@@ -31,6 +31,8 @@ import Footer from "../components/layout/footer";
 import Header from "../components/layout/header";
 import { logoutUser } from "../actions/autActions";
 import { clearCurrentProfile } from "../actions/profileActions";
+import VirtualizedTable from '../components/common/VirtualizedTable';
+
 
 const drawerWidth = 240;
 
@@ -238,6 +240,8 @@ class Dashboard extends Component {
             viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
             ultrices sagittis orci a.
           </Typography>
+          <VirtualizedTable/>
+          
         </main>
 
 
