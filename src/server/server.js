@@ -2,8 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const moment = require("moment");
 const test = require("./routes/test.route"); // Imports routes for the punches
 const users = require("./routes/api/usersRoute");
+const cardcheck = require('./routes/api/cardcheckRoute');
+
 
 // const users = require('./routes/api/users');
 // const profile = require('./routes/api/profile');
@@ -14,6 +17,11 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//Moment Config
+moment.updateLocale("es",{
+  monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+});
 
 // DB Config
 const db = require("./config/keys").mongoURI;
@@ -32,8 +40,9 @@ require("./config/passport")(passport);
 
 // // // // Use Routes
 // //ROUTES
-app.use("/api", test);
+//app.use("/api", test);
 app.use("/api/users", users);
+app.use("/api/cardcheck", cardcheck);
 
 const port = process.env.PORT || 5000;
 
