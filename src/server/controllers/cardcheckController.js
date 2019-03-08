@@ -34,12 +34,12 @@ const findByPeriod = (body, callback) => {
   if (body.start && body.end) {
     //get the period based on what's requested
     start = moment(body.start);
-    end = moment(body.end);
+    end = moment(body.end).endOf('day');
   } else {
     //get the period based on today's date
     const period = getPeriod(moment());
     start = period.start;
-    end = period.end;
+    end = period.end.endOf('day');
   }
 
   Cardcheck.find({
