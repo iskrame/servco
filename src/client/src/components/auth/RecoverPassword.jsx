@@ -21,6 +21,7 @@ class recoverPassword extends Component {
     this.props.CurrentInfo(this.props.match.params.token);
   }
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
@@ -39,10 +40,12 @@ class recoverPassword extends Component {
     this.props.UpdatePassword(newPassword);
     this.setState({ open: true });
 
-    this.props.history.push("/login");
+    // this.props.history.push("/");
   }
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    console.log(e.target.value);
+    if (!/[_\W]/.test(e.target.value))
+      this.setState({ [e.target.name]: e.target.value });
   }
   render() {
     const { errors } = this.state;
@@ -51,7 +54,11 @@ class recoverPassword extends Component {
       <div className="login">
         <div className="container">
           <form onSubmit={this.onSubmit}>
-            <RecoverForm errors={errors} onChange={this.onChange} />
+            <RecoverForm
+              errors={errors}
+              onChange={this.onChange}
+              value={this.state}
+            />
           </form>
         </div>
       </div>

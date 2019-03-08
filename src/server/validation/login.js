@@ -26,7 +26,7 @@ module.exports = function ValidateLoginInput(data) {
   // its a valid email
   //If not a valid email return an Error
   if (!Validator.isEmail(data.email)) {
-    errors.email = "Formato de correo invalido";
+    errors.email = "Formato de correo incorrecto";
   }
   //This validation chek if the input in the field  of email
   // its empty

@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/autActions";
@@ -28,7 +33,7 @@ if (localStorage.jwtToken) {
     // Clear current Profile
     // store.dispatch(clearCurrentProfile());
     // Redirect to login
-    window.location.href = "/login";
+    window.location.href = "/";
   }
 }
 class App extends Component {
@@ -37,16 +42,18 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Route exact path="/login" component={Login} />
             <Switch>
+              <Route path="/login" component={Login} />
+
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+
+              <Route
+                exact
+                path="/recoverPassword/:token/:id"
+                component={recoverPassword}
+              />
+              <Redirect from="/" exact to="/login" />
             </Switch>
-            <Route
-              exact
-              path="/recoverPassword/:token/:id"
-              component={recoverPassword}
-            />
-            <Redirect from="/" to="/login" />
           </div>
         </Router>
       </Provider>

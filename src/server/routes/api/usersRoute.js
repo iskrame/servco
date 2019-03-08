@@ -31,19 +31,20 @@ router.post("/recoverpassword", User.recoverPassword);
 // @access  private only for specific users
 router.get(
   "/current/:token",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const errors = {};
+  User.getUserInfo
+  // passport.authenticate("jwt", { session: false }),
+  // (req, res) => {
+  //   const errors = {};
 
-    Users.findOne({ _id: req.id })
-      .then(user => {
-        if (!user) {
-          return res.status(404);
-        }
-        res.json(user);
-      })
-      .catch(err => res.status(404).json(err));
-  }
+  //   Users.findOne({ _id: req.id })
+  //     .then(user => {
+  //       if (!user) {
+  //         return res.status(404);
+  //       }
+  //       res.json(user);
+  //     })
+  //     .catch(err => res.status(404).json(err));
+  // }
 );
 
 module.exports = router;

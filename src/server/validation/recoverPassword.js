@@ -9,32 +9,29 @@ module.exports = function validateRecoverPasswordInput(data) {
     ? data.passwordConfirm
     : "";
 
-  //to check if the password field is not empty
-  if (Validator.isEmpty(data.password)) {
-    errors.password = "Conraseña Requerida";
-  }
+  // to check if the password field is not empty
+  // if (Validator.isEmpty(data.password)) {
+  //   errors.password = "Conraseña Requerida";
+  // }
   //to check if the password lenght is between 6 and 30 characters
   if (
-    !Validator.isLength(data.password, { min: 8, max: 25 }) &&
-    !Validator.isEmpty(data.password)
+    !Validator.isLength(data.password, { min: 8, max: 25 }) ||
+    !Validator.isLength(data.passwordConfirm, { min: 8, max: 25 })
   ) {
-    errors.password = "La cotraseña debe contener entre 8 y 25 caracteres";
-  }
-
-  //to check if confirm password field is not empty
-  console.log(data.passwordConfirm);
-  if (Validator.isEmpty(data.passwordConfirm)) {
-    console.log(data.passwordConfirm);
-    errors.passwordConfirm = "Confirmar contraseña requerido";
+    errors.passwordConfirm = "Formato de contraseñas invalido";
   }
 
   //this is for check if the both passwords are equals
+  if (!Validator.equals(data.password, data.passwordConfirm)) {
+    errors.passwordConfirm = "Las contraseñas no coinciden";
+  }
+  //to check if confirm password field is not empty
   if (
-    !Validator.equals(data.password, data.passwordConfirm) &&
-    !Validator.isEmpty(data.passwordConfirm)
+    Validator.isEmpty(data.passwordConfirm) ||
+    Validator.isEmpty(data.password)
   ) {
-    console.log(1234);
-    errors.passwordConfirm = "Las contraseñas deben de coincidir";
+    console.log(data.passwordConfirm);
+    errors.passwordConfirm = "No se permiten campos vacíos";
   }
   return {
     errors,

@@ -101,7 +101,7 @@ function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            style={{ background: "#941a1f" }}
+            style={{ background: "#941a1f", textTransform: "none" }}
           >
             Ingresar
           </Button>

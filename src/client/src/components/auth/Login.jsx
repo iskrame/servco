@@ -6,6 +6,7 @@ import { loginUser, sendEmail } from "../../actions/autActions";
 // import Joi from "joi-browser";
 //import TextFieldGroup from "../common/TextFieldGroup";
 import SignIn from "./funcLogin";
+import Dialog from "../common/Dialog";
 
 class Login extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class Login extends Component {
       recoverEmail: "",
       password: "",
       errors: {},
-      show: false
+      show: false,
+      open: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -38,7 +40,23 @@ class Login extends Component {
       this.setState({ recoverEmail: "" });
     }
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({
+        errors: nextProps.errors,
+        password: ""
+      });
+
+      console.log();
+      if (
+        nextProps.errors.emailnotFound === "Usuario no encontrado" ||
+        nextProps.errors.wrongPassword === "Contraseña incorrecta"
+      ) {
+        this.setState({
+          open: true,
+          errors: { message: "Usuario y/o contraseña incorrectos." }
+        });
+      } else {
+        this.setState({ open: false });
+      }
     }
   }
 
@@ -71,7 +89,9 @@ class Login extends Component {
 
     if (!this.state.errors) this.toggleShow(false);
   }
-
+  handleClose = () => {
+    this.setState({ open: false, errors: { message: "" } });
+  };
   onChange(e) {
     const { value, name } = e.target;
     if (name === "password") {
@@ -96,6 +116,11 @@ class Login extends Component {
                 show={show}
                 onClose={this.onClose}
                 onSubmitEmail={this.onSubmitEmail}
+              />
+              <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                errors={errors}
               />
             </div>
           </div>

@@ -53,41 +53,56 @@ function RecoverForm(props) {
       <CssBaseline />
       <Paper className={classes.paper}>
         <img src={img} alt="..." />
-        <form className={classes.form} onSubmit={props.onSubmit}>
-          <FormControl margin="normal" fullWidth>
-            <InputLabel htmlFor="password">Contraseña</InputLabel>
-            <Input
-              id="password"
-              type="password"
-              name="password"
-              autoFocus
-              onChange={props.onChange}
-            />
-            <span style={{ color: "red" }}>{props.errors.password}</span>
-          </FormControl>
-          <FormControl margin="normal" fullWidth>
-            <InputLabel htmlFor="passwordConfirm">
-              Confirmar Contraseña
-            </InputLabel>
-            <Input
-              name="passwordConfirm"
-              type="password"
-              id="passwordConfirm"
-              onChange={props.onChange}
-            />
-            <span style={{ color: "red" }}>{props.errors.passwordConfirm}</span>
-          </FormControl>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            style={{ background: "#941a1f" }}
-          >
-            Cambiar Contraseña
-          </Button>
-        </form>
+        <br />
+        <h4>Recuperación de contraseña</h4>
+        <small>
+          * la contraseña debera tener <strong>mínimo 8</strong> y{" "}
+          <strong>maximo 25 </strong>
+          caracteres{" "}
+        </small>
+        {/* <form className={classes.form} onSubmit={props.onSubmit}> */}
+        <FormControl margin="normal" fullWidth>
+          <InputLabel htmlFor="password">Agregue nueva contraseña</InputLabel>
+          <Input
+            inputProps={{
+              maxLength: 25
+            }}
+            id="password"
+            type="password"
+            name="password"
+            autoFocus
+            value={props.value.password}
+            onChange={props.onChange}
+          />
+          {/* <span style={{ color: "red" }}>{props.errors.password}</span> */}
+        </FormControl>
+        <FormControl margin="normal" fullWidth>
+          <InputLabel htmlFor="passwordConfirm">
+            Repita la nueva contraseña
+          </InputLabel>
+          <Input
+            inputProps={{
+              maxLength: 25
+            }}
+            name="passwordConfirm"
+            type="password"
+            id="passwordConfirm"
+            value={props.value.passwordConfirm}
+            onChange={props.onChange}
+          />
+          <span style={{ color: "red" }}>{props.errors.passwordConfirm}</span>
+        </FormControl>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          style={{ background: "#941a1f", textTransform: "none" }}
+        >
+          Cambiar Contraseña
+        </Button>
+        {/* </form> */}
       </Paper>
     </main>
   );

@@ -95,8 +95,9 @@ export const UpdatePassword = userdata => dispatch => {
 };
 
 export const CurrentInfo = userdata => dispatch => {
+  console.log(userdata);
   axios
-    .get("/api/users/current", userdata)
+    .get("/api/users/current/:token", userdata)
     .then(res => {
       console.log("...Desde route");
       setAuthToken(userdata);

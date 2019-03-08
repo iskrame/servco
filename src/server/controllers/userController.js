@@ -63,7 +63,7 @@ exports.getUserLogin = function(req, res) {
   Users.findOne({ email }).then(user => {
     //Check if the email is in the data base
     if (!user) {
-      errors.email = "Usuario no encontrado";
+      errors.emailnotFound = "Usuario no encontrado";
       return res.status(404).json(errors);
     }
     //Check if the password is the correct password
@@ -85,7 +85,7 @@ exports.getUserLogin = function(req, res) {
           }
         );
       } else {
-        errors.password = "Contraseña incorrecta";
+        errors.wrongPassword = "Contraseña incorrecta";
         res.status(400).json(errors);
       }
     });
