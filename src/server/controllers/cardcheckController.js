@@ -1,5 +1,4 @@
 const moment = require('moment');
-const passport = require('passport');
 const Cardcheck = require('./../models/cardchecks');
 
 /**
@@ -87,49 +86,56 @@ const findByPeriod = (body, callback) => {
   });
 }
 
-exports.punchtimes = (req, res) => {
-  findByPeriod(req.body, checks => {
+exports.punchtimes = (req, callback) => {
+  return new Promise( (resolve, reject) => {
+    findByPeriod(req.body, checks => {
 
-    //transform array to csv
-    for(i in checks){
-      checks[i].punches = checks[i].punches.join(",");
-    }
+      //transform array to csv
+      for(i in checks){
+        checks[i].punches = checks[i].punches.join(",");
+      }
 
-    res.json({GridData : checks});
-  })
+      return resolve(checks);
+    })
+  });
 }
 
-exports.timespent = (req, res) => {
-  findByPeriod(req.body, checks => {
-    let millisCounter = 0;
-    let checkin = null;
-    let checkout = null;
+exports.timespent = (req) => {
+  return new Promise((resolve, reject) =>{
+    findByPeriod(req.body, checks => {
+      let millisCounter = 0;
+      let checkin = null;
+      let checkout = null;
 
-    //gets the difference in milliseconds 
-    //of consecutive punches
-    for (let check of checks) {
-      let i = 1;
-      for (let punch of check.punches) {
-        if (i % 2 != 0) {
-          //check in
-          checkin = moment(punch, 'hh:mm:ss');
-        } else {
-          //check-out
-          checkout = moment(punch, 'hh:mm:ss');
-          millisCounter += Math.abs(checkin.diff(checkout));
+      //gets the difference in milliseconds 
+      //of consecutive punches
+      for (let check of checks) {
+        let i = 1;
+        for (let punch of check.punches) {
+          if (i % 2 != 0) {
+            //check in
+            checkin = moment(punch, 'hh:mm:ss');
+          } else {
+            //check-out
+            checkout = moment(punch, 'hh:mm:ss');
+            millisCounter += Math.abs(checkin.diff(checkout));
+          }
+          i++;
         }
-        i++;
       }
-    }
 
-    let sec = millisCounter / 1000;
-    let hour = parseInt(sec / 3600);
-    sec = sec % 3600;
-    let min = parseInt(sec / 60);
-    sec = parseInt(sec % 60);
+      let sec = millisCounter / 1000;
+      let hour = parseInt(sec / 3600);
+      sec = sec % 3600;
+      let min = parseInt(sec / 60);
+      sec = parseInt(sec % 60);
 
-    res.json({ timespent: `${hour}h ${min}m ${sec}s` });
+      return resolve({timespent: `${hour}h ${min}m ${sec}s`});
+    });
 
   });
   
 }
+
+exports.findByPeriod = findByPeriod;
+exports.getPeriod = getPeriod;
