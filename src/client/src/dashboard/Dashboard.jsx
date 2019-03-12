@@ -25,6 +25,10 @@ import AccessTime from '@material-ui/icons/AccessTime';
 import img from "../img/logoSPARK132.png";
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import Settings from '@material-ui/icons/Settings';
+import Person from '@material-ui/icons/Person';
+import People from '@material-ui/icons/People';
+import TableChart from '@material-ui/icons/TableChart';
 
 
 import Footer from "../components/layout/footer";
@@ -70,8 +74,9 @@ const styles = theme => ({
     marginLeft: -drawerWidth,
   },
   imgLogo: {
-    width: '60%',
-    height: '60%'
+    width: '50%',
+    height: '60%',
+    marginRight: '10%'
   },
   avatar: {
     margin: 10,
@@ -190,24 +195,36 @@ class Dashboard extends Component {
             </Typography>
           </Grid>
           <Divider />
+            <List>
+                <ListItem key="Menu Principal">
+                  <ListItemText classes={{primary: classes.menuItem}} primary="Menu Principal" />
+                </ListItem>
+            </List>
+          <Divider />
           <List>
               <ListItem button key="Dashboard">
-                <ListItemIcon className={classes.menuItem}><InboxIcon /></ListItemIcon>
+                <ListItemIcon className={classes.menuItem}><TableChart /></ListItemIcon>
                 <ListItemText classes={{primary: classes.menuItem}} primary="Dashboard" />
               </ListItem>
               <ListItem button key="Perfil">
-                <ListItemIcon className={classes.menuItem}><AccessTime /></ListItemIcon>
+                <ListItemIcon className={classes.menuItem}><Person /></ListItemIcon>
                 <ListItemText primary="Perfil" classes={{primary: classes.menuItem}}/>
               </ListItem>
           </List>
           <Divider />
           <List >
-            {['Colaboradores', 'Reportes', 'Configuraciones'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon className={classes.menuItem}>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} classes={{primary: classes.menuItem}}/>
+              <ListItem button key="Colaboradores">
+                <ListItemIcon className={classes.menuItem}><People /></ListItemIcon>
+                <ListItemText classes={{primary: classes.menuItem}} primary="Colaboradores" />
               </ListItem>
-            ))}
+              <ListItem button key="Reportes">
+                <ListItemIcon className={classes.menuItem}><AccessTime /></ListItemIcon>
+                <ListItemText classes={{primary: classes.menuItem}} primary="Reportes"/>
+              </ListItem>
+              <ListItem button key="Configuraciones">
+                <ListItemIcon className={classes.menuItem}><Settings /></ListItemIcon>
+                <ListItemText classes={{primary: classes.menuItem}} primary="Configuraciones"/>
+              </ListItem>
           </List>
         </Drawer>
         <main
