@@ -133,17 +133,22 @@ exports.sendingEMail = function(req, res) {
     var mailOptions = {
       from: "Servicios al Colaborador",
       to: user.email,
-      subject: "Recuperar Contraseña",
-      text: `Hola,
-        Recibimos la solicitud de recuperacion de contraseña para su cuenta en 'SERVCO'
-        \nPara concluir el proceso y cambiar su contraseña, diríjase a la siguiente dirección http:localhost:3000/recoverpassword/Bearer ${token}/${
-        user._id
-      }
-        \nEn la mayoría de programas de correo electrónico el enlace anterior debería aparecer
-        \nen azul y puede hacer clic sobre él. Si no funcionara, córtelo y péguelo en la ventana de direcciones de su navegador.
-        \nSi necesita ayuda adicional, póngase en contacto con el administrador
-        \nEnrique Perez Rul
-        \ncorreoElectronicoAdministrador.`
+      subject: "Recuperación de contraseña",
+      text: `
+      Hola, Alejandro Martinez.
+        
+      Recibimos la solicitud de recuperacion de contraseña para su cuenta en 'Servicios al colaborador'
+        
+      Para concluir el proceso y cambiar su contraseña, diríjase a la siguiente dirección:
+        
+      http://10.0.1.89:3000/recoverpassword/Bearer${token}/${user._id}
+        
+      En la mayoría de programas de correo electrónico el enlace anterior debería aparecer en azul y puede hacer clic sobre él. Si no funcionara, córtelo y péguelo en la ventana de direcciones de su navegador.        
+        
+      Si necesita ayuda adicional, póngase en contacto con el administrador
+      
+      Enrique Perez Rul 
+      correoElectronicoAdministrador.`
     };
     trasnporter.sendMail(mailOptions, function(err, info) {
       if (err) {

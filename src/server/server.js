@@ -5,7 +5,7 @@ const passport = require("passport");
 const moment = require("moment");
 const test = require("./routes/test.route"); // Imports routes for the punches
 const users = require("./routes/api/usersRoute");
-const cardcheck = require('./routes/api/cardcheckRoute');
+const dashboard = require('./routes/api/dashboardRoute');
 
 
 // const users = require('./routes/api/users');
@@ -42,7 +42,7 @@ require("./config/passport")(passport);
 // //ROUTES
 //app.use("/api", test);
 app.use("/api/users", users);
-app.use("/api/cardcheck", cardcheck);
+app.use("/api/dashboard", dashboard);
 
 const port = process.env.PORT || 5000;
 

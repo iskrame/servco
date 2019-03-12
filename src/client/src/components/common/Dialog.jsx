@@ -5,7 +5,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Error from "@material-ui/icons/Error";
 class AlertDialog extends React.Component {
   // class AlertDialog(props) {
   //   state = {
@@ -22,7 +21,7 @@ class AlertDialog extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            <span style={{ color: "red" }}>{"Error"}</span>
+            <span style={{ color: "red" }}>Acceso denegado</span>
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
@@ -37,7 +36,11 @@ class AlertDialog extends React.Component {
             <Button
               onClick={this.props.onClose}
               color="white"
-              style={{ background: "#941a1f", color: "white" }}
+              style={{
+                background: "#941a1f",
+                color: "white",
+                textTransform: "none"
+              }}
               autoFocus
             >
               Cerrar

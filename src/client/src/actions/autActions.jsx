@@ -84,6 +84,7 @@ export const UpdatePassword = userdata => dispatch => {
   axios
     .post("/api/users/recoverpassword", userdata)
     .then(res => {
+      setAuthToken(false);
       dispatch(setCurrentUser({}));
     })
     .catch(err =>
@@ -95,24 +96,22 @@ export const UpdatePassword = userdata => dispatch => {
 };
 
 export const CurrentInfo = userdata => dispatch => {
-  console.log(userdata);
-  axios
-    .get("/api/users/current/:token", userdata)
-    .then(res => {
-      console.log("...Desde route");
-      setAuthToken(userdata);
-      // Decode token to get user data
-      const decoded = jwt_decode(userdata); // Set current user
-      dispatch(setUserInfo(decoded));
-      setAuthToken(false);
-      dispatch(setCurrentUser({}));
-    })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+  console.log(userdata + " current Ingo");
+  axios.get("/api/users/current/:token", userdata).then(res => {
+    console.log("...Desde route");
+    setAuthToken(userdata);
+    // Decode token to get user data
+    const decoded = jwt_decode(userdata); // Set current user
+    dispatch(setUserInfo(decoded));
+
+    dispatch(setCurrentUser({}));
+  });
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response.data
+  //   })
+  // );
 };
 
 // Set logged in user
