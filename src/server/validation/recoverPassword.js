@@ -18,7 +18,8 @@ module.exports = function validateRecoverPasswordInput(data) {
     !Validator.isLength(data.password, { min: 8, max: 25 }) ||
     !Validator.isLength(data.passwordConfirm, { min: 8, max: 25 })
   ) {
-    errors.passwordConfirm = "Formato de contraseñas invalido";
+    errors.passwordConfirm =
+      "* la contraseña deberá tener mínimo 8 y máximo 25 caracteres";
   }
 
   //this is for check if the both passwords are equals

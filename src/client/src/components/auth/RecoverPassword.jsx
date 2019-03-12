@@ -5,8 +5,8 @@ import { UpdatePassword } from "../../actions/autActions";
 import RecoverForm from "../functions/formRecoverPassword";
 import { CurrentInfo } from "./../../actions/autActions";
 class recoverPassword extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       password: "",
       passwordConfirm: "",
@@ -16,13 +16,14 @@ class recoverPassword extends Component {
     super();
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    // this.onCancel = this.onCancel.bind(this);
   }
   componentDidMount() {
     this.props.CurrentInfo(this.props.match.params.token);
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    if (nextProps.auth.isAuthenticated) {
+    console.log(nextProps.auth.isAuthenticated);
+    if (!nextProps.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
     if (nextProps.errors) {
@@ -42,8 +43,13 @@ class recoverPassword extends Component {
 
     // this.props.history.push("/");
   }
+  onClose = () => {
+    console.log("....CancelEvent");
+    // e.preventDefault();
+    this.props.history.push("/login");
+  };
+
   onChange(e) {
-    console.log(e.target.value);
     if (!/[_\W]/.test(e.target.value))
       this.setState({ [e.target.name]: e.target.value });
   }
@@ -58,6 +64,7 @@ class recoverPassword extends Component {
               errors={errors}
               onChange={this.onChange}
               value={this.state}
+              onClose={this.onClose}
             />
           </form>
         </div>

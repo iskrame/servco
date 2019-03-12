@@ -85,6 +85,7 @@ class Login extends Component {
     const userEmail = {
       recoverEmail: this.state.recoverEmail
     };
+    this.setState({ errors: { recoverEmail: "" } });
     this.props.sendEmail(userEmail);
 
     if (!this.state.errors) this.toggleShow(false);
@@ -98,6 +99,7 @@ class Login extends Component {
       if (!/[_\W]/.test(e.target.value)) this.setState({ [name]: value });
     } else this.setState({ [name]: value });
   }
+
   // onKeypress(e) {}
   render() {
     const { errors, email, show, password } = this.state;
@@ -115,6 +117,7 @@ class Login extends Component {
                 onClick={() => this.toggleShow(true)}
                 show={show}
                 onClose={this.onClose}
+                onCancel={this.onCancel}
                 onSubmitEmail={this.onSubmitEmail}
               />
               <Dialog

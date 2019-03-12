@@ -18,7 +18,7 @@ module.exports = function ValidateSendingMailInput(data) {
   // its a valid email
   //If not a valid email return an Error
   if (!Validator.isEmail(data.recoverEmail)) {
-    errorsEmail.recoverEmail = "Formato de correo  invalido";
+    errorsEmail.recoverEmail = "Formato de correo incorrecto";
   }
   //This validation chek if the input in the field  of email
   // its empty
