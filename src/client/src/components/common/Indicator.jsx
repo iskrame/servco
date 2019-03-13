@@ -2,17 +2,9 @@ import React from 'react'
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import HourglassFullIcon from '@material-ui/icons/HourglassFull';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import Icon from '@material-ui/core/Icon';
 
 import { withStyles } from '@material-ui/core/styles';
-
-const icons = {
-  hourglass_full: <HourglassFullIcon />,
-  hourglass_empty: <HourglassEmptyIcon />,
-  access_time: <AccessTimeIcon />
-}
 
 const Indicator = ({indicator}) => {
   return(
@@ -27,7 +19,8 @@ const Indicator = ({indicator}) => {
               justifyContent: 'center'              
             }}
           >
-              {icons[indicator.logo]}
+            <Icon>{indicator.logo}</Icon>
+
           </Grid>
           <Grid item xs = {9} style = {{
             fontSize: '.8rem'
