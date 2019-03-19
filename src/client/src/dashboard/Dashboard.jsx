@@ -6,35 +6,36 @@ import { getCurrentProfile, deleteAccount } from "../actions/profileActions";
 // import { Link } from "react-router-dom";
 // import ProfileActions from "./ProfileActions";
 
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import AccessTime from '@material-ui/icons/AccessTime';
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+import AccessTime from "@material-ui/icons/AccessTime";
 import img from "../img/logoSPARK132.png";
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
-import Settings from '@material-ui/icons/Settings';
-import Person from '@material-ui/icons/Person';
-import People from '@material-ui/icons/People';
-import TableChart from '@material-ui/icons/TableChart';
-
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
+import Settings from "@material-ui/icons/Settings";
+import Person from "@material-ui/icons/Person";
+import People from "@material-ui/icons/People";
+import TableChart from "@material-ui/icons/TableChart";
 
 import Footer from "../components/layout/footer";
 import Header from "../components/layout/header";
 import { logoutUser } from "../actions/autActions";
 import { clearCurrentProfile } from "../actions/profileActions";
+import VirtualizedTable from "../components/common/VirtualizedTable";
+import TabInfo from "../components/collaborators/TabInfo";
 import { DashboardContentWrapper } from '../dashboard/DashboardContentWrapper';
 
 
@@ -42,60 +43,57 @@ const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: "flex"
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
-    
+    flexShrink: 0
   },
   drawerPaper: {
     width: drawerWidth,
     background: "#7a797a"
   },
   menuItem: {
-      color: 'white'
+    color: "white"
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
+    display: "flex",
+    alignItems: "center",
+    padding: "0 8px",
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     background: "#ffffff"
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth,
+    marginLeft: -drawerWidth
   },
   imgLogo: {
-    width: '50%',
-    height: '60%',
-    marginRight: '10%'
+    width: "50%",
+    height: "60%",
+    marginRight: "10%"
   },
   avatar: {
-    margin: 10,
+    margin: 10
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginLeft: 0,
+    marginLeft: 0
   }
 });
 
-
-
 class Dashboard extends Component {
-
   state = {
     open: false,
+    item: 0
   };
 
   handleDrawerOpen = () => {
@@ -118,11 +116,115 @@ class Dashboard extends Component {
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
+  onListItemClick = item => {
+    console.log(item);
+    const open = false;
+    this.setState({ item, open });
+  };
   render() {
-
     const { classes, theme } = this.props;
     const { open } = this.state;
-    // const { user } = this.props.auth;
+    let dashboardContent;
+    switch (this.state.item) {
+      case 0:
+        dashboardContent = (
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open
+            })}
+          >
+            <div className={classes.drawerHeader} />
+            <Typography paragraph>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
+              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+              gravida rutrum quisque non tellus. Convallis convallis tellus id
+              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
+              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
+              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+              Metus vulputate eu scelerisque felis imperdiet proin fermentum
+              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
+              lobortis feugiat vivamus at augue. At augue eget arcu dictum
+              varius duis at consectetur lorem. Velit sed ullamcorper morbi
+              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
+            </Typography>
+            <Typography paragraph>
+              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
+              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
+              elementum integer enim neque volutpat ac tincidunt. Ornare
+              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
+              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
+              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
+              ornare massa eget egestas purus viverra accumsan in. In hendrerit
+              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
+              aliquam sem et tortor. Habitant morbi tristique senectus et.
+              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
+              aenean euismod elementum nisi quis eleifend. Commodo viverra
+              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
+              aliquam ultrices sagittis orci a.
+            </Typography>
+            <VirtualizedTable />
+          </main>
+        );
+
+        break;
+      case 1:
+        dashboardContent = (
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open
+            })}
+            style={{ width: 1500 }}
+          >
+            <div className={classes.drawerHeader} />
+            <h1>Perfil</h1>
+          </main>
+        );
+        break;
+      case 2:
+        dashboardContent = (
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open
+            })}
+            style={{ width: 1500 }}
+          >
+            <div className={classes.drawerHeader} />
+            <h1>Colaboradores</h1>
+            {/* <TabInfo /> */}
+          </main>
+        );
+        break;
+      case 3:
+        dashboardContent = (
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open
+            })}
+            style={{ width: 1500 }}
+          >
+            <div className={classes.drawerHeader} />
+            <h1>Reportes</h1>
+          </main>
+        );
+        break;
+      case 4:
+        dashboardContent = (
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open
+            })}
+            style={{ width: 1500 }}
+          >
+            <div className={classes.drawerHeader} />
+            <h1>Configuracion</h1>
+          </main>
+        );
+        break;
+      default:
+        break;
+    } // const { user } = this.props.auth;
 
     //const { profile, loading } = this.props.profile;
 
@@ -164,80 +266,167 @@ class Dashboard extends Component {
     //     );
     //   }
     // }
+
+    console.log(dashboardContent);
     return (
       <div className="dashboard">
-
         <div className="container">
-          
-        <CssBaseline />
-        
-        <Header onClick={this.onLogoutClick.bind(this)} toggleMenu={this.handleDrawerOpen.bind(this)} open={open}/>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <img src={img} alt="..." className={classes.imgLogo}/>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </div>
-          <Divider />
-          <Grid container justify="center" alignItems="center">
-            <Avatar alt="Usuario" className={classes.avatar}>A</Avatar>
-            <Typography variant="h8" className={classes.menuItem} noWrap>
-              Alejandro Martinez 
-            </Typography>
-          </Grid>
-          <Divider />
+          <CssBaseline />
+
+          <Header
+            onClick={this.onLogoutClick.bind(this)}
+            toggleMenu={this.handleDrawerOpen.bind(this)}
+            open={open}
+          />
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <img src={img} alt="..." className={classes.imgLogo} />
+              <IconButton onClick={this.handleDrawerClose}>
+                {theme.direction === "ltr" ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </div>
+            <Divider />
+            <Grid container justify="center" alignItems="center">
+              <Avatar alt="Usuario" className={classes.avatar}>
+                A
+              </Avatar>
+              <Typography variant="h8" className={classes.menuItem} noWrap>
+                Alejandro Martinez
+              </Typography>
+            </Grid>
+            <Divider />
             <List>
-                <ListItem key="Menu Principal">
-                  <ListItemText classes={{primary: classes.menuItem}} primary="Menu Principal" />
-                </ListItem>
+              <ListItem key="Menu Principal">
+                <ListItemText
+                  classes={{ primary: classes.menuItem }}
+                  primary="Menu Principal"
+                />
+              </ListItem>
             </List>
-          <Divider />
-          <List>
-              <ListItem button key="Dashboard">
-                <ListItemIcon className={classes.menuItem}><TableChart /></ListItemIcon>
-                <ListItemText classes={{primary: classes.menuItem}} primary="Dashboard" />
+            <Divider />
+            <List>
+              <ListItem
+                button
+                onClick={() => this.onListItemClick(0)}
+                key="Dashboard"
+              >
+                <ListItemIcon className={classes.menuItem}>
+                  <TableChart />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.menuItem }}
+                  primary="Dashboard"
+                />
               </ListItem>
-              <ListItem button key="Perfil">
-                <ListItemIcon className={classes.menuItem}><Person /></ListItemIcon>
-                <ListItemText primary="Perfil" classes={{primary: classes.menuItem}}/>
+              <ListItem
+                button
+                key="Perfil"
+                onClick={() => this.onListItemClick(1)}
+              >
+                <ListItemIcon className={classes.menuItem}>
+                  <Person />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Perfil"
+                  classes={{ primary: classes.menuItem }}
+                />
               </ListItem>
-          </List>
-          <Divider />
-          <List >
-              <ListItem button key="Colaboradores">
-                <ListItemIcon className={classes.menuItem}><People /></ListItemIcon>
-                <ListItemText classes={{primary: classes.menuItem}} primary="Colaboradores" />
+            </List>
+            <Divider />
+            <List>
+              <ListItem
+                button
+                key="Colaboradores"
+                onClick={() => this.onListItemClick(2)}
+              >
+                <ListItemIcon className={classes.menuItem}>
+                  <People />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.menuItem }}
+                  primary="Colaboradores"
+                />
               </ListItem>
-              <ListItem button key="Reportes">
-                <ListItemIcon className={classes.menuItem}><AccessTime /></ListItemIcon>
-                <ListItemText classes={{primary: classes.menuItem}} primary="Reportes"/>
+              <ListItem
+                button
+                key="Reportes"
+                onClick={() => this.onListItemClick(3)}
+              >
+                <ListItemIcon className={classes.menuItem}>
+                  <AccessTime />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.menuItem }}
+                  primary="Reportes"
+                />
               </ListItem>
-              <ListItem button key="Configuraciones">
-                <ListItemIcon className={classes.menuItem}><Settings /></ListItemIcon>
-                <ListItemText classes={{primary: classes.menuItem}} primary="Configuraciones"/>
+              <ListItem
+                button
+                key="Configuraciones"
+                onClick={() => this.onListItemClick(4)}
+              >
+                <ListItemIcon className={classes.menuItem}>
+                  <Settings />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.menuItem }}
+                  primary="Configuraciones"
+                />
               </ListItem>
-          </List>
-        </Drawer>
-          <main
+            </List>
+          </Drawer>
+          {dashboardContent}
+          {/* <main
             className={classNames(classes.content, {
-              [classes.contentShift]: open,
+              [classes.contentShift]: open
             })}
           >
             <div className={classes.drawerHeader} />
-            
-            <DashboardContentWrapper />
-            
-          </main>
-
+            <Typography paragraph>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
+              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+              gravida rutrum quisque non tellus. Convallis convallis tellus id
+              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
+              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
+              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+              Metus vulputate eu scelerisque felis imperdiet proin fermentum
+              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
+              lobortis feugiat vivamus at augue. At augue eget arcu dictum
+              varius duis at consectetur lorem. Velit sed ullamcorper morbi
+              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
+            </Typography>
+            <Typography paragraph>
+              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
+              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
+              elementum integer enim neque volutpat ac tincidunt. Ornare
+              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
+              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
+              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
+              ornare massa eget egestas purus viverra accumsan in. In hendrerit
+              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
+              aliquam sem et tortor. Habitant morbi tristique senectus et.
+              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
+              aenean euismod elementum nisi quis eleifend. Commodo viverra
+              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
+              aliquam ultrices sagittis orci a.
+            </Typography>
+            <VirtualizedTable />
+            <TabInfo />
+          </main> */}
         </div>
         <Footer />
       </div>
