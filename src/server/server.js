@@ -6,6 +6,7 @@ const moment = require("moment");
 const test = require("./routes/test.route"); // Imports routes for the punches
 const users = require("./routes/api/usersRoute");
 const dashboard = require('./routes/api/dashboardRoute');
+const cors = require('cors');
 
 
 // const users = require('./routes/api/users');
@@ -13,6 +14,9 @@ const dashboard = require('./routes/api/dashboardRoute');
 // const posts = require('./routes/api/posts');
 
 const app = express();
+
+//Enable cors
+app.use(cors());
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

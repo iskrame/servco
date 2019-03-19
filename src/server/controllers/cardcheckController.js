@@ -29,7 +29,7 @@ const getPeriod = (day) => {
 const findByPeriod = (body, callback) => {
   let start = null;
   let end = null;
-
+  
   if (body.start && body.end) {
     //get the period based on what's requested
     start = moment(body.start);
@@ -41,11 +41,17 @@ const findByPeriod = (body, callback) => {
     end = period.end.endOf('day');
   }
 
-  Cardcheck.find({
+  Cardcheck.find({ 
     idZkTeco: body.idZkTeco,
     created: {
       $gte: start,
       $lte: end
+    }
+  },
+  null, //columns you want to collect (null to take all of them)
+  {
+    sort:{
+      created: 'asc'
     }
   }, (err, cardchecks) => {
     if (err) {
@@ -57,7 +63,7 @@ const findByPeriod = (body, callback) => {
     //transforms cardchecks into punches
     cardchecks.map(cardcheck => {
       const created = moment(cardcheck.get('created')).format("DD/MMM/YYYY");
-      const punch = moment(cardcheck.get('created')).format("hh:mm:ss");
+      const punch = moment(cardcheck.get('created')).format("HH:mm:ss");
 
       let index = 0;
       let found = -1;
@@ -114,10 +120,10 @@ exports.timespent = (req) => {
         for (let punch of check.punches) {
           if (i % 2 != 0) {
             //check in
-            checkin = moment(punch, 'hh:mm:ss');
+            checkin = moment(punch, 'HH:mm:ss');
           } else {
             //check-out
-            checkout = moment(punch, 'hh:mm:ss');
+            checkout = moment(punch, 'HH:mm:ss');
             millisCounter += Math.abs(checkin.diff(checkout));
           }
           i++;
@@ -135,6 +141,27 @@ exports.timespent = (req) => {
 
   });
   
+}
+
+exports.lastcheck = (req) =>{
+  return new Promise( (resolve, reject)=> {
+    Cardcheck.find({
+      idZkTeco: req.body.idZkTeco,
+    }).limit(1)
+    .sort({created: 'desc'})
+    .exec((err, res)=>{
+      if(err){
+        console.log(err);
+        throw err;
+      }
+      if(res.length > 0){
+        const lastCheck = moment(res[0].get('created'));
+        return resolve(lastCheck.format('LLL'));
+      }else{
+        return resolve(null);
+      }
+    });
+  });
 }
 
 exports.findByPeriod = findByPeriod;
