@@ -36,6 +36,8 @@ import { logoutUser } from "../actions/autActions";
 import { clearCurrentProfile } from "../actions/profileActions";
 import VirtualizedTable from "../components/common/VirtualizedTable";
 import TabInfo from "../components/collaborators/TabInfo";
+import { DashboardContentWrapper } from '../dashboard/DashboardContentWrapper';
+
 
 const drawerWidth = 240;
 
