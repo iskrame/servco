@@ -18,7 +18,7 @@ const styles = {
     marginRight: 20
   },
   appBar: {
-    top: 'auto',
+    top: "auto",
     bottom: 0,
     background: "#1e305f"
   }
@@ -28,20 +28,23 @@ function Footer(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar
+        position="fixed"
+        className={classes.appBar}
+        style={{ height: "35px" }}
+      >
         <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-          />
           <Typography
-            variant="h6"
+            variant="h7"
             align="center"
             color="inherit"
             className={classes.grow}
+            style={{ marginBottom: "30px" }}
           >
-            Copyright &copy; {new Date().getFullYear()} SPARK TECHNOLOGIES
+            <small>
+              Copyright &copy; {new Date().getFullYear()} SPARK TECHNOLOGIES
+              (v0.1.0.0)
+            </small>
           </Typography>
         </Toolbar>
       </AppBar>

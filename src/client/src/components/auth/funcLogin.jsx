@@ -116,6 +116,12 @@ function SignIn(props) {
             onCancel={props.onCancel}
           />
         </form>
+        <br />
+        <br />
+        <small>
+          Copyright &copy; {new Date().getFullYear()} SPARK TECHNOLOGIES
+          (v0.1.0.0)
+        </small>
       </Paper>
     </main>
   );
