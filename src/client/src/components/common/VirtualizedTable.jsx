@@ -13,18 +13,9 @@ class VirtualizedTable extends Component {
 
   componentDidMount(){
     this._isMounted = true;
-    axios
-    .get("https://api.myjson.com/bins/msqqa",{ cancelToken: source.token})
-    .then(response => {
-      if(this._isMounted){
-        this.setState({
-          data: response.data.GridData
-        });
-      }     
+    this.setState({
+      data: this.props.gridData
     })
-    .catch(err =>
-      console.log('error' + err)
-    );
   }
 
   componentWillUnmount() {
