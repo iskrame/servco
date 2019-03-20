@@ -120,6 +120,7 @@ class Login extends Component {
                 onCancel={this.onCancel}
                 onSubmitEmail={this.onSubmitEmail}
               />
+
               <Dialog
                 open={this.state.open}
                 onClose={this.handleClose}

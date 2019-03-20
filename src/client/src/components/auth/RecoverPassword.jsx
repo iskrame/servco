@@ -22,8 +22,10 @@ class recoverPassword extends Component {
     this.props.CurrentInfo(this.props.match.params.token);
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.auth.isAuthenticated);
-    if (!nextProps.auth.isAuthenticated) {
+    console.log(localStorage.getItem("auth"));
+    if (localStorage.getItem("auth")) {
+      // console.log("asda");
+      localStorage.removeItem("auth");
       this.props.history.push("/login");
     }
     if (nextProps.errors) {
@@ -44,8 +46,6 @@ class recoverPassword extends Component {
     // this.props.history.push("/");
   }
   onClose = () => {
-    console.log("....CancelEvent");
-    // e.preventDefault();
     this.props.history.push("/login");
   };
 

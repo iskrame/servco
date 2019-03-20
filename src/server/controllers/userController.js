@@ -137,7 +137,7 @@ exports.sendingEMail = function(req, res) {
       text: `
       Hola, Alejandro Martinez.
         
-      Recibimos la solicitud de recuperacion de contraseña para su cuenta en 'Servicios al colaborador'
+      Recibimos la solicitud de recuperación de contraseña para su cuenta en 'Servicios al colaborador'.
         
       Para concluir el proceso y cambiar su contraseña, diríjase a la siguiente dirección:
         
@@ -145,7 +145,7 @@ exports.sendingEMail = function(req, res) {
         
       En la mayoría de programas de correo electrónico el enlace anterior debería aparecer en azul y puede hacer clic sobre él. Si no funcionara, córtelo y péguelo en la ventana de direcciones de su navegador.        
         
-      Si necesita ayuda adicional, póngase en contacto con el administrador
+      Si necesita ayuda adicional, póngase en contacto con el administrador.
       
       Enrique Perez Rul 
       correoElectronicoAdministrador.`
@@ -157,7 +157,7 @@ exports.sendingEMail = function(req, res) {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 120 },
+          { expiresIn: 3600 },
           (err, token) => {
             res.json({
               success: true,
