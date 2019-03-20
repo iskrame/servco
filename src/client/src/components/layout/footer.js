@@ -35,7 +35,7 @@ function Footer(props) {
       >
         <Toolbar>
           <Typography
-            variant="h7"
+            variant="h6"
             align="center"
             color="inherit"
             className={classes.grow}

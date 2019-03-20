@@ -34,10 +34,9 @@ import Footer from "../components/layout/footer";
 import Header from "../components/layout/header";
 import { logoutUser } from "../actions/autActions";
 import { clearCurrentProfile } from "../actions/profileActions";
-import VirtualizedTable from "../components/common/VirtualizedTable";
+// import VirtualizedTable from "../components/common/VirtualizedTable";
 import TabInfo from "../components/collaborators/TabInfo";
-import { DashboardContentWrapper } from '../dashboard/DashboardContentWrapper';
-
+import { DashboardContentWrapper } from "../dashboard/DashboardContentWrapper";
 
 const drawerWidth = 240;
 
@@ -93,7 +92,7 @@ const styles = theme => ({
 class Dashboard extends Component {
   state = {
     open: false,
-    item: 0
+    item: 2
   };
 
   handleDrawerOpen = () => {
@@ -119,6 +118,7 @@ class Dashboard extends Component {
   onListItemClick = item => {
     console.log(item);
     const open = false;
+    sessionStorage.setItem("index", item);
     this.setState({ item, open });
   };
   render() {
@@ -134,7 +134,7 @@ class Dashboard extends Component {
             })}
           >
             <div className={classes.drawerHeader} />
-            
+
             <DashboardContentWrapper />
           </main>
         );
@@ -163,7 +163,7 @@ class Dashboard extends Component {
           >
             <div className={classes.drawerHeader} />
             <h1>Colaboradores</h1>
-            {/* <TabInfo /> */}
+            <TabInfo />
           </main>
         );
         break;
@@ -237,8 +237,6 @@ class Dashboard extends Component {
     //     );
     //   }
     // }
-
-    console.log(dashboardContent);
     return (
       <div className="dashboard">
         <div className="container">
@@ -273,7 +271,7 @@ class Dashboard extends Component {
               <Avatar alt="Usuario" className={classes.avatar}>
                 A
               </Avatar>
-              <Typography variant="h8" className={classes.menuItem} noWrap>
+              <Typography variant="h6" className={classes.menuItem} noWrap>
                 Alejandro Martinez
               </Typography>
             </Grid>
@@ -359,45 +357,6 @@ class Dashboard extends Component {
             </List>
           </Drawer>
           {dashboardContent}
-          {/* <main
-            className={classNames(classes.content, {
-              [classes.contentShift]: open
-            })}
-          >
-            <div className={classes.drawerHeader} />
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
-              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-              gravida rutrum quisque non tellus. Convallis convallis tellus id
-              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
-              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
-              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum
-              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
-              lobortis feugiat vivamus at augue. At augue eget arcu dictum
-              varius duis at consectetur lorem. Velit sed ullamcorper morbi
-              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-            </Typography>
-            <Typography paragraph>
-              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-              elementum integer enim neque volutpat ac tincidunt. Ornare
-              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-              ornare massa eget egestas purus viverra accumsan in. In hendrerit
-              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-              aliquam sem et tortor. Habitant morbi tristique senectus et.
-              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
-              aenean euismod elementum nisi quis eleifend. Commodo viverra
-              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
-              aliquam ultrices sagittis orci a.
-            </Typography>
-            <VirtualizedTable />
-            <TabInfo />
-          </main> */}
         </div>
         <Footer />
       </div>

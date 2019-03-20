@@ -8,7 +8,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import classNames from "classnames";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import countries from "./../../utils/countrys";
+import { countries, statesFromMexico } from "../../../utils/countrys";
 
 const styles = theme => ({
   container: {
@@ -30,21 +30,46 @@ const styles = theme => ({
 });
 
 class PersonalData extends Component {
-  // state = {
-  //   clave: "",
-  //   country: "México",
-  //   names: "",
-  //   lastName: "",
-  //   secondLastName: "",
-  //   bdayDate: "",
-  //   gender: ""
-  // };
-  componentDidMount() {
-    this.setState({ country: "México" });
-  }
-
   render() {
     const { classes, state, onChangePattern } = this.props;
+    let stateFrom = "";
+    if (state.country === "México") {
+      console.log("Estados de Mexico");
+      stateFrom = (
+        <TextField
+          id="state"
+          select
+          label="Estado"
+          name="state"
+          // disabled="true"
+          style={{
+            marginLeft: 12,
+            marginRight: 12,
+            width: "100%"
+          }}
+          // className={classes.textField}
+          value={state.state}
+          onChange={this.props.onChange}
+          SelectProps={{
+            MenuProps: {
+              width: "100%"
+            }
+          }}
+          helperText="Please select your currency"
+          margin="normal"
+        >
+          {statesFromMexico.map(option => (
+            <MenuItem key={option.code} value={option.code}>
+              {option.name}
+            </MenuItem>
+          ))}
+        </TextField>
+      );
+    } else {
+      stateFrom = (
+        <TextField id="state" name="state" label="Estado" fullWidth />
+      );
+    }
     return (
       <React.Fragment>
         {/* <Typography variant="h6" gutterBottom>
@@ -53,8 +78,6 @@ class PersonalData extends Component {
         <Grid container spacing={24}>
           <Grid item xs={3}>
             <TextField
-              // required
-
               inputProps={{
                 maxLength: 6,
                 pattern: "^[0-9]*$"
@@ -68,10 +91,9 @@ class PersonalData extends Component {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={16}>
-          <Grid item xs={6}>
+        <Grid container spacing={24}>
+          <Grid item xs={4}>
             <TextField
-              // required
               value={state.names}
               id="name"
               name="names"
@@ -82,7 +104,7 @@ class PersonalData extends Component {
               inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <TextField
               // required
               inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
@@ -93,7 +115,7 @@ class PersonalData extends Component {
               autoComplete="lname"
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <TextField
               // required
               inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
@@ -113,6 +135,7 @@ class PersonalData extends Component {
               name="bdayDate"
               label="Fecha de Nacimiento"
               fullWidth
+              style={{ marginTop: "15px" }}
               // autoComplete="billing address-line1"
             />
           </Grid>
@@ -129,7 +152,7 @@ class PersonalData extends Component {
               }}
               // className={classes.textField}
               value={state.gender}
-              onChange={this.props.handleChangeComponent}
+              onChange={this.props.onChange}
               SelectProps={{
                 MenuProps: {
                   width: "100%"
@@ -143,28 +166,26 @@ class PersonalData extends Component {
           </Grid>
         </Grid>
         <Grid container spacing={16}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               id="city"
               name="city"
               label="Ciudad"
               fullWidth
+              style={{ marginTop: "15px" }}
               // autoComplete="billing address-line2"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="state"
-              name="state"
-              label="State/Province/Region"
-              fullWidth
-            />
+          <Grid item xs={12} sm={4}>
+            {stateFrom}
+            {/* <TextField id="state" name="state" label="Estado" fullWidth /> */}
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               id="standard-select-currency"
               select
               label="País"
+              name="country"
               disabled="true"
               style={{
                 marginLeft: 12,
@@ -173,13 +194,12 @@ class PersonalData extends Component {
               }}
               // className={classes.textField}
               value={state.country}
-              onChange={this.props.handleChange}
+              onChange={this.props.onChange}
               SelectProps={{
                 MenuProps: {
                   width: "100%"
                 }
               }}
-              helperText="Please select your currency"
               margin="normal"
             >
               {countries.map(option => (
@@ -191,63 +211,67 @@ class PersonalData extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
-              id="zip"
-              name="zip"
-              label="Zip / Postal code"
+              id="civilStatus"
+              name="civilStatus"
+              label="Estatdo Civil"
               fullWidth
-              autoComplete="billing postal-code"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              required
-              id="zip"
-              name="zip"
-              label="Zip / Postal code"
+              id="nacionality"
+              name="nacionality"
+              label="Nacionalidad"
               fullWidth
-              autoComplete="billing postal-code"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="country"
-              name="country"
-              label="Country"
-              fullWidth
-              autoComplete="billing country"
-            />
+            <TextField id="curp" name="curp" label="CURP" fullWidth />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="zip"
-              name="zip"
-              label="Zip / Postal code"
-              fullWidth
-              autoComplete="billing postal-code"
-            />
+            <TextField id="rfc" name="rfc" label="RFC" fullWidth />
           </Grid>
           <Grid item xs={12} sm={6}>
+            <TextField id="street" name="street" label="Calle" fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <TextField id="number" name="number" label="Número" fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField id="fracc" name="fracc" label="Colonia" fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={4}>
             <TextField
-              required
-              id="zip"
-              name="zip"
-              label="Zip / Postal code"
+              id="municipality"
+              name="municipality"
+              label="Municipio"
               fullWidth
-              autoComplete="billing postal-code"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
-              required
-              id="zip"
-              name="zip"
-              label="Zip / Postal code"
+              id="addresState"
+              name="addresState"
+              label="Estado"
               fullWidth
-              autoComplete="billing postal-code"
             />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              id="zipCode"
+              name="zipCode"
+              label="Codigo Postal"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField id="cel" name="cel" label="Celular" fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField id="tel" name="tel" label="Casa" fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField id="other" name="other" label="Otro" fullWidth />
           </Grid>
         </Grid>
       </React.Fragment>

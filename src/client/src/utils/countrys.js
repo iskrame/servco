@@ -1,4 +1,4 @@
-const country = [
+export const countries = [
   { value: "Afganistán" },
   { value: "Akrotiri" },
   { value: "Albania" },
@@ -254,4 +254,134 @@ const country = [
   { value: "Zambia" },
   { value: "Zimbabue" }
 ];
-export default country;
+
+export const statesFromMexico = [
+  {
+    name: "Distrito Federal",
+    code: "MX-DIF"
+  },
+  {
+    name: "Aguascalientes",
+    code: "MX-AGU"
+  },
+  {
+    name: "Baja California",
+    code: "MX-BCN"
+  },
+  {
+    name: "Baja California Sur",
+    code: "MX-BCS"
+  },
+  {
+    name: "Campeche",
+    code: "MX-CAM"
+  },
+  {
+    name: "Chiapas",
+    code: "MX-CHP"
+  },
+  {
+    name: "Chihuahua",
+    code: "MX-CHH"
+  },
+  {
+    name: "Coahuila",
+    code: "MX-COA"
+  },
+  {
+    name: "Colima",
+    code: "MX-COL"
+  },
+  {
+    name: "Durango",
+    code: "MX-DUR"
+  },
+  {
+    name: "Guanajuato",
+    code: "MX-GUA"
+  },
+  {
+    name: "Guerrero",
+    code: "MX-GRO"
+  },
+  {
+    name: "Hidalgo",
+    code: "MX-HID"
+  },
+  {
+    name: "Jalisco",
+    code: "MX-JAL"
+  },
+  {
+    name: "Michoacán",
+    code: "MX-MIC"
+  },
+  {
+    name: "Morelos",
+    code: "MX-MOR"
+  },
+  {
+    name: "México",
+    code: "MX-MEX"
+  },
+  {
+    name: "Nayarit",
+    code: "MX-NAY"
+  },
+  {
+    name: "Nuevo León",
+    code: "MX-NLE"
+  },
+  {
+    name: "Oaxaca",
+    code: "MX-OAX"
+  },
+  {
+    name: "Puebla",
+    code: "MX-PUE"
+  },
+  {
+    name: "Querétaro",
+    code: "MX-QUE"
+  },
+  {
+    name: "Quintana Roo",
+    code: "MX-ROO"
+  },
+  {
+    name: "San Luis Potosí",
+    code: "MX-SLP"
+  },
+  {
+    name: "Sinaloa",
+    code: "MX-SIN"
+  },
+  {
+    name: "Sonora",
+    code: "MX-SON"
+  },
+  {
+    name: "Tabasco",
+    code: "MX-TAB"
+  },
+  {
+    name: "Tamaulipas",
+    code: "MX-TAM"
+  },
+  {
+    name: "Tlaxcala",
+    code: "MX-TLA"
+  },
+  {
+    name: "Veracruz",
+    code: "MX-VER"
+  },
+  {
+    name: "Yucatán",
+    code: "MX-YUC"
+  },
+  {
+    name: "Zacatecas",
+    code: "MX-ZAC"
+  }
+];

@@ -6,7 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import PersonalData from "./TabPersonalData";
+import PersonalData from "./personalDataFields/TabPersonalData";
 
 const tabs = [
   {
@@ -55,7 +55,7 @@ class FullWidthTabs extends React.Component {
       bDay: "",
       city: "",
       state: "",
-      country: "",
+      country: "México",
       gender: "",
       civilStatus: "",
       nationality: "",
@@ -75,7 +75,6 @@ class FullWidthTabs extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onChangePattern = this.onChangePattern.bind(this);
-    this.handleChangeComponent = this.handleChangeComponent.bind(this);
   }
 
   handleChange = (event, index) => {
@@ -87,29 +86,14 @@ class FullWidthTabs extends React.Component {
   };
   onChange(e) {
     const { name, value } = e.target;
-    console.log(name + " : " + value);
+    this.setState({ [name]: value });
   }
   onChangePattern(e) {
-    console.log("Entro Pattern");
     const { value, name } = e.target;
     const valueTyped = e.target.validity.valid ? value : this.state[name];
     this.setState({
       [name]: valueTyped
     });
-  }
-  handleChangeComponent(e) {
-    console.log(e.target.name);
-    // const { value, name } = e.target;
-    // if (!/[_\W]/.test(value)) {
-    //   if (name === "clave") {
-    //     if (/^[0-9]*$/.test(value)) {
-    //       this.setState({ [name]: value });
-    //     }
-    //   } else {
-    //     console.log("asdsadas");
-    //     this.setState({ [name]: value });
-    //   }
-    // }
   }
 
   render() {
@@ -140,7 +124,7 @@ class FullWidthTabs extends React.Component {
         >
           <TabContainer dir={theme.direction}>
             <PersonalData
-              onChange={this.handleChangeComponent}
+              onChange={this.onChange}
               onChangePattern={this.onChangePattern}
               state={this.state}
             />

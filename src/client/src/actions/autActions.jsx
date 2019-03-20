@@ -84,7 +84,8 @@ export const UpdatePassword = userdata => dispatch => {
   axios
     .post("/api/users/recoverpassword", userdata)
     .then(res => {
-      setAuthToken(false);
+      localStorage.setItem("auth", true);
+      // setAuthToken(userdata);
       dispatch(setCurrentUser({}));
     })
     .catch(err =>
