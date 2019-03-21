@@ -7,6 +7,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import PersonalData from "./personalDataFields/TabPersonalData";
+import TabLaborData from './laborData/TabLaborData';
 
 const tabs = [
   {
@@ -71,7 +72,23 @@ class FullWidthTabs extends React.Component {
       zipCode: "",
       cel: "",
       tel: "",
-      other: ""
+      other: "",
+      //This states are for labor data (labor tab)
+      jobs: [2],
+      monthlySalary: '',
+      seniorityDate: '',
+      laborLocation: '',
+      otherLaborLocation: '',
+      workingDayType: '',
+      beneficiary: '',
+      relationship: '',
+      procurementRegime: '', //For regimen de contratacion del trabajador
+      schema: '',
+      otherSchema: '',
+      socialSecurityNumber: '',
+      infonavit: '',
+      fonacot: '',
+      payWay: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onChangePattern = this.onChangePattern.bind(this);
@@ -126,7 +143,13 @@ class FullWidthTabs extends React.Component {
               state={this.state}
             />
           </TabContainer>
-          <TabContainer dir={theme.direction}>Item Two</TabContainer>
+          <TabContainer dir={theme.direction}>
+            <TabLaborData
+              onChange={this.onChange}
+              onChangePattern={this.onChangePattern}
+              fields={this.state}
+            />
+          </TabContainer>
           <TabContainer dir={theme.direction}>Item Three</TabContainer>
           <TabContainer dir={theme.direction}>Item Three</TabContainer>
         </SwipeableViews>

@@ -39,7 +39,7 @@ class VirtualizedTable extends Component {
         <WrappedVirtualizedTable
           rowCount={rows.length}
           rowGetter={({ index }) => rows[index]}
-          onRowClick={event => console.log(event)}
+          // onRowClick={event => console.log(event)}
           columns={[
             {
               flexGrow: 1.0,
