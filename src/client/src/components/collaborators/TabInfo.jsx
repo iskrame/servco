@@ -38,8 +38,8 @@ TabContainer.propTypes = {
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    width: "100%"
+    backgroundColor: theme.palette.background.paper
+    // width: "100%"
   }
 });
 
@@ -101,7 +101,7 @@ class FullWidthTabs extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default" fullWidth>
+        <AppBar position="static" color="default">
           <Tabs
             value={this.state.index}
             onChange={this.handleChange}
@@ -109,12 +109,9 @@ class FullWidthTabs extends React.Component {
             textColor="primary"
             variant="fullWidth"
           >
-            {tabs.map(option => (
-              <Tab label={option.name} />
+            {tabs.map((option, index) => (
+              <Tab key={index} label={option.name} />
             ))}
-            {/* // <Tab label="Datos Personales" />
-            // <Tab label="Item Two" />
-            // <Tab label="Item Three" /> */}
           </Tabs>
         </AppBar>
         <SwipeableViews
