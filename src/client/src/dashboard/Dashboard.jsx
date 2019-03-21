@@ -18,9 +18,11 @@ class Dashboard extends Component {
     item: -1
   };
   handleDrawerOpen = () => {
+    console.log("Abrir");
     this.setState({ open: true });
   };
   handleDrawerClose = () => {
+    console.log("Cerrar");
     this.setState({ open: false });
   };
   componentDidMount() {
@@ -45,7 +47,7 @@ class Dashboard extends Component {
       },
       container: {
         margin: "20px",
-        paddingLeft: open ? drawerWidth : 0
+        paddingLeft: open ? drawerWidth : 50
       }
     };
 
@@ -53,7 +55,6 @@ class Dashboard extends Component {
       <div>
         <div style={innerStyles.container}>
           <CssBaseline />
-
           <Header
             onClick={this.onLogoutClick.bind(this)}
             toggleMenu={this.handleDrawerOpen.bind(this)}
@@ -62,7 +63,9 @@ class Dashboard extends Component {
           <LeftDrawer
             handleDrawerClose={this.handleDrawerClose.bind(this)}
             onclick={this.onListItemClick}
+            handleDrawerOpen={this.handleDrawerOpen.bind(this)}
             open={open}
+            onLogoutClick={this.onLogoutClick.bind(this)}
           />
           <Pages open={open} item={this.state.item} />
         </div>
