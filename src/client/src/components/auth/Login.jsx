@@ -45,7 +45,6 @@ class Login extends Component {
         password: ""
       });
 
-      console.log();
       if (
         nextProps.errors.emailnotFound === "Usuario no encontrado" ||
         nextProps.errors.wrongPassword === "Contraseña incorrecta"
@@ -71,7 +70,6 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(userData);
     this.props.loginUser(userData);
   }
 

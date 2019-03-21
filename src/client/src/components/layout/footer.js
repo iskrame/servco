@@ -19,7 +19,8 @@ const styles = {
   appBar: {
     top: "auto",
     bottom: 0,
-    background: "#1e305f"
+    background: "#ffffff",
+    color: "black"
   }
 };
 

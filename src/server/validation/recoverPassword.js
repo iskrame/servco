@@ -31,7 +31,6 @@ module.exports = function validateRecoverPasswordInput(data) {
     Validator.isEmpty(data.passwordConfirm) ||
     Validator.isEmpty(data.password)
   ) {
-    console.log(data.passwordConfirm);
     errors.passwordConfirm = "No se permiten campos vacíos";
   }
   return {

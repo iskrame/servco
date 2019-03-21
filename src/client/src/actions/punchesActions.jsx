@@ -5,7 +5,6 @@ export const fetchPunchesData = userData => dispatch => {
     // .post("/api/test", userData)
     .get("/api/test")
     .then(res => {
-      console.log(res);
       // Set current user
       dispatch(setPunchesData(res));
       dispatch({ type: SET_PUNCHES_DATA, payload: {} });
@@ -16,9 +15,6 @@ export const fetchPunchesData = userData => dispatch => {
         payload: err.response.data
       })
     );
-
-
-    
 };
 // Set logged in user
 export const setPunchesData = data => {

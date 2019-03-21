@@ -5,9 +5,8 @@ const passport = require("passport");
 const moment = require("moment");
 const test = require("./routes/test.route"); // Imports routes for the punches
 const users = require("./routes/api/usersRoute");
-const dashboard = require('./routes/api/dashboardRoute');
-const cors = require('cors');
-
+const dashboard = require("./routes/api/dashboardRoute");
+const cors = require("cors");
 
 // const users = require('./routes/api/users');
 // const profile = require('./routes/api/profile');
@@ -23,8 +22,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Moment Config
-moment.updateLocale("es",{
-  monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+moment.updateLocale("es", {
+  monthsShort: [
+    "Ene",
+    "Feb",
+    "Mar",
+    "Abr",
+    "May",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dic"
+  ]
 });
 
 // DB Config

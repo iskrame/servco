@@ -9,7 +9,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import img from "../img/logoSPARK132.png";
 import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
 import { primaryMenus } from "./data";
 import { withStyles } from "@material-ui/core/styles";
 import { MenuItem } from "@material-ui/core";
@@ -26,10 +25,13 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    background: "#7a797a"
+    background: "#1e305f",
+    border: "none"
   },
   menuItem: {
-    color: "white"
+    color: "white",
+    fontSize: 20,
+    marginBottom: "15px"
   },
   drawerHeader: {
     display: "flex",
@@ -37,8 +39,8 @@ const styles = theme => ({
     padding: "0 8px",
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
-    background: "#ffffff",
-    backgroundColor: "#efefef"
+    background: "#ffffff"
+    // backgroundColor: "#efefef"
   },
   content: {
     flexGrow: 1,
@@ -55,7 +57,10 @@ const styles = theme => ({
     marginRight: "10%"
   },
   avatar: {
-    margin: 10
+    margin: 10,
+    height: "100px",
+    width: "100px",
+    fontSize: 40
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
@@ -88,16 +93,17 @@ class LeftDrawer extends Component {
             )}
           </IconButton>
         </div>
-        <Divider />
-        <Grid container justify="center" alignItems="center">
+        <center>
           <Avatar alt="Usuario" className={classes.avatar}>
             A
           </Avatar>
-          <Typography variant="h6" className={classes.menuItem} noWrap>
-            Alejandro Martinez
-          </Typography>
-        </Grid>
-        <Divider />
+        </center>
+
+        <Typography variant="h6" className={classes.menuItem} noWrap>
+          Alejandro Martinez
+        </Typography>
+
+        <Divider style={{ marginBottom: "15px", background: "white" }} />
         {primaryMenus.menus.map((menu, index) => (
           <MenuItem
             key={index}

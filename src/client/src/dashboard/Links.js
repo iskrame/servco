@@ -4,6 +4,7 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TabInfo from "../components/collaborators/TabInfo";
 import { DashboardContentWrapper } from "../dashboard/DashboardContentWrapper";
+import img from "../img/logoSPARK132.png";
 const drawerWidth = 240;
 const styles = theme => ({
   root: {
@@ -127,6 +128,17 @@ class Pages extends Component {
         );
         break;
       default:
+        dashboardContent = (
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open
+            })}
+            style={{ width: "100%" }}
+          >
+            <div className={classes.drawerHeader} />
+            <img src={img} alt="..." />
+          </main>
+        );
         break;
     }
 

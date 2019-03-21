@@ -1,10 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../controllers/userController");
-const jwt = require("jsonwebtoken");
-const passport = require("passport");
-// Load User model
-const Users = require("../../models/users");
 
 // @route   POST api/users/login
 // @desc    Login User / Returning JWT Token
@@ -29,22 +25,6 @@ router.post("/recoverpassword", User.recoverPassword);
 // @route   GET api/users/Userinfo
 // @desc    creates a new user
 // @access  private only for specific users
-router.get(
-  "/current/:token",
-  User.getUserInfo
-  // passport.authenticate("jwt", { session: false }),
-  // (req, res) => {
-  //   const errors = {};
-
-  //   Users.findOne({ _id: req.id })
-  //     .then(user => {
-  //       if (!user) {
-  //         return res.status(404);
-  //       }
-  //       res.json(user);
-  //     })
-  //     .catch(err => res.status(404).json(err));
-  // }
-);
+router.get("/current/:token", User.getUserInfo);
 
 module.exports = router;

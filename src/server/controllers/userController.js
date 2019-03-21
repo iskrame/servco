@@ -165,8 +165,6 @@ exports.sendingEMail = function(req, res) {
             });
           }
         );
-        // console.log("email sent");
-        // res.status(200).jsonp(req.body);
       }
     });
   });
@@ -176,7 +174,7 @@ exports.recoverPassword = function(req, res) {
   const { errors, isValid } = ValidateRecoverPassword(req.body);
 
   if (!isValid) return res.status(400).json(errors);
-  // const idUser = mongoose.objectid(req.body._id);
+
   Users.findOne({ _id: req.body._id }).then(user => {
     //const to recibe the info of the new user
     const newPassword = new Users({

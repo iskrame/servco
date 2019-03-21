@@ -56,7 +56,7 @@ const styles = theme => ({
 });
 function SignIn(props) {
   const { classes } = props;
-  console.log(props);
+
   return (
     <main className={classes.main}>
       <CssBaseline />
