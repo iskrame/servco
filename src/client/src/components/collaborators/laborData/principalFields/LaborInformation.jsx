@@ -15,7 +15,6 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 //Styles
 const styles = theme => ({
     root: {
@@ -46,7 +45,7 @@ const styles = theme => ({
 });
 //END Styles
 
-class InformacionLaboral extends Component {
+class LaborInformation extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,7 +70,6 @@ class InformacionLaboral extends Component {
     }
     render() {
         const { onChange, onChangePattern, fields, classes } = this.props;
-
         return (
             <div className={classes.root}>
                 <ExpansionPanel defaultExpanded>
@@ -85,7 +83,7 @@ class InformacionLaboral extends Component {
                     <ExpansionPanelDetails className={classes.details}>
                         <div className={classes.column}>
                             <Grid container spacing={24}>
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <InputLabel htmlFor="select-multiple">Puesto</InputLabel>
                                         <Select
@@ -110,7 +108,7 @@ class InformacionLaboral extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             inputProps={{
@@ -124,7 +122,7 @@ class InformacionLaboral extends Component {
                                         />
                                     </FormControl>
                                 </Grid>
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             type="date"
@@ -139,9 +137,9 @@ class InformacionLaboral extends Component {
                                         />
                                     </FormControl>
                                 </Grid>
-                            </Grid>
-                            <Grid container spacing={24}>
-                                <Grid item xs={4} xm={6}>
+
+
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <InputLabel>Ubicación Laboral</InputLabel>
                                         <Select
@@ -160,7 +158,7 @@ class InformacionLaboral extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="otherLaborLocation"
@@ -179,7 +177,7 @@ class InformacionLaboral extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <InputLabel htmlFor="select-multiple">Tipo de Jornada</InputLabel>
                                         <Select
@@ -195,9 +193,8 @@ class InformacionLaboral extends Component {
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                            </Grid>
-                            <Grid container spacing={24}>
-                                <Grid item xs={4} xm={6}>
+
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="beneficiary"
@@ -210,7 +207,7 @@ class InformacionLaboral extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="relationship"
@@ -232,8 +229,8 @@ class InformacionLaboral extends Component {
     }
 }
 
-InformacionLaboral.propTypes = {
+LaborInformation.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(InformacionLaboral);
+export default withStyles(styles)(LaborInformation);

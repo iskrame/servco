@@ -42,7 +42,7 @@ const styles = theme => ({
 });
 //END Styles
 
-class InformacionAdicional extends Component {
+class AdditionalInformation extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,7 +69,7 @@ class InformacionAdicional extends Component {
         const { onChange, onChangePattern, fields, classes } = this.props;
         return (
             <div className={classes.root}>
-                <ExpansionPanel defaultExpanded>
+                <ExpansionPanel >
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <div className={classes.column}>
                             <span className={classes.heading}>
@@ -80,7 +80,7 @@ class InformacionAdicional extends Component {
                     <ExpansionPanelDetails className={classes.details}>
                         <div className={classes.column}>
                             <Grid container spacing={24}>
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="procurementRegime"
@@ -91,7 +91,7 @@ class InformacionAdicional extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <InputLabel>Esquema</InputLabel>
                                         <Select
@@ -106,7 +106,8 @@ class InformacionAdicional extends Component {
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                                <Grid item xs={4} xm={6}>
+
+                                <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="otherSchema"
@@ -125,7 +126,7 @@ class InformacionAdicional extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="socialSecurityNumber"
@@ -138,7 +139,7 @@ class InformacionAdicional extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="infonavit"
@@ -151,7 +152,7 @@ class InformacionAdicional extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="fonacot"
@@ -164,7 +165,7 @@ class InformacionAdicional extends Component {
                                     </FormControl>
                                 </Grid>
 
-                                <Grid item xs={4} xm={6}>
+                                <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
                                         <InputLabel>Forma de Pago</InputLabel>
                                         <Select
@@ -188,8 +189,8 @@ class InformacionAdicional extends Component {
     }
 }
 
-InformacionAdicional.propTypes = {
+AdditionalInformation.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(InformacionAdicional);
+export default withStyles(styles)(AdditionalInformation);

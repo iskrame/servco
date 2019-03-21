@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import InformacionLaboral from './InformacionLaboral';
-import InformacionAdicional from './InformacionAdicional';
+import LaborInformation from './LaborInformation';
+import AdditionalInformation from './AddtionalInformation';
 class PrincipalFields extends Component {
 
     render() {
         const { onChange, onChangePattern, fields } = this.props;
         return (
             <div>
-                <InformacionLaboral
+                <LaborInformation
                     onChange={onChange}
                     onChangePattern={onChangePattern}
                     fields={fields}
                 />
 
-                <InformacionAdicional
+                <AdditionalInformation
                     onChange={onChange}
                     onChangePattern={onChangePattern}
                     fields={fields}
@@ -22,5 +22,4 @@ class PrincipalFields extends Component {
         )
     }
 }
-
 export default PrincipalFields;
