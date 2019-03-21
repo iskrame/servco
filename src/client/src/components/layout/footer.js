@@ -33,7 +33,7 @@ function Footer(props) {
         style={{ height: "35px" }}
       >
         <Toolbar>
-          <h4
+          <span
             align="center"
             color="inherit"
             className={classes.grow}
@@ -43,7 +43,7 @@ function Footer(props) {
               Copyright &copy; {new Date().getFullYear()} SPARK TECHNOLOGIES
               (v0.1.0.0)
             </small>
-          </h4>
+          </span>
         </Toolbar>
       </AppBar>
     </div>

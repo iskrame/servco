@@ -8,13 +8,14 @@ class InfoBox extends React.Component {
 
     const styles = {
       content: {
-        padding: '5px 10px',
+        padding: '10px',
         marginLeft: 90,
         height: 90
       },
       number: {
         display: 'block',
         fontSize: 18,
+        fontWeight: 'bold',
         color: '#000'
       },
       text: {
@@ -27,7 +28,11 @@ class InfoBox extends React.Component {
         height: 90,
         width: 90,
         textAlign: 'center',
-        backgroundColor: color
+        backgroundColor: color,
+        marginTop: '-10px',
+        marginLeft: '5px',
+        borderRadius:'5px',
+        boxShadow: '3px 3px 5px 3px rgba(0,0,0,.2)'
       },
       icon: {
         height: 48,
@@ -35,11 +40,15 @@ class InfoBox extends React.Component {
         marginTop: 18,
         maxWidth: '100%',
         color: '#fff'
-      }
+      },
+      zoom: {
+        marginBottom:'20px', 
+        boxShadow:'3px 3px 5px 3px rgba(0,0,0,.2)',
+      },
     };
 
     return (
-      <Paper style={{margin:'5px'}}>
+      <Paper  style={styles.zoom}>
         <span style={styles.iconSpan}>
         <Icon style={styles.icon}
           />
