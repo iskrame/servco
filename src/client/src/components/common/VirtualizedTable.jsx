@@ -35,7 +35,7 @@ class VirtualizedTable extends Component {
     });
 
     return (
-      <Paper style={{ height: 400, width: '100%' }}>
+      <Paper style={{ minHeight: 150, width: '100%', boxShadow: '3px 3px 5px 3px rgba(0,0,0,.2)' }}>
         <WrappedVirtualizedTable
           rowCount={rows.length}
           rowGetter={({ index }) => rows[index]}

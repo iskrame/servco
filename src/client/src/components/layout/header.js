@@ -144,59 +144,6 @@ class Header extends React.Component {
             </section>
           </Toolbar>
         </AppBar>
-        {/* <AppBar
-          position="fixed"
-          className={classNames(classes.appBar, {
-            [classes.appBarShift]: this.props.open
-          })}
-        >
-          <Toolbar disableGutters={!this.props.open}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.props.toggleMenu}
-              className={classNames(classes.menuButton, {
-                [classes.hide]: !open
-              })}
-            >
-              <MenuIcon />
-            </IconButton>
-            <h4 color="inherit">
-              Servicios al Colaborador
-            </h4>
-            <section className={classes.rightToolbar}>
-              <Button
-                aria-owns={open ? "menu-appbar" : undefined}
-                aria-haspopup="true"
-                onClick={this.handleMenu}
-                color="inherit"
-              >
-                Alejandro Martinez
-              </Button>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={open}
-                onClose={this.handleClose}
-              >
-                <MenuItem>Perfil</MenuItem>
-                <MenuItem onClick={this.props.onClick}>Salir</MenuItem>
-              </Menu>
-
-              <IconButton color="inherit" aria-label="Configuracion">
-                <Settings />
-              </IconButton>
-            </section>
-          </Toolbar>
-        </AppBar> */}
       </div>
     );
   }
