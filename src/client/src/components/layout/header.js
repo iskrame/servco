@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import classNames from "classnames";
@@ -110,9 +109,9 @@ class Header extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <h4 color="inherit" noWrap>
               Servicios al Colaborador
-            </Typography>
+            </h4>
             <section className={classes.rightToolbar}>
               <Button
                 aria-owns={open ? "menu-appbar" : undefined}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Drawer from "@material-ui/core/Drawer";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -99,9 +98,9 @@ class LeftDrawer extends Component {
           </Avatar>
         </center>
 
-        <Typography variant="h6" className={classes.menuItem} noWrap>
+        <h4 className={classes.menuItem} noWrap>
           Alejandro Martinez
-        </Typography>
+        </h4>
 
         <Divider style={{ marginBottom: "15px", background: "white" }} />
         {primaryMenus.menus.map((menu, index) => (

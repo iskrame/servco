@@ -6,7 +6,7 @@ import AccessTime from "@material-ui/icons/AccessTime";
 import Settings from "@material-ui/icons/Settings";
 export const primaryMenus = {
   menus: [
-    { text: "DashBoard", icon: <TableChart /> },
+    { text: "Dashboard", icon: <TableChart /> },
     { text: "Perfil", icon: <Person /> },
     { text: "Colaboradores", icon: <People />, link: "/collaborators" },
     { text: "Reportes", icon: <AccessTime />, link: "/reports" },

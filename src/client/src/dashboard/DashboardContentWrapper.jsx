@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios'; 
-import Typography from '@material-ui/core/Typography';
 import VirtualizedTable from '../components/common/VirtualizedTable';
 import IndicatorContainer from '../components/common/IndicatorContainer';
 
@@ -43,7 +42,7 @@ export class DashboardContentWrapper extends React.Component{
         <div>
           <IndicatorContainer indicators = {this.state.indicators}  />
           <br/>
-          <Typography paragraph>
+          <p>
             Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
             facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
             tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
@@ -54,7 +53,7 @@ export class DashboardContentWrapper extends React.Component{
             sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo
             viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
             ultrices sagittis orci a.
-          </Typography>
+          </p>
           <VirtualizedTable gridData = {this.state.gridData}/>
         </div>
       )
