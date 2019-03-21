@@ -44,13 +44,13 @@ class VirtualizedTable extends Component {
             {
               flexGrow: 1.0,
               width: 150,
-              label: 'Day',
+              label: 'Dia',
               dataKey: 'day',
             },
             {
               flexGrow: 1.0,
               width: 150,
-              label: 'Punches',
+              label: 'Checadas',
               dataKey: 'punches',
             },
           ]}

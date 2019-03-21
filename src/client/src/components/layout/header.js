@@ -161,9 +161,9 @@ class Header extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
+            <h4 color="inherit">
               Servicios al Colaborador
-            </Typography>
+            </h4>
             <section className={classes.rightToolbar}>
               <Button
                 aria-owns={open ? "menu-appbar" : undefined}

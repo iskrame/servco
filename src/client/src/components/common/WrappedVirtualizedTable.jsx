@@ -7,9 +7,6 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized';
 
 const styles = theme => ({
-  table: {
-    fontFamily: theme.typography.fontFamily,
-  },
   flexContainer: {
     display: 'flex',
     alignItems: 'center',

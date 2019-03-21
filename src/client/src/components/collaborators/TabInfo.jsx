@@ -5,7 +5,6 @@ import SwipeableViews from "react-swipeable-views";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import PersonalData from "./personalDataFields/TabPersonalData";
 import TabLaborData from './laborData/TabLaborData';
 
@@ -23,12 +22,11 @@ const tabs = [
     name: "Datos Usuario"
   }
 ];
-// const tabcontainer = [{ tab: <PersonalData /> }, { tab: "Item2" }];
 function TabContainer({ children, dir }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+    <div dir={dir} style={{ padding: 8 * 3 }}>
       {children}
-    </Typography>
+    </div>
   );
 }
 
@@ -40,7 +38,6 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper
-    // width: "100%"
   }
 });
 
@@ -83,7 +80,7 @@ class FullWidthTabs extends React.Component {
       beneficiary: '',
       relationship: '',
       procurementRegime: '', //For regimen de contratacion del trabajador
-      schema: '',
+      schema: '1',
       otherSchema: '',
       socialSecurityNumber: '',
       infonavit: '',

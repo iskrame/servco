@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 
 const styles = {
   root: {
@@ -34,8 +33,7 @@ function Footer(props) {
         style={{ height: "35px" }}
       >
         <Toolbar>
-          <Typography
-            variant="h6"
+          <span
             align="center"
             color="inherit"
             className={classes.grow}
@@ -45,7 +43,7 @@ function Footer(props) {
               Copyright &copy; {new Date().getFullYear()} SPARK TECHNOLOGIES
               (v0.1.0.0)
             </small>
-          </Typography>
+          </span>
         </Toolbar>
       </AppBar>
     </div>
