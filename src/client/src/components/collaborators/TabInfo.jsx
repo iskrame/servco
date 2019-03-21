@@ -80,7 +80,7 @@ class FullWidthTabs extends React.Component {
       beneficiary: '',
       relationship: '',
       procurementRegime: '', //For regimen de contratacion del trabajador
-      schema: '',
+      schema: '1',
       otherSchema: '',
       socialSecurityNumber: '',
       infonavit: '',
