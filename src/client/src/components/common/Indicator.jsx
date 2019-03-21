@@ -1,10 +1,8 @@
 import React from 'react'
-
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 
-import { withStyles } from '@material-ui/core/styles';
 
 const Indicator = ({indicator}) => {
   return(
