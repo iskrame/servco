@@ -1,0 +1,60 @@
+{
+    "Jobs": [
+        {
+            "id": 1,
+            "description": "Desarrollador Nivel 0"
+        },
+        {
+            "id": 2,
+            "description": "Desarrollador Nivel 1"
+        },
+        {
+            "id": 3,
+            "description": "Desarrollador Nivel 2"
+        },
+        {
+            "id": 4,
+            "description": "Desarrollador Nivel 3"
+        },
+        {
+            "id": 5,
+            "description": "Lider de Proyecto"
+        },
+        {
+            "id": 6,
+            "description": "Coordinador de Operaciones"
+        },
+        {
+            "id": 7,
+            "description": "Auxiliar Administrativo"
+        },
+        {
+            "id": 8,
+            "description": "Auxiliar de Recursos Humanos"
+        },
+        {
+            "id": 9,
+            "description": "Recepción"
+        },
+        {
+            "id": 10,
+            "description": "Intendencia"
+        },
+        {
+            "id": 11,
+            "description": "Coordinador de Recursos Humanos"
+        },
+        {
+            "id": 12,
+            "description": "Coordinador de Administración"
+        },
+        {
+            "id": 13,
+            "description": "Director General"
+        },
+        {
+            "id": 14,
+            "description": "Consejo Administrativo"
+        }
+    ]
+}
