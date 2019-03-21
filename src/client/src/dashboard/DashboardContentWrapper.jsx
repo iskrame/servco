@@ -41,7 +41,8 @@ export class DashboardContentWrapper extends React.Component{
     if(this.state.contentLoaded){
       content = (
         <div>
-          <IndicatorContainer indicators = {this.state.indicators} />
+          <IndicatorContainer indicators = {this.state.indicators}  />
+          <br/>
           <Typography paragraph>
             Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
             facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac

@@ -1,17 +1,26 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Indicator from './Indicator';
+import InfoBox from './InfoBox';
+import clock from '@material-ui/icons/AccessTime'
 
-const IndicatorContainer = ({indicators}) =>{
+
+const IndicatorContainer = ({ indicators }) => {
   let content = [];
-  indicators.map(indicator =>{
-    content.push(<Indicator indicator = {indicator} key = {indicator._id}/>);
+  indicators.forEach ((indicator, key) => {
+    content.push(
+      <div key={key} className="col-xs-12 col-sm-6 col-md-3 col-lg-3 m-b-15 ">
+        <InfoBox
+          Icon={clock}
+          color={indicator.backgroundColor}
+          title={indicator.title}
+          value={indicator.value}
+        />
+      </div>);
   });
-  
-  return ( 
-    <Grid container alignItems = 'center' justify = 'center'>
+
+  return (
+    <div className="row">
       {content}
-    </Grid>
+    </div>
   );
 }
 

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import WrappedVirtualizedTable from '../common/WrappedVirtualizedTable';
-import axios from "axios";
-const CancelToken = axios.CancelToken;
-const source = CancelToken.source();
 
 class VirtualizedTable extends Component {
   _isMounted = false;
@@ -33,7 +30,7 @@ class VirtualizedTable extends Component {
     
     const rows = [];
     
-     this.state.data.map((element) => {
+    this.state.data.forEach ((element) => {
       rows.push(createData(element.day,element.punches))
     });
 
@@ -42,7 +39,7 @@ class VirtualizedTable extends Component {
         <WrappedVirtualizedTable
           rowCount={rows.length}
           rowGetter={({ index }) => rows[index]}
-          onRowClick={event => console.log(event)}
+          // onRowClick={event => console.log(event)}
           columns={[
             {
               flexGrow: 1.0,
