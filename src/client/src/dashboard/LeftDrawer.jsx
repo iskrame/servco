@@ -98,7 +98,7 @@ class LeftDrawer extends Component {
           </Avatar>
         </center>
 
-        <h4 className={classes.menuItem} noWrap>
+        <h4 className={classes.menuItem}>
           Alejandro Martinez
         </h4>
 

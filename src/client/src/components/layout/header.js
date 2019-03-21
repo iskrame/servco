@@ -109,7 +109,7 @@ class Header extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <h4 color="inherit" noWrap>
+            <h4 color="inherit">
               Servicios al Colaborador
             </h4>
             <section className={classes.rightToolbar}>
