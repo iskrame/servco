@@ -70,7 +70,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    margin: 0
   },
   imgLogo: {
     width: "50%",
@@ -91,8 +91,8 @@ const styles = theme => ({
 
 class Dashboard extends Component {
   state = {
-    open: false,
-    item: 2
+    open: true,
+    item: 0
   };
 
   handleDrawerOpen = () => {
@@ -122,9 +122,20 @@ class Dashboard extends Component {
     this.setState({ item, open });
   };
   render() {
+    let { open } = this.state;
+    const innerStyles = {
+      header: {
+        paddingLeft: open ? drawerWidth : 0
+      },
+      container: {
+        margin: '20px',
+        paddingLeft: open  ? drawerWidth : 0
+      }
+    };
+
+
     const { classes, theme } = this.props;
-    const { open } = this.state;
-    let dashboardContent;
+     let dashboardContent;
     switch (this.state.item) {
       case 0:
         dashboardContent = (
@@ -195,51 +206,10 @@ class Dashboard extends Component {
         break;
       default:
         break;
-    } // const { user } = this.props.auth;
-
-    //const { profile, loading } = this.props.profile;
-
-    // let dashboardContent;
-    // if (profile === null || loading) {
-    //   dashboardContent = <Spinner />;
-    // } else {
-    //   //check if login user  has profile dta
-    //   if (Object.keys(profile).length > 0) {
-    //     dashboardContent = (
-    //       <div>
-    //         <p className="lead text-muted">
-    //           {" "}
-    //           Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
-    //         </p>
-    //         <ProfileActions />
-    //         {/* Todo: exp and edu*/}
-
-    //         <div style={{ marginBottom: "60px" }}>
-    //           <button
-    //             onClick={this.onDeleteClick.bind(this)}
-    //             className="btn btn-danger"
-    //           >
-    //             Delete My Account
-    //           </button>
-    //         </div>
-    //       </div>
-    //     );
-    //   } else {
-    //     //User is logged but dont have a profile
-    //     dashboardContent = (
-    //       <div>
-    //         <p className="lead text-muted"> Welcome {user.name}</p>
-    //         <p>You have not yet setup a profile, please add some info</p>
-    //         <Link to="/create-profile" className="btn btn-lg btn-info">
-    //           Create Profile
-    //         </Link>
-    //       </div>
-    //     );
-    //   }
-    // }
+    } 
     return (
-      <div className="dashboard">
-        <div className="container">
+      <div>
+        <div style={innerStyles.container}>
           <CssBaseline />
 
           <Header
