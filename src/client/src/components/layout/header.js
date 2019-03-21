@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import classNames from "classnames";
@@ -95,6 +95,58 @@ class Header extends React.Component {
         <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <Toolbar disableGutters={!open}>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={this.props.handleDrawerOpen}
+              className={classNames(classes.menuButton, {
+                [classes.hide]: open
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
+            <h4 color="inherit">Mini variant drawer</h4>
+
+            <section className={classes.rightToolbar}>
+              <Button
+                aria-owns={open ? "menu-appbar" : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit"
+              >
+                Alejandro Martinez
+              </Button>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                open={open}
+                onClose={this.handleClose}
+              >
+                <MenuItem>Perfil</MenuItem>
+                <MenuItem onClick={this.props.onClick}>Salir</MenuItem>
+              </Menu>
+
+              <IconButton color="inherit" aria-label="Configuracion">
+                <Settings />
+              </IconButton>
+            </section>
+          </Toolbar>
+        </AppBar>
+        {/* <AppBar
+          position="fixed"
+          className={classNames(classes.appBar, {
             [classes.appBarShift]: this.props.open
           })}
         >
@@ -103,10 +155,9 @@ class Header extends React.Component {
               color="inherit"
               aria-label="Open drawer"
               onClick={this.props.toggleMenu}
-              className={classNames(
-                classes.menuButton,
-                this.props.open && classes.hide
-              )}
+              className={classNames(classes.menuButton, {
+                [classes.hide]: !open
+              })}
             >
               <MenuIcon />
             </IconButton>
@@ -145,7 +196,7 @@ class Header extends React.Component {
               </IconButton>
             </section>
           </Toolbar>
-        </AppBar>
+        </AppBar> */}
       </div>
     );
   }
