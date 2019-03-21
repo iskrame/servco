@@ -4,7 +4,6 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 
 const styles = {
   root: {
@@ -20,7 +19,8 @@ const styles = {
   appBar: {
     top: "auto",
     bottom: 0,
-    background: "#1e305f"
+    background: "#ffffff",
+    color: "black"
   }
 };
 

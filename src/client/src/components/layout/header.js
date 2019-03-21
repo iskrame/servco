@@ -6,76 +6,71 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import classNames from 'classnames';
-import MenuIcon from '@material-ui/icons/Menu';
-import Settings from '@material-ui/icons/Settings';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-
+import classNames from "classnames";
+import MenuIcon from "@material-ui/icons/Menu";
+import Settings from "@material-ui/icons/Settings";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: "flex"
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    background: "#1e305f"
+    background: "white",
+    color: "black"
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 20,
+    marginRight: 20
   },
   hide: {
-    display: 'none',
+    display: "none"
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth,
+    marginLeft: -drawerWidth
   },
   rightToolbar: {
-    marginLeft: 'auto',
-    marginRight: '2%'
+    marginLeft: "auto",
+    marginRight: "2%"
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
-    marginLeft: 0,
-  },
+    marginLeft: 0
+  }
 });
 
-
-
-
 class Header extends React.Component {
-  
   state = {
     auth: true,
-    anchorEl: null,
+    anchorEl: null
   };
 
   handleChange = event => {
@@ -90,19 +85,17 @@ class Header extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  render(){
-  
-  const { classes } = this.props;
-  const { anchorEl } = this.state;
-  const open = Boolean(anchorEl);
+  render() {
+    const { classes } = this.props;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
 
-
-  return (
-    <div className={classes.root}>
-      <AppBar
+    return (
+      <div className={classes.root}>
+        <AppBar
           position="fixed"
           className={classNames(classes.appBar, {
-            [classes.appBarShift]: this.props.open,
+            [classes.appBarShift]: this.props.open
           })}
         >
           <Toolbar disableGutters={!this.props.open}>
@@ -110,42 +103,42 @@ class Header extends React.Component {
               color="inherit"
               aria-label="Open drawer"
               onClick={this.props.toggleMenu}
-              className={classNames(classes.menuButton, this.props.open && classes.hide)}
+              className={classNames(
+                classes.menuButton,
+                this.props.open && classes.hide
+              )}
             >
-            <MenuIcon />
+              <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              SERVCO Dashboard
+              Servicios al Colaborador
             </Typography>
             <section className={classes.rightToolbar}>
-
-
-              
-                <Button
-                  aria-owns={open ? 'menu-appbar' : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  Alejandro Martinez
-                </Button>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem>Perfil</MenuItem>
-                  <MenuItem onClick={this.props.onClick}>Salir</MenuItem>
-                </Menu>
+              <Button
+                aria-owns={open ? "menu-appbar" : undefined}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="inherit"
+              >
+                Alejandro Martinez
+              </Button>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                open={open}
+                onClose={this.handleClose}
+              >
+                <MenuItem>Perfil</MenuItem>
+                <MenuItem onClick={this.props.onClick}>Salir</MenuItem>
+              </Menu>
 
               <IconButton color="inherit" aria-label="Configuracion">
                 <Settings />
@@ -153,8 +146,8 @@ class Header extends React.Component {
             </section>
           </Toolbar>
         </AppBar>
-    </div>
-  );
+      </div>
+    );
   }
 }
 

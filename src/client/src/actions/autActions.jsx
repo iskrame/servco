@@ -97,9 +97,7 @@ export const UpdatePassword = userdata => dispatch => {
 };
 
 export const CurrentInfo = userdata => dispatch => {
-  console.log(userdata + " current Ingo");
   axios.get("/api/users/current/:token", userdata).then(res => {
-    console.log("...Desde route");
     setAuthToken(userdata);
     // Decode token to get user data
     const decoded = jwt_decode(userdata); // Set current user

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
-import classNames from "classnames";
 import PersonalDataFields from "./principalFields/PrincipalFields";
 
 class PersonalData extends Component {
@@ -10,7 +8,7 @@ class PersonalData extends Component {
     //
     return (
       <React.Fragment>
-        <Grid container spacing={50}>
+        <Grid container spacing={24}>
           <Grid item xs={12}>
             <PersonalDataFields
               onChange={onChange}

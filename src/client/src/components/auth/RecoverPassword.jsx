@@ -22,9 +22,7 @@ class recoverPassword extends Component {
     this.props.CurrentInfo(this.props.match.params.token);
   }
   componentWillReceiveProps(nextProps) {
-    console.log(localStorage.getItem("auth"));
     if (localStorage.getItem("auth")) {
-      // console.log("asda");
       localStorage.removeItem("auth");
       this.props.history.push("/login");
     }
@@ -42,8 +40,6 @@ class recoverPassword extends Component {
     };
     this.props.UpdatePassword(newPassword);
     this.setState({ open: true });
-
-    // this.props.history.push("/");
   }
   onClose = () => {
     this.props.history.push("/login");

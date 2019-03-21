@@ -1,20 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import classNames from "classnames";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Chip from "@material-ui/core/Chip";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-
 import { countries, statesFromMexico } from "../../../../utils/countrys";
 const styles = theme => ({
   root: {
@@ -24,31 +18,11 @@ const styles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     bold: true
   },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
-  },
-  icon: {
-    verticalAlign: "bottom",
-    height: 20,
-    width: 20
-  },
   details: {
     alignItems: "center"
   },
   column: {
     flexBasis: "100%"
-  },
-  helper: {
-    borderLeft: `2px solid ${theme.palette.divider}`,
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
-  },
-  link: {
-    color: theme.palette.primary.main,
-    textDecoration: "none",
-    "&:hover": {
-      textDecoration: "underline"
-    }
   }
 });
 
@@ -57,20 +31,17 @@ class PersonalDataFields extends Component {
     const { classes, onChange, onChangePattern, state } = this.props;
     let stateFrom = "";
     if (state.country === "México") {
-      console.log("Estados de Mexico");
       stateFrom = (
         <TextField
           id="state"
           select
           label="Estado"
           name="state"
-          // disabled="true"
           style={{
             marginLeft: 5,
             marginRight: 12,
             width: "98%"
           }}
-          // className={classes.textField}
           value={state.state}
           onChange={onChange}
           SelectProps={{
@@ -111,7 +82,7 @@ class PersonalDataFields extends Component {
           <ExpansionPanelDetails className={classes.details}>
             <div className={classes.column}>
               <Grid container spacing={24}>
-                <Grid item xs={1}>
+                <Grid item xs={4} sm={1}>
                   <TextField
                     inputProps={{
                       maxLength: 6,
@@ -127,7 +98,7 @@ class PersonalDataFields extends Component {
                 </Grid>
               </Grid>
               <Grid container spacing={24}>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     value={state.names}
                     id="name"
@@ -139,7 +110,7 @@ class PersonalDataFields extends Component {
                     inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
                   />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     // required
                     inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
@@ -150,7 +121,7 @@ class PersonalDataFields extends Component {
                     autoComplete="lname"
                   />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     // required
                     inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
@@ -163,7 +134,7 @@ class PersonalDataFields extends Component {
                 </Grid>
               </Grid>
               <Grid container spacing={24}>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     // required
                     id="bdayDate"
@@ -174,7 +145,7 @@ class PersonalDataFields extends Component {
                     // autoComplete="billing address-line1"
                   />
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     id="civilStatus"
                     name="civilStatus"
