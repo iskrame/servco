@@ -1,0 +1,20 @@
+{
+    "WorkingDayTypeData": [
+        {
+            "id": 1,
+            "description": "Matutina"
+        },
+        {
+            "id": 2,
+            "description": "Flex time tiempo completo"
+        },
+        {
+            "id": 2,
+            "description": "Horario fijo tiempo completo"
+        },
+        {
+            "id": 4,
+            "description": "Horario fijo medio tiempo"
+        }
+    ]
+}
