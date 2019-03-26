@@ -12,6 +12,8 @@ const ValidateRecoverPassword = require("../validation/recoverPassword");
 // Load User model
 const Users = require("../models/users");
 
+const language = require("../src/translate/serverTranslate");
+
 //Function to register an user
 exports.usersRegister = function(req, res) {
   //To get the errors and if is valid the user,
@@ -25,7 +27,7 @@ exports.usersRegister = function(req, res) {
   Users.findOne({ email: req.body.email }).then(user => {
     // if the user is not empty throw an error
     if (user) {
-      errors.email = "El correo ingresado ya se encuenta registrado";
+      errors.email = language().enteredEmail;
       return res.status(400).json(errors);
     }
     //const to recibe the info of the new user
@@ -63,7 +65,7 @@ exports.getUserLogin = function(req, res) {
   Users.findOne({ email }).then(user => {
     //Check if the email is in the data base
     if (!user) {
-      errors.emailnotFound = "Usuario no encontrado";
+      errors.emailnotFound = language().notEmail;
       return res.status(404).json(errors);
     }
     //Check if the password is the correct password
@@ -85,7 +87,7 @@ exports.getUserLogin = function(req, res) {
           }
         );
       } else {
-        errors.wrongPassword = "Contraseña incorrecta";
+        errors.wrongPassword = language().wrongPassword;
         res.status(400).json(errors);
       }
     });
@@ -106,7 +108,7 @@ exports.sendingEMail = function(req, res) {
   Users.findOne({ email }).then(user => {
     //Check if the email is in the data base
     if (!user) {
-      errorsEmail.recoverEmail = "El correo no se encuentra registrado";
+      errorsEmail.recoverEmail = language().notEmail;
       return res.status(404).json(errorsEmail);
     }
     // empleados.findOne({ _id: user.employee}).then(empleado => {
@@ -131,24 +133,15 @@ exports.sendingEMail = function(req, res) {
       }
     );
     var mailOptions = {
-      from: "Servicios al Colaborador",
+      from: language().servco,
       to: user.email,
-      subject: "Recuperación de contraseña",
-      text: `
-      Hola, Alejandro Martinez.
-        
-      Recibimos la solicitud de recuperación de contraseña para su cuenta en 'Servicios al colaborador'.
-        
-      Para concluir el proceso y cambiar su contraseña, diríjase a la siguiente dirección:
+      subject: language().passRecovery,
+      text: `${language().greeting}, Alejandro Martinez.
+      ${language().msn1}
         
       http://10.0.1.89:3000/recoverpassword/Bearer${token}/${user._id}
-        
-      En la mayoría de programas de correo electrónico el enlace anterior debería aparecer en azul y puede hacer clic sobre él. Si no funcionara, córtelo y péguelo en la ventana de direcciones de su navegador.        
-        
-      Si necesita ayuda adicional, póngase en contacto con el administrador.
       
-      Enrique Perez Rul 
-      correoElectronicoAdministrador.`
+      ${language().msn2}`
     };
     trasnporter.sendMail(mailOptions, function(err, info) {
       if (err) {

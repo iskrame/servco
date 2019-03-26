@@ -15,6 +15,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {clientLenguaje} from "../../../../translate/clientTranslate";
 //Styles
 const styles = theme => ({
     root: {
@@ -69,6 +70,7 @@ class LaborInformation extends Component {
         this.props.onChange(e);
     }
     render() {
+        const leng = clientLenguaje();
         const { onChange, onChangePattern, fields, classes } = this.props;
         return (
             <div className={classes.root}>
@@ -76,7 +78,7 @@ class LaborInformation extends Component {
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <div className={classes.column}>
                             <span className={classes.heading}>
-                                <strong>Información Laboral</strong>
+                                <strong>{leng.workingInformation}</strong>
                             </span>
                         </div>
                     </ExpansionPanelSummary>
@@ -85,7 +87,7 @@ class LaborInformation extends Component {
                             <Grid container spacing={24}>
                                 <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
-                                        <InputLabel htmlFor="select-multiple">Puesto</InputLabel>
+                                        <InputLabel htmlFor="select-multiple">{leng.job}</InputLabel>
                                         <Select
                                             multiple
                                             value={fields.jobs}
@@ -115,7 +117,7 @@ class LaborInformation extends Component {
                                                 pattern: "^[0-9]+([.][0-9]*)?$"
                                             }}
                                             name="monthlySalary"
-                                            label="Sueldo mensual"
+                                            label={leng.monthlySalary}
                                             value={fields.monthlySalary}
                                             onChange={onChangePattern}
                                             fullWidth
@@ -127,7 +129,7 @@ class LaborInformation extends Component {
                                         <TextField
                                             type="date"
                                             name="seniorityDate"
-                                            label="Fecha de antigüedad"
+                                            label={leng.dateOfSeniority}
                                             value={fields.seniorityDate}
                                             onChange={onChangePattern}
                                             InputLabelProps={{
@@ -141,7 +143,7 @@ class LaborInformation extends Component {
 
                                 <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
-                                        <InputLabel>Ubicación Laboral</InputLabel>
+                                        <InputLabel>{leng.jobLocation}</InputLabel>
                                         <Select
                                             value={fields.laborLocation}
                                             onChange={this.onHandleChange.bind(this)}
@@ -152,7 +154,7 @@ class LaborInformation extends Component {
                                                 </MenuItem>
                                             ))}
                                             <MenuItem key="Otro" value="Otro">
-                                                Otro
+                                                {leng.other}
                                             </MenuItem>
                                         </Select>
                                     </FormControl>
@@ -162,7 +164,7 @@ class LaborInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="otherLaborLocation"
-                                            label="Otra Ubicación Laboral"
+                                            label={leng.otherJobLocation}
                                             value={fields.otherLaborLocation}
                                             inputProps={
                                                 {
@@ -179,7 +181,7 @@ class LaborInformation extends Component {
 
                                 <Grid item xs={10} sm={4}>
                                     <FormControl className={classes.formControl}>
-                                        <InputLabel htmlFor="select-multiple">Tipo de Jornada</InputLabel>
+                                        <InputLabel htmlFor="select-multiple">{leng.journey}</InputLabel>
                                         <Select
                                             value={fields.workingDayType}
                                             onChange={onChange}
@@ -198,7 +200,7 @@ class LaborInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="beneficiary"
-                                            label="Beneficiario"
+                                            label={leng.beneficiary}
                                             value={fields.beneficiary}
                                             onChange={onChangePattern}
                                             inputProps={{ pattern: "[a-zA-Z_ ]*" }}
@@ -211,7 +213,7 @@ class LaborInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="relationship"
-                                            label="Parentesco del beneficiario"
+                                            label= {leng.relationchipBeneficiary}
                                             value={fields.relationship}
                                             onChange={onChangePattern}
                                             inputProps={{ pattern: "[a-zA-Z_ ]*" }}

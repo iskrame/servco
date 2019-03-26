@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
 import RecoverPassword from "./Poppop";
 import classNames from "classnames";
+import {clientLenguaje} from "../../translate/clientTranslate";
 
 const styles = theme => ({
   main: {
@@ -56,6 +57,7 @@ const styles = theme => ({
 });
 function SignIn(props) {
   const { classes } = props;
+  const leng = clientLenguaje();
 
   return (
     <main className={classes.main}>
@@ -64,7 +66,7 @@ function SignIn(props) {
         <img src={img} alt="..." />
         <form className={classes.form} onSubmit={props.onSubmit}>
           <FormControl margin="normal" fullWidth>
-            <InputLabel htmlFor="email">Usuario</InputLabel>
+            <InputLabel htmlFor="email">{leng.user}</InputLabel>
             <Input
               inputProps={{
                 maxLength: 50
@@ -78,7 +80,7 @@ function SignIn(props) {
             <span style={{ color: "red" }}>{props.errors.email}</span>
           </FormControl>
           <FormControl margin="normal" fullWidth>
-            <InputLabel htmlFor="password">Contraseña</InputLabel>
+            <InputLabel htmlFor="password">{leng.password}</InputLabel>
             <Input
               inputProps={{
                 maxLength: 25
@@ -103,7 +105,7 @@ function SignIn(props) {
             className={classes.submit}
             style={{ background: "#941a1f", textTransform: "none" }}
           >
-            Ingresar
+            {leng.signIn}
           </Button>
         </form>
         <form onSubmit={props.onSubmitEmail}>

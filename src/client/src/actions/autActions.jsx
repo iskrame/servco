@@ -7,20 +7,10 @@ import {
   IS_RECOVER_EMAIL,
   GET_PROFILE
 } from "./types";
+import {clientLenguaje} from "../translate/clientTranslate";
 
-// // // Register User
-// // export const registerUser = (userData, history) => dispatch => {
-// //   axios
-// //     .post("/api/users/register", userData)
-// //     .then(res => history.push("/login"))
-// //     .catch(err =>
-// //       dispatch({
-// //         type: GET_ERRORS,
-// //         payload: err.response.data
-// //       })
-// //     );
-// // };
-
+const leng = clientLenguaje();
+const message = leng.sendEmailMessage;
 export const sendEmail = userData => dispatch => {
   axios
     .post("/api/users/sendemail", userData)
@@ -41,10 +31,7 @@ export const sendEmail = userData => dispatch => {
         payload: {}
       });
       dispatch(setCurrentUser({}));
-      window.alert(
-        "se a enviado un correo con el link para cambiar la contraseña a: " +
-          userData.recoverEmail
-      );
+      window.alert(message + userData.recoverEmail);
     })
     .catch(err => {
       dispatch({ type: IS_RECOVER_EMAIL, payload: {} });

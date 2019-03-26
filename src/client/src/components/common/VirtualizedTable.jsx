@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import WrappedVirtualizedTable from '../common/WrappedVirtualizedTable';
+import {clientLenguaje} from "../../translate/clientTranslate";
+const leng = clientLenguaje();
+const day = leng.day;
+const punches = leng.punches;
 
 class VirtualizedTable extends Component {
   _isMounted = false;
   state = {
     data: [],
   };
+  
 
   componentDidMount(){
     this._isMounted = true;
@@ -28,7 +33,7 @@ class VirtualizedTable extends Component {
       return { id, day, punches };
     }
     
-    const rows = [];
+const rows = [];
     
     this.state.data.forEach ((element) => {
       rows.push(createData(element.day,element.punches))
@@ -39,18 +44,18 @@ class VirtualizedTable extends Component {
         <WrappedVirtualizedTable
           rowCount={rows.length}
           rowGetter={({ index }) => rows[index]}
-          // onRowClick={event => console.log(event)}
+          onRowClick={event => console.log(event)}
           columns={[
             {
               flexGrow: 1.0,
               width: 150,
-              label: 'Dia',
+              abel: day,
               dataKey: 'day',
             },
             {
               flexGrow: 1.0,
               width: 150,
-              label: 'Checadas',
+              label: punches,
               dataKey: 'punches',
             },
           ]}

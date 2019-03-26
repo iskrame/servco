@@ -9,6 +9,10 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import { countries, statesFromMexico } from "../../../../utils/countrys";
+import {clientLenguaje} from "../../../../translate/clientTranslate";
+
+
+
 const styles = theme => ({
   root: {
     width: "100%"
@@ -25,8 +29,15 @@ const styles = theme => ({
   }
 });
 
+export function changelengPF(x) {
+  
+  
+}
+
+let leng = clientLenguaje(0);
 class PersonalDataFields extends Component {
   render() {
+
     const { classes, onChange, onChangePattern, state } = this.props;
     let stateFrom = "";
     if (state.country === "México") {
@@ -74,7 +85,7 @@ class PersonalDataFields extends Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.column}>
               <span className={classes.heading}>
-                <strong>Información Personal</strong>
+                <strong>{leng.personalInfo}</strong>
               </span>
             </div>
           </ExpansionPanelSummary>
@@ -89,7 +100,7 @@ class PersonalDataFields extends Component {
                     }}
                     id="clave"
                     name="clave"
-                    label="Clave"
+                    label={leng.key}
                     value={state.clave}
                     onChange={onChangePattern}
                     fullWidth
@@ -102,7 +113,7 @@ class PersonalDataFields extends Component {
                     value={state.names}
                     id="name"
                     name="names"
-                    label="Nombre(s)"
+                    label={leng.name}
                     onChange={onChangePattern}
                     fullWidth
                     autoComplete="fname"
@@ -115,7 +126,7 @@ class PersonalDataFields extends Component {
                     inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
                     id="lastName"
                     name="lastName"
-                    label="Apellido Paterno"
+                    label={leng.lastName}
                     fullWidth
                     autoComplete="lname"
                   />
@@ -126,7 +137,7 @@ class PersonalDataFields extends Component {
                     inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
                     id="secondlastName"
                     name="secondlastName"
-                    label="Apellido Materno"
+                    label={leng.secondLastName}
                     fullWidth
                     autoComplete="lname"
                   />
@@ -138,7 +149,7 @@ class PersonalDataFields extends Component {
                     // required
                     id="bdayDate"
                     name="bdayDate"
-                    label="Fecha de Nacimiento"
+                    label={leng.bday}
                     fullWidth
                     style={{ marginTop: "15px" }}
                   // autoComplete="billing address-line1"
@@ -148,7 +159,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="civilStatus"
                     name="civilStatus"
-                    label="Estado Civil"
+                    label={leng.civilStatus}
                     fullWidth
                     style={{ marginTop: "16px" }}
                   />
@@ -158,7 +169,7 @@ class PersonalDataFields extends Component {
                     id="gender"
                     select
                     name="gender"
-                    label="Sexo"
+                    label={leng.gender}
                     style={{
                       marginLeft: -2,
                       marginRight: 12,
@@ -174,8 +185,8 @@ class PersonalDataFields extends Component {
                     }}
                     margin="normal"
                   >
-                    <MenuItem value="Masculino">Masculino</MenuItem>
-                    <MenuItem value="Femenino">Femenino</MenuItem>
+                    <MenuItem value="Masculino">{leng.male}</MenuItem>
+                    <MenuItem value="Femenino">{leng.female}</MenuItem>
                   </TextField>
                 </Grid>
               </Grid>
@@ -184,7 +195,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="city"
                     name="city"
-                    label="Ciudad"
+                    label={leng.city}
                     fullWidth
                     style={{ marginTop: "15px" }}
                   />
@@ -196,7 +207,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="standard-select-currency"
                     select
-                    label="País"
+                    label={leng.country}
                     name="country"
                     // disabled="true"
                     style={{
@@ -226,7 +237,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="nacionality"
                     name="nacionality"
-                    label="Nacionalidad"
+                    label={leng.nacionality}
                     fullWidth
                   />
                 </Grid>
@@ -244,7 +255,7 @@ class PersonalDataFields extends Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.column}>
               <span className={classes.heading}>
-                <strong>Datos de Contacto</strong>
+                <strong>{leng.contactInfo}</strong>
               </span>
             </div>
           </ExpansionPanelSummary>
@@ -255,7 +266,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="street"
                     name="street"
-                    label="Calle"
+                    label={leng.street}
                     fullWidth
                   />
                 </Grid>
@@ -263,7 +274,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="number"
                     name="number"
-                    label="Número"
+                    label={leng.number}
                     fullWidth
                   />
                 </Grid>
@@ -271,7 +282,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="fracc"
                     name="fracc"
-                    label="Colonia"
+                    label={leng.fracc}
                     fullWidth
                   />
                 </Grid>
@@ -279,7 +290,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="municipality"
                     name="municipality"
-                    label="Municipio"
+                    label={leng.municipality}
                     fullWidth
                   />
                 </Grid>
@@ -287,7 +298,7 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="addresState"
                     name="addresState"
-                    label="Estado"
+                    label={leng.addresState}
                     fullWidth
                   />
                 </Grid>
@@ -295,23 +306,23 @@ class PersonalDataFields extends Component {
                   <TextField
                     id="zipCode"
                     name="zipCode"
-                    label="Codigo Postal"
+                    label={leng.zipCode}
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <TextField id="cel" name="cel" label="Celular" fullWidth />
+                  <TextField id="cel" name="cel" label={leng.cel} fullWidth />
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <TextField
                     id="tel"
                     name="tel"
-                    label=" Teléfono de Casa"
+                    label={leng.tel}
                     fullWidth
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <TextField id="other" name="other" label="Otro" fullWidth />
+                  <TextField id="other" name="other" label={leng.other} fullWidth />
                 </Grid>
               </Grid>
             </div>

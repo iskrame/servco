@@ -1,6 +1,7 @@
 //#region Imports
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
+const language = require("../src/translate/serverTranslate");
 //#endregion
 
 //Function to validate the input of the fields in
@@ -18,14 +19,14 @@ module.exports = function ValidateSendingMailInput(data) {
   // its a valid email
   //If not a valid email return an Error
   if (!Validator.isEmail(data.recoverEmail)) {
-    errorsEmail.recoverEmail = "Formato de correo incorrecto";
+    errorsEmail.recoverEmail = language().invalidFormatEmail;
   }
   //This validation chek if the input in the field  of email
   // its empty
   //If it is empty value return an Error
 
   if (Validator.isEmpty(data.recoverEmail)) {
-    errorsEmail.recoverEmail = "Correo  requerido";
+    errorsEmail.recoverEmail = language().mailRequired;
   }
   //This validation chek if the value of object errors are empty
   //If it have an empty value return true  else return false

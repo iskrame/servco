@@ -1,15 +1,22 @@
+import {clientLenguaje} from "../translate/clientTranslate";
+const leng = clientLenguaje();
+const Nc = leng.accontN;
+const Nt = leng.cardN;
+const bank = leng.bank;
+const other = leng.other;
+
 export const payWays = [
     {
         id: 1,
-        description: "Número de cuenta"
+        description: Nc
     },
     {
         id: 2,
-        description: "Número de tarjeta"
+        description: Nt
     },
     {
         id: 3,
-        description: "Banco"
+        description: bank
     }
 ]
 
@@ -20,6 +27,6 @@ export const schemas = [
     },
     {
         id: 2,
-        description: "Otro"
+        description: other
     }
 ]

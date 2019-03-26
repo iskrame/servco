@@ -14,14 +14,19 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { primaryMenus } from "./data";
+import { ChangeLenguaje } from "./data";
 import { MenuItem } from "@material-ui/core";
 import img from "../img/logoSPARK132.png";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Settings from "@material-ui/icons/Settings";
 import Menu from "@material-ui/core/Menu";
+import {clientLenguaje} from "../translate/clientTranslate";
+import {changelengPF} from "../components/collaborators/personalDataFields/principalFields/PrincipalFields"
+
+let leng = clientLenguaje(1);
 const drawerWidth = 240;
+let primaryMenus = ChangeLenguaje(1);
 
 const styles = theme => ({
   root: {
@@ -95,7 +100,6 @@ const styles = theme => ({
   menuItem: {
     color: "white",
     fontSize: 20
-    // marginBottom: "15px"
   },
   imgLogo: {
     width: "50%",
@@ -130,7 +134,8 @@ const styles = theme => ({
 class MiniDrawer extends React.Component {
   state = {
     auth: true,
-    anchorEl: null
+    anchorEl: null,
+    lenguajes: 0
   };
   handleChange = event => {
     this.setState({ auth: event.target.checked });
@@ -144,6 +149,12 @@ class MiniDrawer extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  changeleng = x =>{
+  this.setState({lenguajes:x})
+  leng = clientLenguaje(this.state.lenguajes);
+  primaryMenus = ChangeLenguaje(this.state.lenguajes);
+  changelengPF(x);
+ }
   render() {
     const { classes, theme } = this.props;
     const {
@@ -175,9 +186,10 @@ class MiniDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <h4 color="inherit" style={{ marginTop: "15px" }}>
-              Servicio al Colaborador
+              {leng.serviceCol}
             </h4>
             <section className={classes.rightToolbar}>
+            <Button onClick={() =>this.changeleng(this.state.lenguajes === 0 ? 1 : 0)}>{leng.language}</Button>
               <Menu
                 id="menu-appbar"
                 anchorEl={this.state.anchorEl}
@@ -192,10 +204,9 @@ class MiniDrawer extends React.Component {
                 open={openMenu}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={() => onclick(1)}>Perfil</MenuItem>
-                <MenuItem onClick={onLogoutClick}>Salir</MenuItem>
+              <MenuItem onClick={() => onclick(1)}>{leng.profile}</MenuItem>
+              <MenuItem onClick={onLogoutClick}>{leng.logOut}</MenuItem>
               </Menu>
-
               <Button
                 color="inherit"
                 aria-label="Configuracion"

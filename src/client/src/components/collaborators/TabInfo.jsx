@@ -7,19 +7,25 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PersonalData from "./personalDataFields/TabPersonalData";
 import TabLaborData from './laborData/TabLaborData';
+import {clientLenguaje} from "../../translate/clientTranslate";
 
+let leng = clientLenguaje();
+let personalData = leng.personalData;
+let labroData = leng.laborData;
+let eduExp = leng.education;
+let userData = leng.userData;
 const tabs = [
   {
-    name: "Datos Personales"
+    name: personalData
   },
   {
-    name: "Datos Laborales"
+    name: labroData
   },
   {
-    name: "Educacion/Experiencia"
+    name: eduExp
   },
   {
-    name: "Datos Usuario"
+    name: userData
   }
 ];
 function TabContainer({ children, dir }) {
