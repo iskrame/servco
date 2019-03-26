@@ -226,7 +226,7 @@ export const countries = [
   { value: "Taiwán" },
   { value: "Tanzania" },
   { value: "Tayikistán" },
-  { value: "TerritorioBritánicodel Océano Indico" },
+  { value: "Territorio Británico del Océano Indico" },
   { value: "Territorios Australes Franceses" },
   { value: "Timor Oriental" },
   { value: "Togo" },

@@ -5,12 +5,24 @@ import SwipeableViews from "react-swipeable-views";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import PersonalData from "./personalDataFields/TabPersonalData";
-import TabLaborData from './laborData/TabLaborData';
-
+import TabLaborData from "./laborData/TabLaborData";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import BornFields from "./personalDataFields/principalFields/BornFields";
+import PersonalDataFields from "./personalDataFields/principalFields/PrincipalFields";
+import AddressFields from "./personalDataFields/principalFields/AddressFields";
 const tabs = [
   {
-    name: "Datos Personales"
+    name: "Información Personal"
+  },
+  {
+    name: "Lugar de Nacimiento"
+  },
+  {
+    name: "Dirección"
+  },
+  {
+    name: "Datos de Contacto"
   },
   {
     name: "Datos Laborales"
@@ -37,90 +49,80 @@ TabContainer.propTypes = {
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: "10px",
+    boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)"
+  },
+  buttons: {
+    display: "flex",
+    justifyContent: "flex-end"
+  },
+  button: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit * 5,
+    marginBottom: theme.spacing.unit * 3,
+    borderRadius: "5px",
+    boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)",
+    background: "#1e305f"
+  },
+  buttonBack: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 3,
+    borderRadius: "5px",
+    boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)"
+  },
+  buttonCancel: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 3,
+    borderRadius: "5px",
+    boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)",
+    background: "#941a1f",
+    color: "white",
+    hover: { background: "red" }
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    marginBottom: theme.spacing.unit * 5,
+    padding: theme.spacing.unit * 5,
+    [theme.breakpoints.up(600 + theme.spacing.unit * 4 * 2)]: {
+      marginTop: theme.spacing.unit * 2,
+      marginBottom: theme.spacing.unit,
+      padding: theme.spacing.unit * 5,
+      margin: "15px"
+    },
+    borderRadius: "5px",
+    boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)",
+    height: "350px"
+  },
+  appBar: {
+    backgroundColor: "#941a1f",
+    borderRadius: "5px",
+    boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)"
   }
 });
 
 class FullWidthTabs extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      index: 0,
-      clave: "",
-      names: "",
-      lastName: "",
-      secondLastName: "",
-      bDay: "",
-      city: "",
-      state: "",
-      country: "México",
-      gender: "",
-      civilStatus: "",
-      nationality: "",
-      curp: "",
-      rfc: "",
-      street: "",
-      number: "",
-      //this is a variable for Colonia/Fraccionamiento
-      fracc: "",
-      //this is a variable for Municipio
-      municipality: "",
-      addresState: "",
-      zipCode: "",
-      cel: "",
-      tel: "",
-      other: "",
-      //This states are for labor data (labor tab)
-      jobs: [2],
-      monthlySalary: '',
-      seniorityDate: '',
-      laborLocation: '',
-      otherLaborLocation: '',
-      workingDayType: '',
-      beneficiary: '',
-      relationship: '',
-      procurementRegime: '', //For regimen de contratacion del trabajador
-      schema: '1',
-      otherSchema: '',
-      socialSecurityNumber: '',
-      infonavit: '',
-      fonacot: '',
-      payWay: ''
-    };
-    this.onChange = this.onChange.bind(this);
-    this.onChangePattern = this.onChangePattern.bind(this);
+  componentDidMount() {
+    this.props.state.tabs = tabs.length;
   }
-
-  handleChange = (event, index) => {
-    this.setState({ index });
-  };
-
-  handleChangeIndex = index => {
-    this.setState({ index });
-  };
-  onChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
-  onChangePattern(e) {
-    const { value, name } = e.target;
-    const valueTyped = e.target.validity.valid ? value : this.state[name];
-    this.setState({
-      [name]: valueTyped
-    });
-  }
-
   render() {
     const { classes, theme } = this.props;
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="default">
+        <AppBar position="static">
           <Tabs
-            value={this.state.index}
-            onChange={this.handleChange}
+            value={this.props.state.index}
+            onChange={this.props.handleChange}
             indicatorColor="primary"
-            textColor="primary"
+            style={{
+              indicatorColor: "#1e305f",
+              backgroundColor: "#941a1f",
+              borderRadius: "5px",
+              boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)"
+            }}
             variant="fullWidth"
           >
             {tabs.map((option, index) => (
@@ -130,26 +132,83 @@ class FullWidthTabs extends React.Component {
         </AppBar>
         <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={this.state.index}
-          onChangeIndex={this.handleChangeIndex}
+          index={this.props.state.index}
+          onChangeIndex={this.props.handleChangeIndex}
         >
           <TabContainer dir={theme.direction}>
-            <PersonalData
-              onChange={this.onChange}
-              onChangePattern={this.onChangePattern}
-              state={this.state}
-            />
+            <Paper className={classes.paper}>
+              <PersonalDataFields
+                onChange={this.props.onChange}
+                onChangePattern={this.props.onChangePattern}
+                state={this.props.state}
+              />
+            </Paper>
           </TabContainer>
           <TabContainer dir={theme.direction}>
-            <TabLaborData
-              onChange={this.onChange}
-              onChangePattern={this.onChangePattern}
-              fields={this.state}
-            />
+            <Paper className={classes.paper}>
+              <BornFields
+                onChange={this.props.onChange}
+                onChangePattern={this.props.onChangePattern}
+                state={this.props.state}
+              />
+              <div />
+            </Paper>
           </TabContainer>
+          <TabContainer dir={theme.direction}>
+            <Paper className={classes.paper}>
+              <AddressFields
+                onChange={this.props.onChange}
+                onChangePattern={this.props.onChangePattern}
+                state={this.props.state}
+              />
+            </Paper>
+          </TabContainer>
+          <TabContainer dir={theme.direction}>
+            <Paper className={classes.paper}>
+              <TabLaborData
+                onChange={this.onChange}
+                onChangePattern={this.onChangePattern}
+                fields={this.props.state}
+              />
+            </Paper>
+          </TabContainer>
+
+          <TabContainer dir={theme.direction}>Item Three</TabContainer>
           <TabContainer dir={theme.direction}>Item Three</TabContainer>
           <TabContainer dir={theme.direction}>Item Three</TabContainer>
         </SwipeableViews>
+        <div className={classes.buttons}>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.buttonCancel}
+            onClick={this.props.handleCancel}
+          >
+            Cancelar
+          </Button>
+          {this.props.state.index !== 0 && (
+            <Button
+              className={classes.buttonBack}
+              onClick={this.props.handleBack}
+            >
+              Atras
+            </Button>
+          )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={
+              this.props.state.index === tabs.length - 1
+                ? this.props.onsubmit
+                : this.props.handleNext
+            }
+            className={classes.button}
+          >
+            {this.props.state.index === tabs.length - 1
+              ? "Guardar"
+              : "Siguiente"}
+          </Button>
+        </div>
       </div>
     );
   }

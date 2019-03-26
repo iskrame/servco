@@ -116,7 +116,9 @@ const styles = theme => ({
     marginBottom: "5px"
   },
   userText: {
-    color: "white"
+    color: "white",
+    marginBottom: "15px",
+    fontSize: 25
   },
   userTextClose: {
     display: "none"
@@ -151,7 +153,9 @@ class MiniDrawer extends React.Component {
       open,
       onclick,
       handleDrawerOpen,
-      onLogoutClick
+      onLogoutClick,
+      name,
+      index
     } = this.props;
     let openMenu = Boolean(this.state.anchorEl);
     return (
@@ -175,7 +179,7 @@ class MiniDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <h4 color="inherit" style={{ marginTop: "15px" }}>
-              Servicio al Colaborador
+              {index === "" ? "Servicio al Colaborador" : name}
             </h4>
             <section className={classes.rightToolbar}>
               <Menu
@@ -192,7 +196,7 @@ class MiniDrawer extends React.Component {
                 open={openMenu}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={() => onclick(1)}>Perfil</MenuItem>
+                <MenuItem onClick={() => onclick("Perfil", 1)}>Perfil</MenuItem>
                 <MenuItem onClick={onLogoutClick}>Salir</MenuItem>
               </Menu>
 
@@ -250,7 +254,7 @@ class MiniDrawer extends React.Component {
               [classes.userTextClose]: !open
             })}
           >
-            Alejandro Martinez
+            {"Alejandro Martinez"}
           </h4>
 
           <Divider style={{ marginBottom: "15px", background: "white" }} />
@@ -266,7 +270,7 @@ class MiniDrawer extends React.Component {
                 button
                 key={index}
                 className={classes.menuItem}
-                onClick={() => onclick(index)}
+                onClick={() => onclick(menu.text, index)}
               >
                 <ListItemIcon className={classes.menuItem}>
                   {menu.icon}
