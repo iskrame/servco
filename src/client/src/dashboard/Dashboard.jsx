@@ -15,7 +15,8 @@ const drawerWidth = 240;
 class Dashboard extends Component {
   state = {
     open: true,
-    item: -1
+    item: "",
+    name: ""
   };
   handleDrawerOpen = () => {
     console.log("Abrir");
@@ -36,8 +37,8 @@ class Dashboard extends Component {
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
-  onListItemClick = item => {
-    this.setState({ item });
+  onListItemClick = (name, item) => {
+    this.setState({ item, name });
   };
   render() {
     let { open } = this.state;
@@ -47,7 +48,8 @@ class Dashboard extends Component {
       },
       container: {
         margin: "20px",
-        paddingLeft: open ? drawerWidth : 50
+        paddingLeft: open ? drawerWidth : 50,
+        borderRadius: "50px"
       }
     };
 
@@ -62,11 +64,14 @@ class Dashboard extends Component {
           />
           <LeftDrawer
             handleDrawerClose={this.handleDrawerClose.bind(this)}
+            name={this.state.name}
+            index={this.state.item}
             onclick={this.onListItemClick}
             handleDrawerOpen={this.handleDrawerOpen.bind(this)}
             open={open}
             onLogoutClick={this.onLogoutClick.bind(this)}
           />
+
           <Pages open={open} item={this.state.item} />
         </div>
         <Footer />
