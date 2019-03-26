@@ -120,7 +120,9 @@ const styles = theme => ({
     marginBottom: "5px"
   },
   userText: {
-    color: "white"
+    color: "white",
+    marginBottom: "15px",
+    fontSize: 25
   },
   userTextClose: {
     display: "none"
@@ -162,7 +164,9 @@ class MiniDrawer extends React.Component {
       open,
       onclick,
       handleDrawerOpen,
-      onLogoutClick
+      onLogoutClick,
+      name,
+      index
     } = this.props;
     let openMenu = Boolean(this.state.anchorEl);
     return (
@@ -261,7 +265,7 @@ class MiniDrawer extends React.Component {
               [classes.userTextClose]: !open
             })}
           >
-            Alejandro Martinez
+            {"Alejandro Martinez"}
           </h4>
 
           <Divider style={{ marginBottom: "15px", background: "white" }} />
@@ -277,7 +281,7 @@ class MiniDrawer extends React.Component {
                 button
                 key={index}
                 className={classes.menuItem}
-                onClick={() => onclick(index)}
+                onClick={() => onclick(menu.text, index)}
               >
                 <ListItemIcon className={classes.menuItem}>
                   {menu.icon}

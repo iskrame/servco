@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+// import Grid from "@material-ui/core/Grid";
+// import TextField from "@material-ui/core/TextField";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import { countries, statesFromMexico } from "../../../../utils/countrys";
+
+import PersonalInfo from "./PersonalInfo";
+import BornFields from "./BornFields";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -18,7 +25,7 @@ const styles = theme => ({
     width: "100%"
   },
   heading: {
-    fontSize: '15px',
+    fontSize: "15px",
     bold: true
   },
   details: {
@@ -36,300 +43,69 @@ export function changelengPF(x) {
 
 let leng = clientLenguaje(0);
 class PersonalDataFields extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 1
+    };
+  }
+
   render() {
+    const { classes, onChangePattern, state } = this.props;
 
-    const { classes, onChange, onChangePattern, state } = this.props;
-    let stateFrom = "";
-    if (state.country === "México") {
-      stateFrom = (
-        <TextField
-          id="state"
-          select
-          label="Estado"
-          name="state"
-          style={{
-            marginLeft: 5,
-            marginRight: 12,
-            width: "98%"
-          }}
-          value={state.state}
-          onChange={onChange}
-          SelectProps={{
-            MenuProps: {
-              width: "100%"
-            }
-          }}
-          margin="normal"
-        >
-          {statesFromMexico.map(option => (
-            <MenuItem key={option.code} value={option.code}>
-              {option.name}
-            </MenuItem>
-          ))}
-        </TextField>
-      );
-    } else {
-      stateFrom = (
-        <TextField
-          id="state"
-          name="state"
-          label="Estado"
-          fullWidth
-          style={{ marginTop: "15px" }}
-        />
-      );
+    let tabContent;
+    switch (this.state.index) {
+      case 1:
+        tabContent = (
+          <PersonalInfo
+            state={state}
+            onChange={this.props.onChange}
+            onChangePattern={onChangePattern}
+          />
+        );
+        break;
+      case 2:
+        tabContent = (
+          <BornFields
+            state={state}
+            onChange={this.props.onChange}
+            onChangePattern={onChangePattern}
+          />
+        );
+        break;
+      case 3:
+        tabContent = (
+          <BornFields
+            state={state}
+            onChange={this.props.onChange}
+            onChangePattern={onChangePattern}
+          />
+        );
+        break;
+      default:
+        break;
     }
-    return (
-      <div className={classes.root}>
-        <ExpansionPanel defaultExpanded>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <div className={classes.column}>
-              <span className={classes.heading}>
-                <strong>{leng.personalInfo}</strong>
-              </span>
-            </div>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={classes.details}>
-            <div className={classes.column}>
-              <Grid container spacing={24}>
-                <Grid item xs={4} sm={1}>
-                  <TextField
-                    inputProps={{
-                      maxLength: 6,
-                      pattern: "^[0-9]*$"
-                    }}
-                    id="clave"
-                    name="clave"
-                    label={leng.key}
-                    value={state.clave}
-                    onChange={onChangePattern}
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-              <Grid container spacing={24}>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    value={state.names}
-                    id="name"
-                    name="names"
-                    label={leng.name}
-                    onChange={onChangePattern}
-                    fullWidth
-                    autoComplete="fname"
-                    inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    // required
-                    inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
-                    id="lastName"
-                    name="lastName"
-                    label={leng.lastName}
-                    fullWidth
-                    autoComplete="lname"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    // required
-                    inputProps={{ pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*" }}
-                    id="secondlastName"
-                    name="secondlastName"
-                    label={leng.secondLastName}
-                    fullWidth
-                    autoComplete="lname"
-                  />
-                </Grid>
-              </Grid>
-              <Grid container spacing={24}>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    // required
-                    id="bdayDate"
-                    name="bdayDate"
-                    label={leng.bday}
-                    fullWidth
-                    style={{ marginTop: "15px" }}
-                  // autoComplete="billing address-line1"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="civilStatus"
-                    name="civilStatus"
-                    label={leng.civilStatus}
-                    fullWidth
-                    style={{ marginTop: "16px" }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="gender"
-                    select
-                    name="gender"
-                    label={leng.gender}
-                    style={{
-                      marginLeft: -2,
-                      marginRight: 12,
-                      width: "100%"
-                    }}
-                    // className={classes.textField}
-                    value={state.gender}
-                    onChange={this.props.onChange}
-                    SelectProps={{
-                      MenuProps: {
-                        width: "100%"
-                      }
-                    }}
-                    margin="normal"
-                  >
-                    <MenuItem value="Masculino">{leng.male}</MenuItem>
-                    <MenuItem value="Femenino">{leng.female}</MenuItem>
-                  </TextField>
-                </Grid>
-              </Grid>
-              <Grid container spacing={16}>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="city"
-                    name="city"
-                    label={leng.city}
-                    fullWidth
-                    style={{ marginTop: "15px" }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  {stateFrom}
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="standard-select-currency"
-                    select
-                    label={leng.country}
-                    name="country"
-                    // disabled="true"
-                    style={{
-                      marginLeft: 5,
-                      marginRight: 12,
-                      width: "98%"
-                    }}
-                    // className={classes.textField}
-                    value={state.country}
-                    onChange={this.props.onChange}
-                    SelectProps={{
-                      MenuProps: {
-                        width: "100%"
-                      }
-                    }}
-                    margin="normal"
-                  >
-                    {countries.map(option => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.value}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </Grid>
 
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="nacionality"
-                    name="nacionality"
-                    label={leng.nacionality}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField id="curp" name="curp" label="CURP" fullWidth />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField id="rfc" name="rfc" label="RFC" fullWidth />
-                </Grid>
-              </Grid>
-            </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <div className={classes.column}>
-              <span className={classes.heading}>
-                <strong>{leng.contactInfo}</strong>
-              </span>
-            </div>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails className={classes.details}>
-            <div className={classes.column}>
-              <Grid container spacing={24}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    id="street"
-                    name="street"
-                    label={leng.street}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  <TextField
-                    id="number"
-                    name="number"
-                    label={leng.number}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="fracc"
-                    name="fracc"
-                    label={leng.fracc}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="municipality"
-                    name="municipality"
-                    label={leng.municipality}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="addresState"
-                    name="addresState"
-                    label={leng.addresState}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="zipCode"
-                    name="zipCode"
-                    label={leng.zipCode}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField id="cel" name="cel" label={leng.cel} fullWidth />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField
-                    id="tel"
-                    name="tel"
-                    label={leng.tel}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <TextField id="other" name="other" label={leng.other} fullWidth />
-                </Grid>
-              </Grid>
-            </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      </div>
-    );
+    return <div className={classes.root}>{tabContent}</div>;
+    /* //           <Grid item xs={12} sm={4}>
+      //             <TextField id="cel" name="cel" label="Celular" fullWidth />
+      //           </Grid>
+      //           <Grid item xs={12} sm={4}>
+      //             <TextField
+      //               id="tel"
+      //               name="tel"
+      //               label=" Teléfono de Casa"
+      //               fullWidth
+      //             />
+      //           </Grid>
+      //           <Grid item xs={12} sm={4}>
+      //             <TextField id="other" name="other" label="Otro" fullWidth />
+      //           </Grid>
+      //         </Grid>
+      //       </div>
+      //     </ExpansionPanelDetails>
+      //   </ExpansionPanel>
+      // </div> */
   }
 }
 PersonalDataFields.propTypes = {
@@ -337,3 +113,185 @@ PersonalDataFields.propTypes = {
 };
 
 export default withStyles(styles)(PersonalDataFields);
+
+// import React from "react";
+// import PropTypes from "prop-types";
+// import withStyles from "@material-ui/core/styles/withStyles";
+// import CssBaseline from "@material-ui/core/CssBaseline";
+// import AppBar from "@material-ui/core/AppBar";
+// import Toolbar from "@material-ui/core/Toolbar";
+// import Paper from "@material-ui/core/Paper";
+// import Stepper from "@material-ui/core/Stepper";
+// import Step from "@material-ui/core/Step";
+// import StepLabel from "@material-ui/core/StepLabel";
+// import Button from "@material-ui/core/Button";
+// import Typography from "@material-ui/core/Typography";
+// import PersonalInfo from "./PersonalInfo";
+// // import AddressForm from "./AddressForm";
+// // import PaymentForm from "./PaymentForm";
+// // import Review from "./Review";
+
+// const styles = theme => ({
+//   appBar: {
+//     position: "relative"
+//   },
+//   layout: {
+//     width: "auto",
+//     marginLeft: theme.spacing.unit * 2,
+//     marginRight: theme.spacing.unit * 2,
+//     [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+//       width: 600,
+//       marginLeft: "auto",
+//       marginRight: "auto"
+//     }
+//   },
+//   paper: {
+//     marginTop: theme.spacing.unit * 3,
+//     marginBottom: theme.spacing.unit * 3,
+//     padding: theme.spacing.unit * 2,
+//     [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+//       marginTop: theme.spacing.unit * 6,
+//       marginBottom: theme.spacing.unit * 6,
+//       padding: theme.spacing.unit * 3
+//     }
+//   },
+//   stepper: {
+//     padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`
+//   },
+//   buttons: {
+//     display: "flex",
+//     justifyContent: "flex-end"
+//   },
+//   button: {
+//     marginTop: theme.spacing.unit * 3,
+//     marginLeft: theme.spacing.unit
+//   }
+// });
+
+// const steps = ["Shipping address", "Payment details", "Review your order"];
+
+// function getStepContent(step, props) {
+//   switch (step) {
+//     case 0:
+//       return (
+//         <PersonalInfo
+//           onChange={props.onChange}
+//           state={props.state}
+//           onChangePattern={props.onChangePattern}
+//         />
+//       );
+//     case 1:
+//       return <div />;
+//     // return <PaymentForm />;
+//     case 2:
+//     // return <Review />;
+//     default:
+//     // throw new Error("Unknown step");
+//   }
+// }
+
+// class Checkout extends React.Component {
+//   state = {
+//     activeStep: 0,
+//     index: 0
+//   };
+
+//   constructor() {
+//     super();
+//     this.handleChangeIndex = this.handleChangeIndex.bind(this);
+//   }
+//   handleNext = () => {
+//     this.setState(state => ({
+//       activeStep: state.activeStep + 1
+//     }));
+//   };
+
+//   handleBack = () => {
+//     this.setState(state => ({
+//       activeStep: state.activeStep - 1
+//     }));
+//   };
+
+//   handleReset = () => {
+//     this.setState({
+//       activeStep: 0
+//     });
+//   };
+//   handleChange = (event, index) => {
+//     this.setState({ index });
+//   };
+
+//   handleChangeIndex = index => {
+//     console.log("index: " + index);
+//     // this.setState(state => ({
+//     //   activeStep: state.index++
+//     // }));
+//   };
+//   render() {
+//     const { classes } = this.props;
+//     const { activeStep } = this.state;
+
+//     return (
+//       <React.Fragment>
+//         <CssBaseline />
+
+//         <main className={classes.layout}>
+//           <Stepper
+//             activeStep={activeStep}
+//             className={classes.stepper}
+//             // onClick={this.handleChangeIndex()}
+//           >
+//             {steps.map((label, index) => (
+//               <Step key={label}>
+//                 <StepLabel>
+//                   <h4>{label}</h4>
+//                 </StepLabel>
+//               </Step>
+//             ))}
+//           </Stepper>
+//           <React.Fragment>
+//             {activeStep === steps.length ? (
+//               <React.Fragment>
+//                 <h4 gutterBottom>Thank you for your order.</h4>
+//                 <Typography variant="subtitle1">
+//                   Your order number is #2001539. We have emailed your order
+//                   confirmation, and will send you an update when your order has
+//                   shipped.
+//                 </Typography>
+//               </React.Fragment>
+//             ) : (
+//               <React.Fragment>
+//                 {getStepContent(activeStep, this.props)}
+//                 {/* <div className={classes.buttons}>
+//                   {activeStep !== 0 && (
+//                     <Button
+//                       onClick={this.handleBack}
+//                       className={classes.button}
+//                     >
+//                       Back
+//                     </Button>
+//                   )}
+//                   <Button
+//                     variant="contained"
+//                     color="primary"
+//                     onClick={this.handleNext}
+//                     className={classes.button}
+//                   >
+//                     {activeStep === steps.length - 1 ? "Place order" : "Next"}
+//                   </Button>
+//                 </div> */}
+//               </React.Fragment>
+//             )}
+//           </React.Fragment>
+//           {/* </Paper> */}
+//         </main>
+//       </React.Fragment>
+//     );
+//   }
+// }
+
+// Checkout.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
+
+// export default withStyles(styles)(Checkout);

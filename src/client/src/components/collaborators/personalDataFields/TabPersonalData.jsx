@@ -5,14 +5,14 @@ import PersonalDataFields from "./principalFields/PrincipalFields";
 
 class PersonalData extends Component {
   render() {
-    const { onChange, onChangePattern, state } = this.props;
+    const { onChangePattern, state } = this.props;
     //
     return (
       <React.Fragment>
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <PersonalDataFields
-              onChange={onChange}
+              onChange={this.props.onChange}
               onChangePattern={onChangePattern}
               state={state}
             />
