@@ -9,6 +9,7 @@ const dashboard = require("./routes/api/dashboardRoute");
 const cors = require("cors");
 const language = require("./src/translate/serverTranslate");
 
+const Collaborator = require('./routes/api/collaboratorRoute');
 // const users = require('./routes/api/users');
 // const profile = require('./routes/api/profile');
 // const posts = require('./routes/api/posts');
@@ -60,6 +61,7 @@ require("./config/passport")(passport);
 //app.use("/api", test);
 app.use("/api/users", users);
 app.use("/api/dashboard", dashboard);
+app.use("/api/collaborators", Collaborator);
 
 const port = process.env.PORT || 5000;
 
