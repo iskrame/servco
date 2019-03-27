@@ -8,6 +8,7 @@ const days = leng.day + "s";
 const currentPeriod = leng.currentPeriod;
 const previousPeriod = leng.previousPeriod;
 class GraphicChart extends React.Component {
+    
   state = {
     style: {
         background: "#fff", 
@@ -91,6 +92,7 @@ class GraphicChart extends React.Component {
   }
 
 render() {
+
     return (
         <div style={this.state.style}>
             <Line height={70} data={this.state.dataLine} options={this.state.options } />

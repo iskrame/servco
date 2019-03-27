@@ -49,7 +49,7 @@ class PersonalInfo extends Component {
                 }}
                 id="clave"
                 name="clave"
-                label="Clave"
+                label={this.props.leng.key}
                 value={state.clave}
                 onChange={onChangePattern}
                 fullWidth
@@ -72,7 +72,7 @@ class PersonalInfo extends Component {
                 value={state.names}
                 id="name"
                 name="names"
-                label="Nombre(s)"
+                label={this.props.leng.name}
                 onChange={onChangePattern}
                 fullWidth
                 autoComplete="fname"
@@ -93,7 +93,7 @@ class PersonalInfo extends Component {
                 }}
                 id="lastName"
                 name="lastName"
-                label="Apellido Paterno"
+                label={this.props.leng.lastName}
                 fullWidth
                 onChange={onChangePattern}
                 value={state.lastName}
@@ -109,8 +109,8 @@ class PersonalInfo extends Component {
                   pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*"
                 }}
                 id="secondLastName"
-                name="secondLastName"
-                label="Apellido Materno"
+                name={this.props.leng.secondLastName}
+                label={this.props.leng.secondLastName}
                 onChange={onChangePattern}
                 value={state.secondLastName}
                 fullWidth
@@ -122,7 +122,7 @@ class PersonalInfo extends Component {
               <TextField
                 type="date"
                 name="bDay"
-                label="Fecha de Nacimiento"
+                label={this.props.leng.bDay}
                 value={state.bDay}
                 onChange={onChangePattern}
                 InputLabelProps={{
@@ -134,32 +134,32 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormControl className={classes.formControl}>
-              <InputLabel>Estado Civil</InputLabel>
+              <InputLabel>{this.props.leng.civilStatus}</InputLabel>
               <Select
                 id="civilStatus"
                 name="civilStatus"
                 value={state.civilStatus}
                 onChange={onChange}
               >
-                <MenuItem value="Soltero">Soltero</MenuItem>
-                <MenuItem value="Casado">Casado</MenuItem>
-                <MenuItem value="Divorciado">Divorciado</MenuItem>
-                <MenuItem value="Viudo">Viudo</MenuItem>
-                <MenuItem value="UnionLibre">Union Libre</MenuItem>
+                <MenuItem value="Soltero">{this.props.leng.single}</MenuItem>
+                <MenuItem value="Casado">{this.props.leng.married}</MenuItem>
+                <MenuItem value="Divorciado">{this.props.leng.divorced}</MenuItem>
+                <MenuItem value="Viudo">{this.props.leng.widower}</MenuItem>
+                <MenuItem value="UnionLibre">{this.props.leng.freeUnion}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormControl className={classes.formControl}>
-              <InputLabel>Sexo</InputLabel>
+              <InputLabel>{this.props.leng.gender}</InputLabel>
               <Select
                 id="gender"
                 name="gender"
                 value={state.gender}
                 onChange={onChange}
               >
-                <MenuItem value="Masculino">Masculino</MenuItem>
-                <MenuItem value="Femenino">Femenino</MenuItem>
+                <MenuItem value="Masculino">{this.props.leng.male}</MenuItem>
+                <MenuItem value="Femenino">{this.props.leng.female}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -171,5 +171,6 @@ class PersonalInfo extends Component {
 PersonalInfo.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
 
 export default withStyles(styles)(PersonalInfo);

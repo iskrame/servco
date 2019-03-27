@@ -20,7 +20,7 @@ export  function ChangeLenguaje (lenguaje){
   conf = leng.conf;
   const primaryMenus = {
     menus: [
-      { text: "Dashboard", icon: <TableChart /> },
+      { text: "Dashboard", icon: <TableChart  /> },
       { text: profile, icon: <Person /> },
       { text: collaborators, icon: <People />, link: "/collaborators" },
       { text: reports, icon: <AccessTime />, link: "/reports" },

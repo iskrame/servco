@@ -34,7 +34,7 @@ function RecoverPassword(props) {
             <form onSubmit={props.onSubmitEmail}>
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="recoverEmail">
-                  Ingresar correo electrónico
+                  {leng.enterEmail}
                 </InputLabel>
                 <Input
                   id="recoverEmail"
@@ -57,7 +57,7 @@ function RecoverPassword(props) {
                   textTransform: "none"
                 }}
               >
-                Enviar correo
+                  {leng.sendEmail}
               </Button>
               <Button
                 variant="contained"
@@ -70,7 +70,7 @@ function RecoverPassword(props) {
                 }}
                 onClick={props.onClose}
               >
-                Cancelar
+                {leng.cancel}
               </Button>
             </form>
           </DialogContentText>

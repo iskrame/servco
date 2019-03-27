@@ -5,18 +5,9 @@ import { withStyles } from "@material-ui/core/styles";
 // import TextField from "@material-ui/core/TextField";
 // import MenuItem from "@material-ui/core/MenuItem";
 // import { countries, statesFromMexico } from "../../../../utils/countrys";
-
 import PersonalInfo from "./PersonalInfo";
 import BornFields from "./BornFields";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import { countries, statesFromMexico } from "../../../../utils/countrys";
-import {clientLenguaje} from "../../../../translate/clientTranslate";
+//import {clientLenguaje} from "../../../../translate/clientTranslate";
 
 
 
@@ -36,12 +27,12 @@ const styles = theme => ({
   }
 });
 
-export function changelengPF(x) {
+// export function changelengPF(x) {
   
   
-}
+// }
 
-let leng = clientLenguaje(0);
+//let leng = clientLenguaje(0);
 class PersonalDataFields extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +43,6 @@ class PersonalDataFields extends Component {
 
   render() {
     const { classes, onChangePattern, state } = this.props;
-
     let tabContent;
     switch (this.state.index) {
       case 1:
@@ -61,6 +51,7 @@ class PersonalDataFields extends Component {
             state={state}
             onChange={this.props.onChange}
             onChangePattern={onChangePattern}
+            leng = {this.props.leng}
           />
         );
         break;
@@ -70,6 +61,7 @@ class PersonalDataFields extends Component {
             state={state}
             onChange={this.props.onChange}
             onChangePattern={onChangePattern}
+            leng = {this.props.leng}
           />
         );
         break;
@@ -79,6 +71,7 @@ class PersonalDataFields extends Component {
             state={state}
             onChange={this.props.onChange}
             onChangePattern={onChangePattern}
+            leng = {this.props.leng}
           />
         );
         break;

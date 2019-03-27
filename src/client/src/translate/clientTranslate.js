@@ -1,7 +1,8 @@
 export function clientLenguaje(x) {
     let bandera = true;
+ 
+    bandera = x === 0 ?true: false;
 
-    bandera = x === 0 ? false: true
     let lenguaje=
             {   
                 language : " ",
@@ -79,7 +80,20 @@ export function clientLenguaje(x) {
                 education : " ",
                 userData: " ",
                 currentPeriod : " ",
-                previousPeriod : " "
+                previousPeriod : " ",
+                enterEmail : " ",
+                sendEmail : " ",
+                origin : " ",
+                addres : " ",
+                edit : " ",
+                single : " ",
+                married : " ",
+                divorced : " ",
+                widower : " ",
+                freeUnion : " ",
+                back : " ",
+                next : " ",
+                save : " "
             }
         if (bandera) {
             lenguaje=
@@ -127,7 +141,7 @@ export function clientLenguaje(x) {
                     country : "País",
                     city : "Ciudad",
                     nacionality : "Nacionalidad",
-                    contactInfo : "Datos de Contacto",
+                    contactInfo : "DATOS DE CONTACTO",
                     street : "Calle",
                     number : "Numero",
                     fracc : "Colonia",
@@ -159,7 +173,20 @@ export function clientLenguaje(x) {
                     education : "EDUCACION/EXPERIENCIA",
                     userData: "DATOS USUARIO",
                     currentPeriod : "Periodo Actual",
-                    previousPeriod : "Periodo Anterior"
+                    previousPeriod : "Periodo Anterior",
+                    enterEmail : "Ingresar Correo Electrónico",
+                    sendEmail : "Enviar correo",
+                    origin : "LUGAR DE NACIMIENTO",
+                    addres : "DIRECCION",
+                    edit : "Editar",
+                    single : "Soltero",
+                    married : "Casado",
+                    divorced : "Divorciado",
+                    widower : "Viudo",
+                    freeUnion : "Union Libre",
+                    back : "ATRAS",
+                    next : "SIGUIENTE",
+                    save : "GUARDAR"
                 }
             
             }else{
@@ -208,7 +235,7 @@ export function clientLenguaje(x) {
                     country : "Country",
                     city : "City",
                     nacionality : "Nacionality",
-                    contactInfo : "Contact information",
+                    contactInfo : "CONTACT INFORMATION",
                     street : "Street",
                     number : "Number",
                     fracc : "Suburb",
@@ -240,7 +267,20 @@ export function clientLenguaje(x) {
                     education : "EDUCATION/EXPERIENCE",
                     userData: "USER DATA",
                     currentPeriod : "Current Period",
-                    previousPeriod : "Previous Period"
+                    previousPeriod : "Previous Period",
+                    enterEmail : "Enter Email",
+                    sendEmail : "Send Email",
+                    origin : "ORIGIN",
+                    addres : "ADDRESS",
+                    edit : "Edit",
+                    single : "Single",
+                    married : "Married",
+                    divorced : "Divorced",
+                    widower : "Widrower",
+                    freeUnion : "Free Union",
+                    back : "BACK",
+                    next : "NEXT",
+                    save : "SAVE"
                 }
             }
         return lenguaje;

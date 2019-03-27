@@ -45,7 +45,7 @@ class AddressInfo extends Component {
               <TextField
                 id="street"
                 name="street"
-                label="Calle"
+                label={this.props.leng.street}
                 fullWidth
                 value={state.street}
                 inputProps={{
@@ -61,7 +61,7 @@ class AddressInfo extends Component {
               <TextField
                 id="number"
                 name="number"
-                label="Número"
+                label={this.props.leng.number}
                 fullWidth
                 value={state.number}
                 inputProps={{
@@ -77,7 +77,7 @@ class AddressInfo extends Component {
               <TextField
                 id="fracc"
                 name="fracc"
-                label="Colonia"
+                label={this.props.leng.fracc}
                 fullWidth
                 inputProps={{
                   maxLength: 100,
@@ -92,7 +92,7 @@ class AddressInfo extends Component {
               <TextField
                 id="zipCode"
                 name="zipCode"
-                label="Codigo Postal"
+                label={this.props.leng.zipCode}
                 value={state.zipCode}
                 fullWidth
                 inputProps={{
@@ -109,7 +109,7 @@ class AddressInfo extends Component {
                 id="municipality"
                 name="municipality"
                 value={state.municipality}
-                label="Municipio"
+                label={this.props.leng.municipality}
                 fullWidth
                 onChange={onChangePattern}
               />
@@ -117,7 +117,7 @@ class AddressInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormControl className={classes.formControl}>
-              <InputLabel>Estado</InputLabel>
+              <InputLabel>{this.props.leng.addresState}</InputLabel>
               <Select
                 id="addresState"
                 name="addresState"

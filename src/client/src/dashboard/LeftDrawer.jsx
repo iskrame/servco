@@ -22,11 +22,14 @@ import Button from "@material-ui/core/Button";
 import Settings from "@material-ui/icons/Settings";
 import Menu from "@material-ui/core/Menu";
 import {clientLenguaje} from "../translate/clientTranslate";
-import {changelengPF} from "../components/collaborators/personalDataFields/principalFields/PrincipalFields"
+import {changelengTabInfo} from "../components/collaborators/CollaboratorAdministrator";
+import usaFlag from "../img/usaFlag.png";
+import spainFlag from "../img/spainFlag.png";
 
-let leng = clientLenguaje(1);
+let leng = clientLenguaje(0);
 const drawerWidth = 240;
-let primaryMenus = ChangeLenguaje(1);
+let primaryMenus = ChangeLenguaje(0);
+
 
 const styles = theme => ({
   root: {
@@ -150,12 +153,17 @@ class MiniDrawer extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+  onclick = () => {
+    let lenguajesIndex = this.props.leng === 0 ? 1 : 0;
+     this.changeleng(lenguajesIndex)
+  }
 
   changeleng = x =>{
   this.setState({lenguajes:x})
-  leng = clientLenguaje(this.state.lenguajes);
-  primaryMenus = ChangeLenguaje(this.state.lenguajes);
-  changelengPF(x);
+  leng = clientLenguaje(x);
+  primaryMenus = ChangeLenguaje(x);
+  changelengTabInfo(this.state.lenguajes);
+    this.props.onclick(this.props.name,this.props.index,x)
  }
   render() {
     const { classes, theme } = this.props;
@@ -165,10 +173,9 @@ class MiniDrawer extends React.Component {
       onclick,
       handleDrawerOpen,
       onLogoutClick,
-      name,
-      index
     } = this.props;
     let openMenu = Boolean(this.state.anchorEl);
+    
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -193,7 +200,7 @@ class MiniDrawer extends React.Component {
               {leng.serviceCol}
             </h4>
             <section className={classes.rightToolbar}>
-            <Button onClick={() =>this.changeleng(this.state.lenguajes === 0 ? 1 : 0)}>{leng.language}</Button>
+            <Button onClick={this.onclick}> <img src={leng.language === "ESP" ? spainFlag : usaFlag} width="30px" height="20px" alt="..."/>{leng.language}</Button>
               <Menu
                 id="menu-appbar"
                 anchorEl={this.state.anchorEl}
@@ -208,6 +215,7 @@ class MiniDrawer extends React.Component {
                 open={openMenu}
                 onClose={this.handleClose}
               >
+              
               <MenuItem onClick={() => onclick(1)}>{leng.profile}</MenuItem>
               <MenuItem onClick={onLogoutClick}>{leng.logOut}</MenuItem>
               </Menu>
@@ -281,7 +289,7 @@ class MiniDrawer extends React.Component {
                 button
                 key={index}
                 className={classes.menuItem}
-                onClick={() => onclick(menu.text, index)}
+                onClick={() => onclick(menu.text, index,this.state.lenguajes)}
               >
                 <ListItemIcon className={classes.menuItem}>
                   {menu.icon}

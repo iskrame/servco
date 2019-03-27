@@ -5,29 +5,26 @@ import SwipeableViews from "react-swipeable-views";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import PersonalData from "./personalDataFields/TabPersonalData";
-import TabLaborData from './laborData/TabLaborData';
-import {clientLenguaje} from "../../translate/clientTranslate";
+import TabLaborData from "./laborData/TabLaborData";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import BornFields from "./personalDataFields/principalFields/BornFields";
+import PersonalDataFields from "./personalDataFields/principalFields/PrincipalFields";
+import AddressFields from "./personalDataFields/principalFields/AddressFields";
+//import {clientLenguaje} from "../../translate/clientTranslate";
+//import { ChangeLenguaje } from "../../dashboard/data";
 
-let leng = clientLenguaje();
-let personalData = leng.personalData;
-let labroData = leng.laborData;
-let eduExp = leng.education;
-let userData = leng.userData;
-const tabs = [
-  {
-    name: personalData
-  },
-  {
-    name: labroData
-  },
-  {
-    name: eduExp
-  },
-  {
-    name: userData
-  }
-];
+// export function changelengTabInfo(x){
+//   let leng;
+//   if (x===0) {
+//     leng = clientLenguaje(0);
+  
+//   } else {
+//    leng =clientLenguaje(1);
+//   }
+//    return leng;
+// }
+
 function TabContainer({ children, dir }) {
   return (
     <div dir={dir} style={{ padding: 8 * 3 }}>
@@ -98,12 +95,37 @@ const styles = theme => ({
 });
 
 class FullWidthTabs extends React.Component {
+
   componentDidMount() {
-    this.props.state.tabs = tabs.length;
+  //const l =  changelengTabInfo(1)
   }
+
   render() {
     const { classes, theme } = this.props;
-
+   
+    const tabs = [
+      {
+        name: this.props.leng.personalData
+      },
+      {
+        name: this.props.leng.origin
+      },
+      {
+        name: this.props.leng.addres
+      },
+      {
+        name: this.props.leng.contactInfo
+      },
+      {
+        name: this.props.leng.laborData
+      },
+      {
+        name: this.props.leng.education
+      },
+      {
+        name: this.props.leng.userData
+      }
+    ];
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -135,6 +157,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
+                leng={this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -144,6 +167,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
+                leng = {this.props.leng}
               />
               <div />
             </Paper>
@@ -154,6 +178,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
+                leng = {this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -163,11 +188,12 @@ class FullWidthTabs extends React.Component {
                 onChange={this.onChange}
                 onChangePattern={this.onChangePattern}
                 fields={this.props.state}
+                leng = {this.props.leng}
               />
             </Paper>
           </TabContainer>
 
-          <TabContainer dir={theme.direction}>Item Three</TabContainer>
+          {/* <TabContainer dir={theme.direction}>{leng.personalData}</TabContainer> */}
           <TabContainer dir={theme.direction}>Item Three</TabContainer>
           <TabContainer dir={theme.direction}>Item Three</TabContainer>
         </SwipeableViews>
@@ -178,14 +204,14 @@ class FullWidthTabs extends React.Component {
             className={classes.buttonCancel}
             onClick={this.props.handleCancel}
           >
-            Cancelar
+            {this.props.leng.cancel}
           </Button>
           {this.props.state.index !== 0 && (
             <Button
               className={classes.buttonBack}
               onClick={this.props.handleBack}
             >
-              Atras
+              {this.props.leng.back}
             </Button>
           )}
           <Button
@@ -199,8 +225,8 @@ class FullWidthTabs extends React.Component {
             className={classes.button}
           >
             {this.props.state.index === tabs.length - 1
-              ? "Guardar"
-              : "Siguiente"}
+              ? this.props.leng.save
+              : this.props.leng.next}
           </Button>
         </div>
       </div>

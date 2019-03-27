@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import WrappedVirtualizedTable from '../common/WrappedVirtualizedTable';
 import {clientLenguaje} from "../../translate/clientTranslate";
-const leng = clientLenguaje();
-const day = leng.day;
-const punches = leng.punches;
 
 class VirtualizedTable extends Component {
   _isMounted = false;
@@ -38,7 +35,7 @@ const rows = [];
     this.state.data.forEach ((element) => {
       rows.push(createData(element.day,element.punches))
     });
-
+    let lenguaje = clientLenguaje(this.props.leng);
     return (
       <Paper style={{ minHeight: 150, width: '100%', boxShadow: '3px 3px 5px 3px rgba(0,0,0,.2)' }}>
         <WrappedVirtualizedTable
@@ -49,13 +46,13 @@ const rows = [];
             {
               flexGrow: 1.0,
               width: 150,
-              abel: day,
+              label: lenguaje.day,
               dataKey: 'day',
             },
             {
               flexGrow: 1.0,
               width: 150,
-              label: punches,
+              label: lenguaje.punches,
               dataKey: 'punches',
             },
           ]}
