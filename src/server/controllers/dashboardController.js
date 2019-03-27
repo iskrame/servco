@@ -1,5 +1,6 @@
 const indicator = require('./indicatorController');
 const cardcheck = require('./cardcheckController');
+const chart = require('./chartController');
 const moment = require('moment');
 
 
@@ -11,7 +12,8 @@ exports.dashboard = async (req, res) => {
       end: actualPeriod.end.format("DD/MMM/YYYY")
     },
     GridData: await cardcheck.punchtimes(req),
-    DashboardIndicators: await indicator.findWithValue(req)
+    DashboardIndicators: await indicator.findWithValue(req),
+    ChartData: await chart.getData(req)
   };
 
   res.json(dashboard);

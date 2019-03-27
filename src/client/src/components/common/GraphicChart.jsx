@@ -3,17 +3,19 @@ import { Line } from "react-chartjs-2";
 
 
 class GraphicChart extends React.Component {
+
   state = {
     style: {
         background: "#fff", 
         boxShadow: '3px 3px 5px 3px rgba(0,0,0,.2)', 
-        borderRadius:'5px', padding: "20px"
+        borderRadius:'5px', padding: "20px",
+        position: "relative"
     },
     dataLine: {
-      labels: ["17/03", "18/03", "19/03", "20/03", "21/03","22/03", "23/03", "24/03", "25/03", "26/03","27/03", "28/03", "29/03", "30/03"],
+      labels: this.props.chartData.actualData.labels,
       datasets: [
         {
-            label: "Periodo Actual (40/90)",
+            label: "Periodo Actual (" + this.props.chartData.actualData.start + " - " + this.props.chartData.actualData.end + ") " + this.props.chartData.actualData.totalHours + "/45",
             steppedLine: false,
             fill: true,
             lineTension: 0.1,
@@ -32,10 +34,10 @@ class GraphicChart extends React.Component {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [8.5, 9, 8, 7, 9,8.5, 9, 8, 7, 9,8.5, 9, 8, 7]
+            data: this.props.chartData.actualData.hours
         },
         {
-            label: "Periodo Anterior (50/90)",
+            label: "Periodo Anterior (" + this.props.chartData.previousData.start + " - " + this.props.chartData.previousData.end + ") " + this.props.chartData.previousData.totalHours + "/45",
             steppedLine: false,
             fill: true,
             lineTension: 0.1,
@@ -54,12 +56,13 @@ class GraphicChart extends React.Component {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [9, 8.5, 6, 8, 10,8.5, 9, 8, 7, 9,8, 10,8.5, 9]
+            data: this.props.chartData.previousData.hours
           }
       ]
     },
     options: {
         responsive: true,
+        maintainAspectRatio: true,
         scales: {
             xAxes: [{
                 display: true,

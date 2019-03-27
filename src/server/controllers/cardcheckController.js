@@ -135,8 +135,9 @@ exports.timespent = (req) => {
       sec = sec % 3600;
       let min = parseInt(sec / 60);
       sec = parseInt(sec % 60);
+      let totalHours = (millisCounter / (1000 * 60 * 60)).toFixed(1);
 
-      return resolve({timespent: `${hour}h ${min}m ${sec}s`});
+      return resolve({timespent: `${hour}h ${min}m ${sec}s`, hours: totalHours});
     });
 
   });
