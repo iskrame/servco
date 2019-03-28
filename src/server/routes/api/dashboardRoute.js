@@ -7,5 +7,10 @@ router.post('/',
   dashboard.dashboard
 );
 
+router.post('/timechart',
+  passport.authenticate("jwt",{session:false}),
+  dashboard.timeChart
+);
+
 module.exports = router;
 

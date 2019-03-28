@@ -12,10 +12,19 @@ exports.dashboard = async (req, res) => {
       end: actualPeriod.end.format("DD/MMM/YYYY")
     },
     GridData: await cardcheck.punchtimes(req),
-    DashboardIndicators: await indicator.findWithValue(req),
-    ChartData: await chart.getData(req)
+    DashboardIndicators: await indicator.findWithValue(req)
   };
 
   res.json(dashboard);
 
 }
+
+exports.timeChart = async (req, res) => {
+  const timeChart = {
+    ChartData: await chart.getData(req)
+  };
+
+  res.json(timeChart);
+
+}
+

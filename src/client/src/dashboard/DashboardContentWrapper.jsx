@@ -23,8 +23,7 @@ export class DashboardContentWrapper extends React.Component{
     .then(res => {
       this.setState({
         indicators: res.data.DashboardIndicators,
-        gridData: res.data.GridData,
-        chartData: res.data.ChartData
+        gridData: res.data.GridData
       });
     })
     .catch(err =>{
@@ -45,7 +44,7 @@ export class DashboardContentWrapper extends React.Component{
       content = (
         <div>
           <IndicatorContainer indicators = {this.state.indicators}  />
-          <GraphicChart chartData = {this.state.chartData} />
+          <GraphicChart />
           <br/>
           <VirtualizedTable gridData = {this.state.gridData}/>
         </div>
