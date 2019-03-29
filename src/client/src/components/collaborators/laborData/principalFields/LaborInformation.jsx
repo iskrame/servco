@@ -11,10 +11,13 @@ import { statesFromMexico } from "../../../../utils/countrys";
 import { Jobs } from "../../../../utils/Jobs.json";
 import { WorkingDayTypeData } from "../../../../utils/WorkingDayTypeData.json";
 import TextField from "@material-ui/core/TextField";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+//import {clientLenguaje} from "../../../../translate/clientTranslate";
+
+
 //Styles
 const styles = theme => ({
   root: {
@@ -43,6 +46,8 @@ const styles = theme => ({
   }
 });
 //END Styles
+
+//let leng = clientLenguaje();
 
 class LaborInformation extends Component {
   constructor(props) {
@@ -75,7 +80,7 @@ class LaborInformation extends Component {
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <div className={classes.column}>
               <span className={classes.heading}>
-                <strong>Información Laboral</strong>
+                <strong>{this.props.leng.workingInformation}</strong>
               </span>
             </div>
           </ExpansionPanelSummary>
@@ -84,7 +89,7 @@ class LaborInformation extends Component {
               <Grid container spacing={24}>
                 <Grid item xs={10} sm={4}>
                   <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="select-multiple">Puesto</InputLabel>
+                    <InputLabel htmlFor="select-multiple">{this.props.leng.job}</InputLabel>
                     <Select
                       multiple
                       value={fields.jobs}
@@ -116,7 +121,7 @@ class LaborInformation extends Component {
                         pattern: "^[0-9]+([.][0-9]*)?$"
                       }}
                       name="monthlySalary"
-                      label="Sueldo mensual"
+                      label={this.props.leng.monthlySalary}
                       value={fields.monthlySalary}
                       onChange={onChangePattern}
                       fullWidth
@@ -128,7 +133,7 @@ class LaborInformation extends Component {
                     <TextField
                       type="date"
                       name="seniorityDate"
-                      label="Fecha de antigüedad"
+                      label={this.props.leng.dateOfSeniority}
                       value={fields.seniorityDate}
                       onChange={onChangePattern}
                       InputLabelProps={{
@@ -140,7 +145,7 @@ class LaborInformation extends Component {
                 </Grid>
                 <Grid item xs={10} sm={4}>
                   <FormControl className={classes.formControl}>
-                    <InputLabel>Ubicación Laboral</InputLabel>
+                    <InputLabel>{this.props.leng.jobLocation}</InputLabel>
                     <Select
                       value={fields.laborLocation}
                       onChange={this.onHandleChange.bind(this)}
@@ -152,7 +157,7 @@ class LaborInformation extends Component {
                         </MenuItem>
                       ))}
                       <MenuItem key="Otro" value="Otro">
-                        Otro
+                        {this.props.leng.other}
                       </MenuItem>
                     </Select>
                   </FormControl>
@@ -162,7 +167,7 @@ class LaborInformation extends Component {
                   <FormControl className={classes.formControl}>
                     <TextField
                       name="otherLaborLocation"
-                      label="Otra Ubicación Laboral"
+                      label={this.props.leng.otherLaborLocation}
                       value={fields.otherLaborLocation}
                       inputProps={{
                         pattern: "[a-zA-Z_ ]*",
@@ -179,7 +184,7 @@ class LaborInformation extends Component {
                 <Grid item xs={10} sm={4}>
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="select-multiple">
-                      Tipo de Jornada
+                      {this.props.leng.journey}
                     </InputLabel>
                     <Select
                       value={fields.workingDayType}
@@ -203,7 +208,7 @@ class LaborInformation extends Component {
                   <FormControl className={classes.formControl}>
                     <TextField
                       name="beneficiary"
-                      label="Beneficiario"
+                      label={this.props.leng.beneficiary}
                       value={fields.beneficiary}
                       onChange={onChangePattern}
                       inputProps={{ pattern: "[a-zA-Z_ ]*" }}
@@ -216,7 +221,7 @@ class LaborInformation extends Component {
                   <FormControl className={classes.formControl}>
                     <TextField
                       name="relationship"
-                      label="Parentesco del beneficiario"
+                      label={this.props.leng.relationchipBeneficiary}
                       value={fields.relationship}
                       onChange={onChangePattern}
                       inputProps={{ pattern: "[a-zA-Z_ ]*" }}

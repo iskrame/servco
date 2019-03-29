@@ -9,8 +9,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import {clientLenguaje} from "../../translate/clientTranslate";
 
 function RecoverPassword(props) {
+  const leng = clientLenguaje();
   return (
     <main>
       <CssBaseline />
@@ -19,7 +21,7 @@ function RecoverPassword(props) {
         variant="body1"
         style={{ color: "#1e305f", cursor: "pointer" }}
       >
-        Recuperar Contraseña
+        {leng.recoverPassword}
       </Link>
       <Dialog
         open={props.show}
@@ -32,7 +34,7 @@ function RecoverPassword(props) {
             <form onSubmit={props.onSubmitEmail}>
               <FormControl margin="normal" fullWidth>
                 <InputLabel htmlFor="recoverEmail">
-                  Ingresar correo electrónico
+                  {leng.enterEmail}
                 </InputLabel>
                 <Input
                   id="recoverEmail"
@@ -55,7 +57,7 @@ function RecoverPassword(props) {
                   textTransform: "none"
                 }}
               >
-                Enviar correo
+                  {leng.sendEmail}
               </Button>
               <Button
                 variant="contained"
@@ -68,7 +70,7 @@ function RecoverPassword(props) {
                 }}
                 onClick={props.onClose}
               >
-                Cancelar
+                {leng.cancel}
               </Button>
             </form>
           </DialogContentText>

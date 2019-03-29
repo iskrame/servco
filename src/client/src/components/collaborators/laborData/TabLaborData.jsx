@@ -22,6 +22,7 @@ class TabLaborData extends Component {
               onChange={onChange}
               onChangePattern={onChangePattern}
               fields={fields}
+              leng = {this.props.leng}
             />
           </Grid>
         </Grid>

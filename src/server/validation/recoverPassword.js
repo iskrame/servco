@@ -1,5 +1,6 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
+const language = require("../src/translate/serverTranslate");
 
 module.exports = function validateRecoverPasswordInput(data) {
   let errors = {};
@@ -18,20 +19,19 @@ module.exports = function validateRecoverPasswordInput(data) {
     !Validator.isLength(data.password, { min: 8, max: 25 }) ||
     !Validator.isLength(data.passwordConfirm, { min: 8, max: 25 })
   ) {
-    errors.passwordConfirm =
-      "* la contraseña deberá tener mínimo 8 y máximo 25 caracteres";
+    errors.passwordConfirm =language().passLength;
   }
 
   //this is for check if the both passwords are equals
   if (!Validator.equals(data.password, data.passwordConfirm)) {
-    errors.passwordConfirm = "Las contraseñas no coinciden";
+    errors.passwordConfirm = language().passNotMatch;
   }
   //to check if confirm password field is not empty
   if (
     Validator.isEmpty(data.passwordConfirm) ||
     Validator.isEmpty(data.password)
   ) {
-    errors.passwordConfirm = "No se permiten campos vacíos";
+    errors.passwordConfirm = language().emptyFields;
   }
   return {
     errors,

@@ -8,6 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import img from "../../img/logoSPARK132.png";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
+import {clientLenguaje} from "../../translate/clientTranslate";
 
 const styles = theme => ({
   main: {
@@ -45,6 +46,7 @@ const styles = theme => ({
     cursor: "pointer"
   }
 });
+const leng = clientLenguaje();
 
 function RecoverForm(props) {
   const { classes } = props;
@@ -55,11 +57,11 @@ function RecoverForm(props) {
       <Paper className={classes.paper}>
         <img src={img} alt="..." />
         <br />
-        <h4>Recuperación de contraseña</h4>
+        <h4>{leng.passwordRecovery}</h4>
 
         <form className={classes.form} onSubmit={props.onSubmit}>
           <FormControl margin="normal" fullWidth>
-            <InputLabel htmlFor="password">Agregue nueva contraseña</InputLabel>
+            <InputLabel htmlFor="password">{leng.addNewPass}</InputLabel>
             <Input
               inputProps={{
                 maxLength: 25
@@ -76,7 +78,7 @@ function RecoverForm(props) {
           </FormControl>
           <FormControl margin="normal" fullWidth>
             <InputLabel htmlFor="passwordConfirm">
-              Repita la nueva contraseña
+              {leng.repitPass}
             </InputLabel>
             <Input
               inputProps={{
@@ -97,7 +99,7 @@ function RecoverForm(props) {
             className={classes.submit}
             style={{ background: "#941a1f", textTransform: "none" }}
           >
-            Cambiar contraseña
+            {leng.changepass}
           </Button>
           <Button
             variant="contained"
@@ -110,7 +112,7 @@ function RecoverForm(props) {
             }}
             onClick={props.onClose}
           >
-            Cancelar
+            {leng.cancel}
           </Button>
         </form>
       </Paper>

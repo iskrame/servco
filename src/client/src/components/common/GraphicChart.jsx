@@ -1,8 +1,14 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import {clientLenguaje} from "../../translate/clientTranslate";
 
-
+const leng = clientLenguaje();
+const hours = leng.hours;
+const days = leng.day + "s";
+const currentPeriod = leng.currentPeriod;
+const previousPeriod = leng.previousPeriod;
 class GraphicChart extends React.Component {
+    
   state = {
     style: {
         background: "#fff", 
@@ -13,7 +19,7 @@ class GraphicChart extends React.Component {
       labels: ["17/03", "18/03", "19/03", "20/03", "21/03","22/03", "23/03", "24/03", "25/03", "26/03","27/03", "28/03", "29/03", "30/03"],
       datasets: [
         {
-            label: "Periodo Actual (40/90)",
+            label: currentPeriod + " (40/90)",
             steppedLine: false,
             fill: true,
             lineTension: 0.1,
@@ -35,7 +41,7 @@ class GraphicChart extends React.Component {
             data: [8.5, 9, 8, 7, 9,8.5, 9, 8, 7, 9,8.5, 9, 8, 7]
         },
         {
-            label: "Periodo Anterior (50/90)",
+            label: previousPeriod + " (50/90)",
             steppedLine: false,
             fill: true,
             lineTension: 0.1,
@@ -65,7 +71,7 @@ class GraphicChart extends React.Component {
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: 'Horas'
+                    labelString: hours
                 },
                 gridLines: {
                     display:false
@@ -75,7 +81,7 @@ class GraphicChart extends React.Component {
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: 'Dias'
+                    labelString: days
                 },
                 gridLines: {
                     display:true
@@ -86,6 +92,7 @@ class GraphicChart extends React.Component {
   }
 
 render() {
+
     return (
         <div style={this.state.style}>
             <Line height={70} data={this.state.dataLine} options={this.state.options } />
