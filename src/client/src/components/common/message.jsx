@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 // import CloseIcon from "@material-ui/icons/Close";
+import {clientLenguaje} from "../../translate/clientTranslate";
 
 const styles = theme => ({
   close: {
@@ -30,10 +31,11 @@ class SimpleSnackbar extends React.Component {
   };
 
   render() {
+    const leng = clientLenguaje();
     const { classes } = this.props;
     return (
       <div>
-        <Button onClick={this.handleClick}>Open simple snackbar</Button>
+        <Button onClick={this.handleClick}>{leng.snackbarmsn}</Button>
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",
@@ -45,7 +47,7 @@ class SimpleSnackbar extends React.Component {
           ContentProps={{
             "aria-describedby": "message-id"
           }}
-          message={<span id="message-id">Note archived</span>}
+          message={<span id="message-id">{leng.notesA}</span>}
           action={[
             <Button
               key="undo"
@@ -53,7 +55,7 @@ class SimpleSnackbar extends React.Component {
               size="small"
               onClick={this.handleClose}
             >
-              UNDO
+              {leng.undo}
             </Button>,
             <IconButton
               key="close"

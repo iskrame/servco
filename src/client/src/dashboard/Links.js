@@ -82,7 +82,7 @@ class Pages extends Component {
             })}
           >
             <div className={classes.drawerHeader} />
-            <DashboardContentWrapper />
+            <DashboardContentWrapper leng={this.props.leng}/>
           </main>
         );
 
@@ -110,7 +110,7 @@ class Pages extends Component {
           >
             <div className={classes.drawerHeader} />
             <center>
-              <CollaboratorAdministrator />
+              <CollaboratorAdministrator leng={this.props.leng}/>
               {/* <TabInfo /> */}
             </center>
           </main>

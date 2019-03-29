@@ -7,6 +7,7 @@ import { loginUser, sendEmail } from "../../actions/autActions";
 //import TextFieldGroup from "../common/TextFieldGroup";
 import SignIn from "./funcLogin";
 import Dialog from "../common/Dialog";
+import {clientLenguaje} from "../../translate/clientTranslate";
 
 class Login extends Component {
   constructor(props) {
@@ -32,6 +33,8 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const leng = clientLenguaje().messageWrongPU;
+
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
@@ -51,7 +54,7 @@ class Login extends Component {
       ) {
         this.setState({
           open: true,
-          errors: { message: "Usuario y/o contraseña incorrectos." }
+          errors: { message: leng }
         });
       } else {
         this.setState({ open: false });

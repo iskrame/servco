@@ -96,9 +96,35 @@ const styles = theme => ({
 });
 
 class FullWidthTabs extends React.Component {
+  componentDidMount() {
+    this.props.state.tabs = tabs.length;
+  }
   render() {
     const { classes, theme } = this.props;
-    const tabs = this.props.tabs;
+   
+    const tabs = [
+      {
+        name: this.props.leng.personalData
+      },
+      {
+        name: this.props.leng.origin
+      },
+      {
+        name: this.props.leng.addres
+      },
+      {
+        name: this.props.leng.contactInfo
+      },
+      {
+        name: this.props.leng.laborData
+      },
+      {
+        name: this.props.leng.education
+      },
+      {
+        name: this.props.leng.userData
+      }
+    ];
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -130,6 +156,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
+                leng={this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -139,6 +166,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
+                leng = {this.props.leng}
               />
               <div />
             </Paper>
@@ -149,6 +177,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
+                leng = {this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -166,6 +195,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 fields={this.props.state}
+                leng = {this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -204,14 +234,14 @@ class FullWidthTabs extends React.Component {
             className={classes.buttonCancel}
             onClick={this.props.handleCancel}
           >
-            Cancelar
+            {this.props.leng.cancel}
           </Button>
           {this.props.state.index !== 0 && (
             <Button
               className={classes.buttonBack}
               onClick={this.props.handleBack}
             >
-              Atras
+              {this.props.leng.back}
             </Button>
           )}
           <Button
@@ -235,8 +265,8 @@ class FullWidthTabs extends React.Component {
             })}
           >
             {this.props.state.index === tabs.length - 1
-              ? "Guardar"
-              : "Siguiente"}
+              ? this.props.leng.save
+              : this.props.leng.next}
           </Button>
         </div>
       </div>

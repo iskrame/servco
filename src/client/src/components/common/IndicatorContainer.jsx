@@ -11,7 +11,7 @@ const IndicatorContainer = ({ indicators }) => {
         <InfoBox
           Icon={clock}
           color={indicator.backgroundColor}
-          title={indicator.title}
+          title= {indicator.title}
           value={indicator.value}
         />
       </div>);

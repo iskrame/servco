@@ -4,6 +4,10 @@ import { withStyles } from "@material-ui/core/styles";
 
 import PersonalInfo from "./PersonalInfo";
 import BornFields from "./BornFields";
+//import {clientLenguaje} from "../../../../translate/clientTranslate";
+
+
+
 const styles = theme => ({
   root: {
     width: "100%"
@@ -20,6 +24,12 @@ const styles = theme => ({
   }
 });
 
+// export function changelengPF(x) {
+  
+  
+// }
+
+//let leng = clientLenguaje(0);
 class PersonalDataFields extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +40,6 @@ class PersonalDataFields extends Component {
 
   render() {
     const { classes, onChangePattern, state } = this.props;
-
     let tabContent;
     switch (this.state.index) {
       case 1:
@@ -39,6 +48,7 @@ class PersonalDataFields extends Component {
             state={state}
             onChange={this.props.onChange}
             onChangePattern={onChangePattern}
+            leng = {this.props.leng}
           />
         );
         break;
@@ -48,6 +58,7 @@ class PersonalDataFields extends Component {
             state={state}
             onChange={this.props.onChange}
             onChangePattern={onChangePattern}
+            leng = {this.props.leng}
           />
         );
         break;
@@ -57,6 +68,7 @@ class PersonalDataFields extends Component {
             state={state}
             onChange={this.props.onChange}
             onChangePattern={onChangePattern}
+            leng = {this.props.leng}
           />
         );
         break;
