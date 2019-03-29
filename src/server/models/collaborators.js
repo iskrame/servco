@@ -6,20 +6,22 @@ const Schema = mongoose.Schema;
 
 const CollaboratorSchema = new Schema({
     clave: {
-        type: String
+        type: Number,
+        required: true
     },
     names: {
-        type: String
+        type: String,
+        required: true
     },
     lastName: {
-        type: String
+        type: String,
+        required: true
     },
     secondLastName: {
         type: String
     },
     bDay: {
-        type: Date,
-        default: Date.now
+        type: Date
     },
     city: {
         type: String
@@ -45,39 +47,55 @@ const CollaboratorSchema = new Schema({
     rfc: {
         type: String
     },
-    street: {
-        type: String
+    address: {
+        street: {
+            type: String
+        },
+        number: {
+            type: String
+        },
+        fracc: {
+            type: String
+        },
+        municipality: {
+            type: String
+        },
+        addresState: {
+            type: String
+        },
+        zipCode: {
+            type: Number
+        },
     },
-    number: {
-        type: String
+    contactPhones: {
+        cel: {
+            type: String
+        },
+        tel: {
+            type: String
+        },
+        other: {
+            type: String
+        }
     },
-    fracc: {
-        type: String
-    },
-    municipality: {
-        type: String
-    },
-    addresState: {
-        type: String
-    },
-    zipCode: {
-        type: Number
-    },
-    cel: {
-        type: String
-    },
-    tel: {
-        type: String
-    },
-    other: {
-        type: String
+    emergenciesInformation: {
+        chronicdiseases: {
+            type: String
+        },
+        bloodType: {
+            type: String
+        },
+        allergies: {
+            type: String
+        }
     },
     jobs: [],
     monthlySalary: {
-        type: String
+        type: Number
     },
     seniorityDate: {
-        type: String
+        type: Date,
+        default: Date.now
     },
     laborLocation: {
         type: String
@@ -94,15 +112,15 @@ const CollaboratorSchema = new Schema({
     relationship: {
         type: String
     },
-    procurementRegime: {
-        type: String
-    },
-    _schema: {
-        type: String
-    },
-    otherSchema: {
-        type: String
-    },
+    // procurementRegime: {
+    //     type: String
+    // },
+    // _schema: {
+    //     type: String
+    // },
+    // otherSchema: {
+    //     type: String
+    // },
     socialSecurityNumber: {
         type: String
     },
@@ -113,10 +131,58 @@ const CollaboratorSchema = new Schema({
         type: String
     },
     payWay: {
-        type: String
+        accountNumber: {
+            type: String
+        },
+        cardNumber: {
+            type: String
+        },
+        bank: {
+            type: String
+        },
+        CLABE: {
+            type: String
+        }
     },
+    education: [
+        {
+            school: {
+                type: String
+            },
+            career: {
+                type: String
+            },
+            startDate: {
+                type: Date
+            },
+            endDate: {
+                type: Date
+            },
+            current: {
+                type: Boolean,
+                default: false
+            },
+            additionalInformation: {
+                type: String,
+                max: 250
+            }
+        }
+    ],
     email: {
         type: String
+    },
+    password: {
+        type: String
+    },
+    employeeRol: {
+        type: String
+    },
+    zkUser: {
+        type: Number
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
 });
 

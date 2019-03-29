@@ -41,7 +41,7 @@ class BornFields extends Component {
     if (state.country === "México") {
       stateFrom = (
         <div>
-          <InputLabel>Estado</InputLabel>
+          <InputLabel>{this.props.leng.addresState}</InputLabel>
           <Select
             id="state"
             name="state"
@@ -81,8 +81,8 @@ class BornFields extends Component {
               <TextField
                 id="city"
                 name="city"
-                label="Ciudad"
-                value={state.city}
+                label={this.props.leng.city}
+                value= {state.city}
                 onChange={onChangePattern}
                 inputProps={{
                   maxLength: 100,
@@ -99,10 +99,10 @@ class BornFields extends Component {
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl className={classes.formControl}>
-              <InputLabel>País</InputLabel>
+              <InputLabel>{this.props.leng.country}</InputLabel>
               <Select
                 id="country"
-                label="País"
+                label={this.props.leng.country}
                 name="country"
                 disabled={true}
                 fullWidth
@@ -123,7 +123,7 @@ class BornFields extends Component {
               <TextField
                 id="nationality"
                 name="nationality"
-                label="Nacionalidad"
+                label={this.props.leng.nationality}
                 value={state.nationality}
                 onChange={onChangePattern}
                 inputProps={{

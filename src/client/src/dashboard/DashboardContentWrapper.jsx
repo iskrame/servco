@@ -46,7 +46,7 @@ export class DashboardContentWrapper extends React.Component{
           <IndicatorContainer indicators = {this.state.indicators}  />
           <GraphicChart />
           <br/>
-          <VirtualizedTable gridData = {this.state.gridData}/>
+          <VirtualizedTable gridData = {this.state.gridData} leng={this.props.leng}/>
         </div>
       )
     }

@@ -12,6 +12,7 @@ import Edit from "@material-ui/icons/Edit";
 // import Collaborators from './data'
 import { getCollaborators, getCollaborator, saveMovie } from "./data";
 import { Paper } from "@material-ui/core";
+import {clientLenguaje} from "../../translate/clientTranslate"
 // function getInitialState() {
 const initialState = {
   view: "administrator",
@@ -60,6 +61,21 @@ const initialState = {
 };
 // return initialState;
 // }
+export function changelengTabInfo(x){
+  
+  // cont++;
+  // console.log(cont)
+  
+  let leng;
+  if (x===0) {
+    leng = clientLenguaje(0);
+    // console.log(leng);
+  } else {
+   leng =clientLenguaje(1);
+  //  console.log(leng);
+  }
+   return leng;
+}
 class AdminPage extends Component {
   constructor() {
     super();
@@ -67,6 +83,7 @@ class AdminPage extends Component {
     this.onChange = this.onChange.bind(this);
     this.onChangePattern = this.onChangePattern.bind(this);
     this.onClickEdit = this.onClickEdit.bind(this);
+
   }
 
   onClick(e) {
@@ -75,7 +92,6 @@ class AdminPage extends Component {
   }
   onClickEdit = id => {
     const collaborator = getCollaborator(id);
-    console.log(collaborator);
     this.setState({
       view: "add",
       clave: collaborator.clave,
@@ -94,7 +110,6 @@ class AdminPage extends Component {
   };
   onChange(e) {
     const { name, value } = e.target;
-    console.log(name + value);
     if (name === "country" && value !== "México") {
       this.setState({ nationality: "" });
     }
@@ -102,9 +117,7 @@ class AdminPage extends Component {
   }
   onChangePattern(e) {
     const { value, name } = e.target;
-    console.log(name);
     const valueTyped = e.target.validity.valid ? value : this.state[name];
-    console.log(valueTyped);
     this.setState({
       [name]: valueTyped
     });
@@ -122,6 +135,7 @@ class AdminPage extends Component {
   componentDidMount() {
     this.setState({ colla: getCollaborators() });
   }
+
   onsubmit = e => {
     // console.log(this.state);
     saveMovie(this.state);
@@ -129,6 +143,8 @@ class AdminPage extends Component {
     // this.setState({ colla });
     this.setState(initialState);
   };
+  
+ 
   render() {
     const styles = {
       floatingActionButton: {
@@ -188,7 +204,8 @@ class AdminPage extends Component {
         }
       }
     };
-
+let lenguaje = clientLenguaje(this.props.leng);
+// console.log(lenguaje)
     if (this.state.view === "administrator") {
       return (
         <div>
@@ -208,9 +225,9 @@ class AdminPage extends Component {
                   }}
                 >
                   <TableCell style={styles.columns.id}>ID</TableCell>
-                  <TableCell style={styles.columns.price}>Clave</TableCell>
-                  <TableCell style={styles.columns.name}>Name</TableCell>
-                  <TableCell style={styles.columns.edit}>Edit</TableCell>
+                  <TableCell style={styles.columns.price}>{lenguaje.key}</TableCell>
+                  <TableCell style={styles.columns.name}>{lenguaje.name}</TableCell>
+                  <TableCell style={styles.columns.edit}>{lenguaje.edit}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -265,6 +282,7 @@ class AdminPage extends Component {
             handleBack={this.handleBack}
             onsubmit={this.onsubmit}
             handleCancel={this.handleCancel}
+            leng={lenguaje}
           />
         </div>
       );

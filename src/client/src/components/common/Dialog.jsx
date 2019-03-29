@@ -5,6 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import {clientLenguaje} from "../../translate/clientTranslate";
 class AlertDialog extends React.Component {
   // class AlertDialog(props) {
   //   state = {
@@ -12,6 +13,7 @@ class AlertDialog extends React.Component {
   //   };
 
   render() {
+    const leng= clientLenguaje();
     return (
       <div>
         <Dialog
@@ -21,7 +23,7 @@ class AlertDialog extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            <span style={{ color: "red" }}>Acceso denegado</span>
+            <span style={{ color: "red" }}>{leng.accessDenied}</span>
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
@@ -43,7 +45,7 @@ class AlertDialog extends React.Component {
               }}
               autoFocus
             >
-              Cerrar
+              {leng.close}
             </Button>
           </DialogActions>
         </Dialog>

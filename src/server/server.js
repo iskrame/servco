@@ -7,6 +7,8 @@ const test = require("./routes/test.route"); // Imports routes for the punches
 const users = require("./routes/api/usersRoute");
 const dashboard = require("./routes/api/dashboardRoute");
 const cors = require("cors");
+const language = require("./src/translate/serverTranslate");
+
 const Collaborator = require('./routes/api/collaboratorRoute');
 // const users = require('./routes/api/users');
 // const profile = require('./routes/api/profile');

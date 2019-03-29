@@ -12,6 +12,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { payWays, schemas } from '../../../../utils/DummyData';
+//import {clientLenguaje} from "../../../../translate/clientTranslate";
 //Styles
 const styles = theme => ({
     root: {
@@ -42,6 +43,7 @@ const styles = theme => ({
 });
 //END Styles
 
+
 class AdditionalInformation extends Component {
     constructor(props) {
         super(props);
@@ -64,8 +66,9 @@ class AdditionalInformation extends Component {
         }
         this.props.onChange(e);
     }
-
+    
     render() {
+        //const leng = clientLenguaje();
         const { onChange, onChangePattern, fields, classes } = this.props;
         return (
             <div className={classes.root}>
@@ -73,7 +76,7 @@ class AdditionalInformation extends Component {
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <div className={classes.column}>
                             <span className={classes.heading}>
-                                <strong>Información Adicional</strong>
+                                <strong>{this.props.leng.additionalInformation}</strong>
                             </span>
                         </div>
                     </ExpansionPanelSummary>
@@ -84,7 +87,7 @@ class AdditionalInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="procurementRegime"
-                                            label="Régimen de contratación del trabajador"
+                                            label={this.props.leng.regimeWorker}
                                             value={fields.procurementRegime}
                                             onChange={onChange}
                                             fullWidth />
@@ -93,7 +96,7 @@ class AdditionalInformation extends Component {
 
                                 <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
-                                        <InputLabel>Esquema</InputLabel>
+                                        <InputLabel>{this.props.leng.scheme}</InputLabel>
                                         <Select
                                             value={fields.schema}
                                             onChange={this.onHandleChange.bind(this)}
@@ -111,7 +114,7 @@ class AdditionalInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="otherSchema"
-                                            label="Otro esquema"
+                                            label={this.props.leng.otherScheme}
                                             value={fields.otherSchema}
                                             inputProps={
                                                 {
@@ -130,7 +133,7 @@ class AdditionalInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="socialSecurityNumber"
-                                            label="(NSS) Número de seguridad social"
+                                            label={this.props.leng.socialNumber}
                                             value={fields.socialSecurityNumber}
                                             onChange={onChangePattern}
                                             inputProps={{ pattern: "[0-9]*" }}
@@ -143,7 +146,7 @@ class AdditionalInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="infonavit"
-                                            label="Infonavit"
+                                            label={this.props.leng.infonavit}
                                             value={fields.infonavit}
                                             onChange={onChangePattern}
                                             inputProps={{ pattern: "[a-zA-Z0-9]*" }}
@@ -156,7 +159,7 @@ class AdditionalInformation extends Component {
                                     <FormControl className={classes.formControl}>
                                         <TextField
                                             name="fonacot"
-                                            label="Fonacot"
+                                            label={this.props.leng.fonacot}
                                             value={fields.fonacot}
                                             onChange={onChangePattern}
                                             inputProps={{ pattern: "[a-zA-Z0-9]*" }}
@@ -164,16 +167,16 @@ class AdditionalInformation extends Component {
                                         />
                                     </FormControl>
                                 </Grid>
-
+                                
                                 <Grid item xs={11} sm={4}>
                                     <FormControl className={classes.formControl}>
-                                        <InputLabel>Forma de Pago</InputLabel>
+                                        <InputLabel>{this.props.leng.payform}</InputLabel>
                                         <Select
                                             value={fields.payWay}
                                             onChange={onChange}
                                             name="payWay">
                                             {payWays.map(payWay => (
-                                                <MenuItem key={payWay.description} value={payWay.id}>
+                                                <MenuItem key={payWay.description} value={payWay.id} >
                                                     {payWay.description}
                                                 </MenuItem>
                                             ))}

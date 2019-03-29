@@ -11,12 +11,14 @@ class PrincipalFields extends Component {
                     onChange={onChange}
                     onChangePattern={onChangePattern}
                     fields={fields}
+                    leng = {this.props.leng}
                 />
 
                 <AdditionalInformation
                     onChange={onChange}
                     onChangePattern={onChangePattern}
                     fields={fields}
+                    leng = {this.props.leng}
                 />
             </div>
         )

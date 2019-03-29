@@ -5,6 +5,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+import {clientLenguaje} from "../../translate/clientTranslate";
 // import MenuIcon from "@material-ui/icons/Menu";
 
 const styles = {
@@ -19,6 +20,7 @@ const styles = {
     marginRight: 20
   }
 };
+const leng = clientLenguaje();
 
 function ButtonAppBar(props) {
   const { classes } = props;
@@ -38,10 +40,10 @@ function ButtonAppBar(props) {
             color="inherit"
             className={classes.grow}
           >
-            News
+            {leng.news}
           </h4>
           <Button color="inherit" onClick={props.onClick}>
-            Logout
+            {leng.logOuts}
           </Button>
         </Toolbar>
       </AppBar>

@@ -16,6 +16,7 @@ const styles = theme => ({
 
 class GraphicChart extends React.Component {
 
+
   state = {
     style: {
         background: "#fff", 
@@ -44,7 +45,7 @@ class GraphicChart extends React.Component {
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: 'Horas'
+                    labelString: hours
                 },
                 gridLines: {
                     display:false
@@ -54,7 +55,7 @@ class GraphicChart extends React.Component {
                 display: true,
                 scaleLabel: {
                     display: true,
-                    labelString: 'Dias'
+                    labelString: days
                 },
                 gridLines: {
                     display:true
@@ -138,6 +139,7 @@ class GraphicChart extends React.Component {
 
 render() {
     const { classes } = this.props;
+
     return (
         <div style={this.state.style}>
             <Line height={70} data={this.state.dataLine} options={this.state.options } />
