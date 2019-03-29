@@ -19,7 +19,6 @@ class Dashboard extends Component {
     name: ""
   };
   handleDrawerOpen = () => {
-    console.log("Abrir");
     this.setState({ open: true });
   };
   handleDrawerClose = () => {
@@ -52,7 +51,8 @@ class Dashboard extends Component {
         borderRadius: "50px"
       }
     };
-
+    const { user } = this.props.auth;
+    console.log(user);
     return (
       <div>
         <div style={innerStyles.container}>

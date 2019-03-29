@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import TabInfo from "./TabInfo";
-// import Icon from "@material-ui/core/Icon";
+import axios from "axios";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Edit from "@material-ui/icons/Edit";
-// import Collaborators from './data'
-import { getCollaborators, getCollaborator, saveMovie } from "./data";
 import { Paper } from "@material-ui/core";
-// function getInitialState() {
+import ValidCollaboratorsInput from "../../validation/collaborators";
+import moment from "moment";
 const initialState = {
   view: "administrator",
   index: 0,
@@ -40,6 +39,7 @@ const initialState = {
   cel: "",
   tel: "",
   other: "",
+  personalEmail: "",
   //This states are for labor data (labor tab)
   jobs: [2],
   monthlySalary: "",
@@ -56,14 +56,46 @@ const initialState = {
   infonavit: "",
   fonacot: "",
   payWay: "",
-  tabs: ""
+  tabs: "",
+  email: "",
+  password: "",
+  status: "",
+  rol: "",
+  zKWebUser: ""
 };
-// return initialState;
-// }
+const tabs = [
+  {
+    name: "Información Personal"
+  },
+  {
+    name: "Lugar de Nacimiento"
+  },
+  {
+    name: "Dirección"
+  },
+  {
+    name: "Datos de Contacto"
+  },
+  {
+    name: "Datos Laborales"
+  },
+  {
+    name: "Información Adicional (Datos Laborales)"
+  },
+  {
+    name: "Escolaridad Superior"
+  },
+  // {
+  //   name: "Experiencia"
+  // },
+  {
+    name: "Datos Usuario"
+  }
+];
 class AdminPage extends Component {
   constructor() {
     super();
-    this.state = { colla: [], ...initialState };
+    this.state = { gridData: [], errors: [], ...initialState };
     this.onChange = this.onChange.bind(this);
     this.onChangePattern = this.onChangePattern.bind(this);
     this.onClickEdit = this.onClickEdit.bind(this);
@@ -74,14 +106,27 @@ class AdminPage extends Component {
     this.setState({ view: "add" });
   }
   onClickEdit = id => {
-    const collaborator = getCollaborator(id);
-    console.log(collaborator);
+    console.log(this.state.gridData);
+    const colla = this.state.gridData;
+    const data = colla.find(c => c._id === id);
+
+    // axios
+    //   .get("/api/collaborators/getByID", id)
+    //   .then(res => {
+    const date = moment(data.bDay).format("YYYY/MM/DD");
+
+    console.log(date.replace("/", "-").replace("/", "-"));
     this.setState({
       view: "add",
-      clave: collaborator.clave,
-      names: collaborator.names,
-      lastName: collaborator.lastName,
-      secondLastName: collaborator.secondLastName
+      clave: data.clave,
+      curp: data.curp,
+      rfc: data.rfc,
+      names: data.names,
+      lastName: data.lastName,
+      secondLastName: data.secondLastName,
+      bDay: date.replace("/", "-").replace("/", "-"),
+      email: data.email,
+      password: data.password
     });
   };
 
@@ -94,7 +139,7 @@ class AdminPage extends Component {
   };
   onChange(e) {
     const { name, value } = e.target;
-    console.log(name + value);
+
     if (name === "country" && value !== "México") {
       this.setState({ nationality: "" });
     }
@@ -102,32 +147,164 @@ class AdminPage extends Component {
   }
   onChangePattern(e) {
     const { value, name } = e.target;
-    console.log(name);
+
     const valueTyped = e.target.validity.valid ? value : this.state[name];
-    console.log(valueTyped);
+
     this.setState({
       [name]: valueTyped
     });
+    // if (name === "names") {
+    const { errors, isValid } = ValidCollaboratorsInput(this.state);
+
+    if (isValid) this.setState({ errors });
+    // }
   }
   handleNext = () => {
-    if (this.state.index < 6)
-      this.setState(state => ({ index: state.index + 1 }));
+    const validData = {
+      clave: this.state.clave,
+      names: this.state.names,
+      lastName: this.state.lastName,
+      secondLastName: this.state.secondLastName
+    };
+    const { errors, isValid } = ValidCollaboratorsInput(validData);
+    if (isValid) {
+      if (this.state.index < tabs.length)
+        this.setState(state => ({ index: state.index + 1 }));
+    }
+    this.setState({ errors });
   };
   handleBack = () => {
     this.setState(state => ({ index: state.index - 1 }));
   };
   handleCancel = () => {
     this.setState(initialState);
+    this.getCollaborators();
   };
-  componentDidMount() {
-    this.setState({ colla: getCollaborators() });
+  getCollaborators() {
+    axios({
+      url: "/api/collaborators",
+      method: "get"
+    })
+      .then(res => {
+        this.setState({
+          gridData: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .then(() => {
+        this.setState({
+          contentLoaded: true
+        });
+      });
   }
+  componentDidMount = () => {
+    this.getCollaborators();
+  };
   onsubmit = e => {
-    // console.log(this.state);
-    saveMovie(this.state);
-    // console.log(colla);
-    // this.setState({ colla });
-    this.setState(initialState);
+    const {
+      clave,
+      names,
+      lastName,
+      secondLastName,
+      bDay,
+      city,
+      state,
+      country,
+      gender,
+      civilStatus,
+      nationality,
+      curp,
+      rfc,
+      street,
+      number,
+      //this is a variable for Colonia/Fraccionamiento
+      fracc,
+      //this is a variable for Municipio
+      municipality,
+      addresState,
+      zipCode,
+      cel,
+      tel,
+      other,
+      personalEmail,
+      //This states are for labor data (labor tab)
+      jobs,
+      monthlySalary,
+      seniorityDate,
+      laborLocation,
+      otherLaborLocation,
+      workingDayType,
+      beneficiary,
+      relationship,
+      procurementRegime, //For regimen de contratacion del trabajador
+      schema,
+      otherSchema,
+      socialSecurityNumber,
+      infonavit,
+      fonacot,
+      payWay
+    } = this.state;
+
+    const newCollaborator = {
+      clave,
+      names,
+      lastName,
+      secondLastName,
+      bDay,
+      city,
+      state,
+      country,
+      gender,
+      civilStatus,
+      nationality,
+      curp,
+      rfc,
+      street,
+      number,
+      //this is a variable for Colonia/Fraccionamiento
+      fracc,
+      //this is a variable for Municipio
+      municipality,
+      addresState,
+      zipCode,
+      cel,
+      tel,
+      other,
+      personalEmail,
+      //This states are for labor data (labor tab)
+      jobs,
+      monthlySalary,
+      seniorityDate,
+      laborLocation,
+      otherLaborLocation,
+      workingDayType,
+      beneficiary,
+      relationship,
+      procurementRegime, //For regimen de contratacion del trabajador
+      schema,
+      otherSchema,
+      socialSecurityNumber,
+      infonavit,
+      fonacot,
+      payWay
+    };
+    const { errors, isValid } = ValidCollaboratorsInput(newCollaborator);
+    if (isValid) {
+      axios
+        .post("/api/collaborators/", newCollaborator)
+        .then(res => {
+          this.setState(initialState);
+          this.getCollaborators();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      console.log(newCollaborator);
+    } else {
+      this.setState({ errors: errors, index: 0 });
+    }
   };
   render() {
     const styles = {
@@ -150,8 +327,8 @@ class AdminPage extends Component {
         id: {
           width: "25%",
           color: "white",
-          fontSize: 14,
-          display: "none"
+          fontSize: 14
+          // display: "none"
         },
         name: {
           width: "35%",
@@ -171,8 +348,8 @@ class AdminPage extends Component {
       },
       rows: {
         id: {
-          width: "10%",
-          display: "none"
+          width: "10%"
+          // display: "none"
         },
         name: {
           width: "20%"
@@ -214,7 +391,7 @@ class AdminPage extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.state.colla.map((item, index) => (
+                {this.state.gridData.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell
                       style={styles.rows.id}
@@ -265,6 +442,7 @@ class AdminPage extends Component {
             handleBack={this.handleBack}
             onsubmit={this.onsubmit}
             handleCancel={this.handleCancel}
+            tabs={tabs}
           />
         </div>
       );

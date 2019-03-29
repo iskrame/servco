@@ -54,16 +54,35 @@ class PersonalInfo extends Component {
                 onChange={onChangePattern}
                 fullWidth
               />
+              {this.props.state.errors.clave && (
+                <div style={{ color: "red" }}>
+                  {this.props.state.errors.clave}
+                </div>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormControl className={classes.formControl}>
-              <TextField id="curp" name="curp" label="CURP" fullWidth />
+              <TextField
+                id="curp"
+                name="curp"
+                value={state.curp}
+                onChange={onChangePattern}
+                label="CURP"
+                fullWidth
+              />
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormControl className={classes.formControl}>
-              <TextField id="rfc" name="rfc" label="RFC" fullWidth />
+              <TextField
+                id="rfc"
+                name="rfc"
+                value={state.rfc}
+                onChange={onChangePattern}
+                label="RFC"
+                fullWidth
+              />
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -81,6 +100,11 @@ class PersonalInfo extends Component {
                   pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*"
                 }}
               />
+              {this.props.state.errors.names && (
+                <div style={{ color: "red" }}>
+                  {this.props.state.errors.names}
+                </div>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -98,6 +122,11 @@ class PersonalInfo extends Component {
                 onChange={onChangePattern}
                 value={state.lastName}
               />
+              {this.props.state.errors.lastName && (
+                <div style={{ color: "red" }}>
+                  {this.props.state.errors.lastName}
+                </div>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -115,6 +144,11 @@ class PersonalInfo extends Component {
                 value={state.secondLastName}
                 fullWidth
               />
+              {this.props.state.errors.secondLastName && (
+                <div style={{ color: "red" }}>
+                  {this.props.state.errors.secondLastName}
+                </div>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={4}>
