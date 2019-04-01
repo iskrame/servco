@@ -98,7 +98,7 @@ export function clientLenguaje(x) {
         if (bandera) {
             lenguaje=
                 {
-                    language : "ENG",
+                    language : "ESP",
                     user : "Usuario",
                     password : "Contraseña",
                     signIn : "Ingresar",
@@ -165,7 +165,7 @@ export function clientLenguaje(x) {
                     cancel : "cancelar",
                     profile : "Perfil",
                     collaborators : "Colaboradores",
-                    reports : "Reoportes",
+                    reports : "Reportes",
                     conf : "Configuraciones",
                     serviceCol : "Servicio al Colaborador",
                     personalData : "DATOS PERSONALES",
@@ -192,7 +192,7 @@ export function clientLenguaje(x) {
             }else{
                 lenguaje=
                 {   
-                    language : "ESP",
+                    language : "ENG",
                     user : "User",
                     password : "Password",
                     signIn : "Sign In",
@@ -261,7 +261,7 @@ export function clientLenguaje(x) {
                     collaborators : "Collaborators",
                     reports : "Reports",
                     conf : "Configurations",
-                    serviceCol : "Service to the Collaborator",
+                    serviceCol : "Collaborator Services",
                     personalData : "PERSONAL DATA",
                     laborData : "LABOR DATA",
                     education : "EDUCATION/EXPERIENCE",
