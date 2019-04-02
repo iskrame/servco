@@ -1,6 +1,8 @@
 export function clientLenguaje(x) {
   let bandera = true;
 
+  bandera = x === 0 ? true : false;
+
     let lenguaje=
             {   
                 language : " ",
@@ -263,6 +265,7 @@ export function clientLenguaje(x) {
                     laborData : "LABOR DATA",
                     education : "EDUCATION/EXPERIENCE",
                     userData: "USER DATA",
+                    accessDenied : "Access Denied",
                     currentPeriod : "Current Period",
                     previousPeriod : "Previous Period",
                     enterEmail : "Enter Email",
@@ -282,4 +285,3 @@ export function clientLenguaje(x) {
             }
         return lenguaje;
     }
-                    accessDenied : "Access Denied",
