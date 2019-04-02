@@ -10,9 +10,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Edit from "@material-ui/icons/Edit";
 import { Paper } from "@material-ui/core";
-import {clientLenguaje} from "../../translate/clientTranslate"
+import { clientLenguaje } from "../../translate/clientTranslate";
 // function getInitialState() {
-import ValidCollaboratorsInput from "../../validation/collaborators";
+import {
+  ValidCollaboratorsInput,
+  ValidUserInput
+} from "../../validation/collaborators";
 import moment from "moment";
 const initialState = {
   view: "administrator",
@@ -25,8 +28,8 @@ const initialState = {
   city: "",
   state: "",
   country: "México",
-  gender: "Masculino",
-  civilStatus: "Soltero",
+  gender: "0",
+  civilStatus: "0",
   nationality: "Mexicana",
   curp: "",
   rfc: "",
@@ -65,60 +68,31 @@ const initialState = {
   rol: "",
   zKWebUser: ""
 };
-const tabs = [
-  {
-    name: "Información Personal"
-  },
-  {
-    name: "Lugar de Nacimiento"
-  },
-  {
-    name: "Dirección"
-  },
-  {
-    name: "Datos de Contacto"
-  },
-  {
-    name: "Datos Laborales"
-  },
-  {
-    name: "Información Adicional (Datos Laborales)"
-  },
-  {
-    name: "Escolaridad Superior"
-  },
-  // {
-  //   name: "Experiencia"
-  // },
-  {
-    name: "Datos Usuario"
-  }
-];
+
 // return initialState;
 // }
-export function changelengTabInfo(x){
-  
-  // cont++;
-  // console.log(cont)
-  
+export function changelengTabInfo(x) {
   let leng;
-  if (x===0) {
+  if (x === 0) {
     leng = clientLenguaje(0);
-    // console.log(leng);
   } else {
-   leng =clientLenguaje(1);
-  //  console.log(leng);
+    leng = clientLenguaje(1);
   }
-   return leng;
+  return leng;
 }
 class AdminPage extends Component {
   constructor() {
     super();
-    this.state = { gridData: [], errors: [], ...initialState };
+    this.state = {
+      id: "",
+      gridData: [],
+      errors: [],
+      errorsUser: [],
+      ...initialState
+    };
     this.onChange = this.onChange.bind(this);
     this.onChangePattern = this.onChangePattern.bind(this);
     this.onClickEdit = this.onClickEdit.bind(this);
-
   }
 
   onClick(e) {
@@ -126,28 +100,54 @@ class AdminPage extends Component {
     this.setState({ view: "add" });
   }
   onClickEdit = id => {
-    console.log(this.state.gridData);
-    const colla = this.state.gridData;
-    const data = colla.find(c => c._id === id);
+    let data;
+    axios({
+      url: "/api/collaborators",
+      method: "get",
+      params: id
+    })
+      .then(res => {
+        data = res.data;
+        const date = res.data[0].bDate.split("T");
+        this.setState({
+          view: "add",
+          id: data[0]._id,
+          clave: data[0].clave,
+          curp: data[0].curp,
+          rfc: data[0].rfc,
+          names: data[0].names,
+          lastName: data[0].lastName,
+          secondLastName: data[0].secondLastName,
+          city: data[0].city,
+          bDay: date[0],
+          state: data[0].state,
+          country: data[0].country,
+          gender: data[0].gender,
+          civilStatus: data[0].civilStatus,
+          nationality: data[0].nationality,
+          street: data[0].address.street,
+          number: data[0].address.number,
+          fracc: data[0].address.fracc,
+          municipality: data[0].address.municipality,
+          addresState: data[0].address.addresState,
+          zipCode: data[0].address.zipCode,
+          cel: data[0].contactPhones.cel,
+          tel: data[0].contactPhones.tel,
+          other: data[0].contactPhones.other,
+          personalEmail: data[0].contactPhones.personalEmail,
 
-    // axios
-    //   .get("/api/collaborators/getByID", id)
-    //   .then(res => {
-    const date = moment(data.bDay).format("YYYY/MM/DD");
-
-    console.log(date.replace("/", "-").replace("/", "-"));
-    this.setState({
-      view: "add",
-      clave: data.clave,
-      curp: data.curp,
-      rfc: data.rfc,
-      names: data.names,
-      lastName: data.lastName,
-      secondLastName: data.secondLastName,
-      bDay: date.replace("/", "-").replace("/", "-"),
-      email: data.email,
-      password: data.password
-    });
+          email: data[0].email,
+          password: data[0].password
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .then(() => {
+        this.setState({
+          contentLoaded: true
+        });
+      });
   };
 
   handleChange = (event, index) => {
@@ -185,7 +185,7 @@ class AdminPage extends Component {
     };
     const { errors, isValid } = ValidCollaboratorsInput(validData);
     if (isValid) {
-      if (this.state.index < tabs.length)
+      if (this.state.index < 7)
         this.setState(state => ({ index: state.index + 1 }));
     }
     this.setState({ errors });
@@ -221,6 +221,7 @@ class AdminPage extends Component {
   };
   onsubmit = e => {
     const {
+      id,
       clave,
       names,
       lastName,
@@ -261,15 +262,21 @@ class AdminPage extends Component {
       socialSecurityNumber,
       infonavit,
       fonacot,
-      payWay
+      payWay,
+      email,
+      password
     } = this.state;
 
+    // const bDate = moment(bDay).format("YYYY-MM-DD");
+    const bDate = bDay;
+
     const newCollaborator = {
+      id,
       clave,
       names,
       lastName,
       secondLastName,
-      bDay,
+      bDate,
       city,
       state,
       country,
@@ -305,9 +312,12 @@ class AdminPage extends Component {
       socialSecurityNumber,
       infonavit,
       fonacot,
-      payWay
+      payWay,
+      email,
+      password
     };
-    const { errors, isValid } = ValidCollaboratorsInput(newCollaborator);
+    console.log("date input: " + newCollaborator.bDate);
+    const { errorsUser, isValid } = ValidUserInput(newCollaborator);
     if (isValid) {
       axios
         .post("/api/collaborators/", newCollaborator)
@@ -318,13 +328,11 @@ class AdminPage extends Component {
         .catch(err => {
           console.log(err);
         });
-      console.log(newCollaborator);
     } else {
-      this.setState({ errors: errors, index: 0 });
+      this.setState({ errorsUser: errorsUser });
     }
   };
-  
- 
+
   render() {
     const styles = {
       floatingActionButton: {
@@ -384,8 +392,34 @@ class AdminPage extends Component {
         }
       }
     };
-let lenguaje = clientLenguaje(this.props.leng);
-// console.log(lenguaje)
+    let lenguaje = clientLenguaje(this.props.leng);
+    const tabs = [
+      {
+        name: lenguaje.personalData
+      },
+      {
+        name: lenguaje.origin
+      },
+      {
+        name: lenguaje.addres
+      },
+      {
+        name: lenguaje.contactInfo
+      },
+      {
+        name: lenguaje.laborData
+      },
+      {
+        name: lenguaje.addData
+      },
+      {
+        name: lenguaje.education
+      },
+      {
+        name: lenguaje.userData
+      }
+    ];
+
     if (this.state.view === "administrator") {
       return (
         <div>
@@ -405,9 +439,15 @@ let lenguaje = clientLenguaje(this.props.leng);
                   }}
                 >
                   <TableCell style={styles.columns.id}>ID</TableCell>
-                  <TableCell style={styles.columns.price}>{lenguaje.key}</TableCell>
-                  <TableCell style={styles.columns.name}>{lenguaje.name}</TableCell>
-                  <TableCell style={styles.columns.edit}>{lenguaje.edit}</TableCell>
+                  <TableCell style={styles.columns.price}>
+                    {lenguaje.key}
+                  </TableCell>
+                  <TableCell style={styles.columns.name}>
+                    {lenguaje.name}
+                  </TableCell>
+                  <TableCell style={styles.columns.edit}>
+                    {lenguaje.edit}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

@@ -72,7 +72,11 @@ exports.getUserLogin = function(req, res) {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         //if user match then fill the payload to create the token
-        const payload = { id: user.id, email: email };
+        const payload = {
+          id: user.id,
+          email: email,
+          name: email
+        };
 
         //create the token
         jwt.sign(

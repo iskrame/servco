@@ -97,34 +97,11 @@ const styles = theme => ({
 
 class FullWidthTabs extends React.Component {
   componentDidMount() {
-    this.props.state.tabs = tabs.length;
+    // this.props.state.tabs = tabs.length;
   }
   render() {
     const { classes, theme } = this.props;
-   
-    const tabs = [
-      {
-        name: this.props.leng.personalData
-      },
-      {
-        name: this.props.leng.origin
-      },
-      {
-        name: this.props.leng.addres
-      },
-      {
-        name: this.props.leng.contactInfo
-      },
-      {
-        name: this.props.leng.laborData
-      },
-      {
-        name: this.props.leng.education
-      },
-      {
-        name: this.props.leng.userData
-      }
-    ];
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -140,7 +117,7 @@ class FullWidthTabs extends React.Component {
             }}
             variant="scrollable"
           >
-            {tabs.map((option, index) => (
+            {this.props.tabs.map((option, index) => (
               <Tab key={index} label={option.name} />
             ))}
           </Tabs>
@@ -166,7 +143,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
-                leng = {this.props.leng}
+                leng={this.props.leng}
               />
               <div />
             </Paper>
@@ -177,7 +154,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 state={this.props.state}
-                leng = {this.props.leng}
+                leng={this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -195,7 +172,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 fields={this.props.state}
-                leng = {this.props.leng}
+                leng={this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -205,6 +182,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 fields={this.props.state}
+                leng={this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -214,6 +192,7 @@ class FullWidthTabs extends React.Component {
                 onChange={this.props.onChange}
                 onChangePattern={this.props.onChangePattern}
                 fields={this.props.state}
+                leng={this.props.leng}
               />
             </Paper>
           </TabContainer>
@@ -248,12 +227,13 @@ class FullWidthTabs extends React.Component {
             variant="contained"
             color="primary"
             onClick={
-              this.props.state.index === tabs.length - 1
+              this.props.state.index === this.props.tabs.length - 1
                 ? this.props.onsubmit
                 : this.props.handleNext
             }
             className={classNames(classes.button, {
-              [classes.buttonSave]: this.props.state.index === tabs.length - 1
+              [classes.buttonSave]:
+                this.props.state.index === this.props.tabs.length - 1
               // })}{
               //   classNames({
               //     [classes.button]: !this.props.state.index === tabs.length - 1,
@@ -264,7 +244,7 @@ class FullWidthTabs extends React.Component {
               //   : "success"
             })}
           >
-            {this.props.state.index === tabs.length - 1
+            {this.props.state.index === this.props.tabs.length - 1
               ? this.props.leng.save
               : this.props.leng.next}
           </Button>

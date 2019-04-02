@@ -37,7 +37,6 @@ const styles = theme => ({
 });
 //END Styles
 
-
 class AdditionalInformation extends Component {
   constructor(props) {
     super(props);
@@ -58,136 +57,121 @@ class AdditionalInformation extends Component {
       });
       this.props.fields.otherSchema = "";
     }
-    
-    render() {
-        //const leng = clientLenguaje();
-        const { onChange, onChangePattern, fields, classes } = this.props;
-        return (
-            <div className={classes.root}>
-                <ExpansionPanel >
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <div className={classes.column}>
-                            <span className={classes.heading}>
-                                <strong>{this.props.leng.additionalInformation}</strong>
-                            </span>
-                        </div>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails className={classes.details}>
-                        <div className={classes.column}>
-                            <Grid container spacing={24}>
-                                <Grid item xs={11} sm={4}>
-                                    <FormControl className={classes.formControl}>
-                                        <TextField
-                                            name="procurementRegime"
-                                            label={this.props.leng.regimeWorker}
-                                            value={fields.procurementRegime}
-                                            onChange={onChange}
-                                            fullWidth />
-                                    </FormControl>
-                                </Grid>
+  }
+  render() {
+    //const leng = clientLenguaje();
+    const { onChange, onChangePattern, fields, classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                name="procurementRegime"
+                label={this.props.leng.regimeWorker}
+                value={fields.procurementRegime}
+                onChange={onChange}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
 
-                                <Grid item xs={11} sm={4}>
-                                    <FormControl className={classes.formControl}>
-                                        <InputLabel>{this.props.leng.scheme}</InputLabel>
-                                        <Select
-                                            value={fields.schema}
-                                            onChange={this.onHandleChange.bind(this)}
-                                            name="schema">
-                                            {schemas.map(schema => (
-                                                <MenuItem key={schema.description} value={schema.id}>
-                                                    {schema.description}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <InputLabel>{this.props.leng.scheme}</InputLabel>
+              <Select
+                value={fields.schema}
+                onChange={this.onHandleChange.bind(this)}
+                name="schema"
+              >
+                {schemas.map(schema => (
+                  <MenuItem key={schema.description} value={schema.id}>
+                    {schema.description}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
 
-                                <Grid item xs={11} sm={4}>
-                                    <FormControl className={classes.formControl}>
-                                        <TextField
-                                            name="otherSchema"
-                                            label={this.props.leng.otherScheme}
-                                            value={fields.otherSchema}
-                                            inputProps={
-                                                {
-                                                    pattern: "[a-zA-Z_ ]*",
-                                                    disabled: this.state.disabledOtherLocation ? 'disabled' : ''
-                                                }
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                name="otherSchema"
+                label={this.props.leng.otherScheme}
+                value={fields.otherSchema}
+                inputProps={{
+                  pattern: "[a-zA-Z_ ]*",
+                  disabled: this.state.disabledOtherLocation ? "disabled" : ""
+                }}
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                name="socialSecurityNumber"
+                label="(NSS) Número de seguridad social"
+                value={fields.socialSecurityNumber}
+                onChange={onChangePattern}
+                inputProps={{ pattern: "[0-9]*" }}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                name="socialSecurityNumber"
+                label={this.props.leng.socialNumber}
+                value={fields.socialSecurityNumber}
+                onChange={onChangePattern}
+                inputProps={{ pattern: "[0-9]*" }}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                name="infonavit"
+                label={this.props.leng.infonavit}
+                value={fields.infonavit}
+                onChange={onChangePattern}
+                inputProps={{ pattern: "[a-zA-Z0-9]*" }}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
 
-            <Grid item xs={11} sm={4}>
-              <FormControl className={classes.formControl}>
-                <TextField
-                  name="socialSecurityNumber"
-                  label="(NSS) Número de seguridad social"
-                  value={fields.socialSecurityNumber}
-                  onChange={onChangePattern}
-                  inputProps={{ pattern: "[0-9]*" }}
-                  fullWidth
-                />
-              </FormControl>
-            </Grid>
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <TextField
+                name="fonacot"
+                label={this.props.leng.fonacot}
+                value={fields.fonacot}
+                onChange={onChangePattern}
+                inputProps={{ pattern: "[a-zA-Z0-9]*" }}
+                fullWidth
+              />
+            </FormControl>
+          </Grid>
 
-                                <Grid item xs={11} sm={4}>
-                                    <FormControl className={classes.formControl}>
-                                        <TextField
-                                            name="socialSecurityNumber"
-                                            label={this.props.leng.socialNumber}
-                                            value={fields.socialSecurityNumber}
-                                            onChange={onChangePattern}
-                                            inputProps={{ pattern: "[0-9]*" }}
-                                            fullWidth
-                                        />
-                                    </FormControl>
-                                </Grid>
-
-                                <Grid item xs={11} sm={4}>
-                                    <FormControl className={classes.formControl}>
-                                        <TextField
-                                            name="infonavit"
-                                            label={this.props.leng.infonavit}
-                                            value={fields.infonavit}
-                                            onChange={onChangePattern}
-                                            inputProps={{ pattern: "[a-zA-Z0-9]*" }}
-                                            fullWidth
-                                        />
-                                    </FormControl>
-                                </Grid>
-
-                                <Grid item xs={11} sm={4}>
-                                    <FormControl className={classes.formControl}>
-                                        <TextField
-                                            name="fonacot"
-                                            label={this.props.leng.fonacot}
-                                            value={fields.fonacot}
-                                            onChange={onChangePattern}
-                                            inputProps={{ pattern: "[a-zA-Z0-9]*" }}
-                                            fullWidth
-                                        />
-                                    </FormControl>
-                                </Grid>
-                                
-                                <Grid item xs={11} sm={4}>
-                                    <FormControl className={classes.formControl}>
-                                        <InputLabel>{this.props.leng.payform}</InputLabel>
-                                        <Select
-                                            value={fields.payWay}
-                                            onChange={onChange}
-                                            name="payWay">
-                                            {payWays.map(payWay => (
-                                                <MenuItem key={payWay.description} value={payWay.id} >
-                                                    {payWay.description}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
-                        </div>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-            </div>
-        )
-    }
+          <Grid item xs={11} sm={4}>
+            <FormControl className={classes.formControl}>
+              <InputLabel>{this.props.leng.payform}</InputLabel>
+              <Select value={fields.payWay} onChange={onChange} name="payWay">
+                {payWays.map(payWay => (
+                  <MenuItem key={payWay.description} value={payWay.id}>
+                    {payWay.description}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 AdditionalInformation.propTypes = {

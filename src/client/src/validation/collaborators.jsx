@@ -9,7 +9,7 @@ function isEmpty(data) {
   );
 }
 
-export default function ValidCollaboratorsInput(data, firstFields) {
+export function ValidCollaboratorsInput(data, firstFields) {
   let errors = {};
 
   data.clave = !isEmpty(data.clave) ? data.clave : "";
@@ -33,5 +33,19 @@ export default function ValidCollaboratorsInput(data, firstFields) {
   return {
     errors,
     isValid: isEmpty(errors)
+  };
+}
+
+export function ValidUserInput(data) {
+  let errorsUser = {};
+  data.email = !isEmpty(data.email) ? data.email : "";
+  data.password = !isEmpty(data.password) ? data.password : "";
+
+  if (data.email === "") errorsUser.email = "Campo Obligatorio";
+  if (data.password === "") errorsUser.password = "Campo Obligatorio";
+
+  return {
+    errorsUser,
+    isValid: isEmpty(errorsUser)
   };
 }

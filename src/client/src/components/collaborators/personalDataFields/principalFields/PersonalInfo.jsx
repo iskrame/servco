@@ -138,7 +138,7 @@ class PersonalInfo extends Component {
                   pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*"
                 }}
                 id="secondLastName"
-                name={this.props.leng.secondLastName}
+                name="secondLastName"
                 label={this.props.leng.secondLastName}
                 onChange={onChangePattern}
                 value={state.secondLastName}
@@ -153,8 +153,10 @@ class PersonalInfo extends Component {
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormControl className={classes.formControl}>
+              {/* <InputLabel>{this.props.leng.civilStatus}</InputLabel> */}
               <TextField
                 type="date"
+                id="bDay"
                 name="bDay"
                 label={this.props.leng.bDay}
                 value={state.bDay}
@@ -175,11 +177,11 @@ class PersonalInfo extends Component {
                 value={state.civilStatus}
                 onChange={onChange}
               >
-                <MenuItem value="Soltero">{this.props.leng.single}</MenuItem>
-                <MenuItem value="Casado">{this.props.leng.married}</MenuItem>
-                <MenuItem value="Divorciado">{this.props.leng.divorced}</MenuItem>
-                <MenuItem value="Viudo">{this.props.leng.widower}</MenuItem>
-                <MenuItem value="UnionLibre">{this.props.leng.freeUnion}</MenuItem>
+                <MenuItem value="0">{this.props.leng.single}</MenuItem>
+                <MenuItem value="1">{this.props.leng.married}</MenuItem>
+                <MenuItem value="2">{this.props.leng.divorced}</MenuItem>
+                <MenuItem value="3">{this.props.leng.widower}</MenuItem>
+                <MenuItem value="4">{this.props.leng.freeUnion}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -192,8 +194,8 @@ class PersonalInfo extends Component {
                 value={state.gender}
                 onChange={onChange}
               >
-                <MenuItem value="Masculino">{this.props.leng.male}</MenuItem>
-                <MenuItem value="Femenino">{this.props.leng.female}</MenuItem>
+                <MenuItem value="0">{this.props.leng.male}</MenuItem>
+                <MenuItem value="1">{this.props.leng.female}</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -205,6 +207,5 @@ class PersonalInfo extends Component {
 PersonalInfo.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
 
 export default withStyles(styles)(PersonalInfo);

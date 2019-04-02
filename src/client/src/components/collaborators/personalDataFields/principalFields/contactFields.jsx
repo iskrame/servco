@@ -42,13 +42,12 @@ class ContactFields extends Component {
             <FormControl className={classes.formControl}>
               <TextField
                 inputProps={{
-                  maxLength: 6,
                   pattern: "^[0-9]*$"
                 }}
                 id="cel"
                 name="cel"
                 label="Celular"
-                // value={state.cel}
+                value={state.cel}
                 onChange={onChangePattern}
                 fullWidth
               />
@@ -61,11 +60,11 @@ class ContactFields extends Component {
                 id="tel"
                 name="tel"
                 label="Telefono de Casa"
+                value={state.tel}
                 onChange={onChangePattern}
                 fullWidth
                 autoComplete="fname"
                 inputProps={{
-                  maxLength: 100,
                   pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*"
                 }}
               />
@@ -74,9 +73,7 @@ class ContactFields extends Component {
           <Grid item xs={12} sm={6}>
             <FormControl className={classes.formControl}>
               <TextField
-                // required
                 inputProps={{
-                  maxLength: 100,
                   pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ]*"
                 }}
                 id="other"
@@ -93,7 +90,6 @@ class ContactFields extends Component {
               <TextField
                 // required
                 inputProps={{
-                  maxLength: 100,
                   pattern: "[a-zA-Z0-9\\s.,/'-~¨ñÑ@]*"
                 }}
                 id="personalEmail"

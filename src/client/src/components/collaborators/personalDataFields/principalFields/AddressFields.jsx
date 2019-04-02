@@ -77,6 +77,7 @@ class AddressInfo extends Component {
               <TextField
                 id="fracc"
                 name="fracc"
+                value={state.fracc}
                 label={this.props.leng.fracc}
                 fullWidth
                 inputProps={{

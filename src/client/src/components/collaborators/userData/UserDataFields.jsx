@@ -50,9 +50,9 @@ class UserDataFields extends Component {
                 onChange={onChangePattern}
                 fullWidth
               />
-              {this.props.state.errors.email && (
+              {this.props.state.errorsUser.email && (
                 <div style={{ color: "red" }}>
-                  {this.props.state.errors.email}
+                  {this.props.state.errorsUser.email}
                 </div>
               )}
             </FormControl>
@@ -73,9 +73,9 @@ class UserDataFields extends Component {
                   pattern: "[a-zA-Z0-9]*"
                 }}
               />
-              {this.props.state.errors.password && (
+              {this.props.state.errorsUser.password && (
                 <div style={{ color: "red" }}>
-                  {this.props.state.errors.password}
+                  {this.props.state.errorsUser.password}
                 </div>
               )}
             </FormControl>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-import CollaboratorAdministrator from "../components/collaborators/CollaboratorAdministrator";
+import AdminPage from "../components/collaborators/CollaboratorAdministrator";
 import { DashboardContentWrapper } from "../dashboard/DashboardContentWrapper";
 import img from "../img/logoSPARK132.png";
 const drawerWidth = 240;
@@ -82,7 +82,7 @@ class Pages extends Component {
             })}
           >
             <div className={classes.drawerHeader} />
-            <DashboardContentWrapper leng={this.props.leng}/>
+            <DashboardContentWrapper leng={this.props.leng} />
           </main>
         );
 
@@ -110,8 +110,7 @@ class Pages extends Component {
           >
             <div className={classes.drawerHeader} />
             <center>
-              <CollaboratorAdministrator leng={this.props.leng}/>
-              {/* <TabInfo /> */}
+              <AdminPage leng={this.props.leng} prueba="Prueba" />
             </center>
           </main>
         );
