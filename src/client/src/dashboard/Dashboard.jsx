@@ -23,7 +23,6 @@ class Dashboard extends Component {
     this.setState({ open: true });
   };
   handleDrawerClose = () => {
-    console.log("Cerrar");
     this.setState({ open: false });
   };
   componentDidMount() {

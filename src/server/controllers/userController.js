@@ -54,7 +54,7 @@ exports.getUserLogin = function(req, res) {
   //variables to get if is valid the text in the imputs, and
   // get the errors throwed by the function
   const { errors, isValid } = validateLoginInput(req.body);
-  console.log(req.body);
+
   //Check if the input value is valid
   if (!isValid) return res.status(400).json(errors);
 

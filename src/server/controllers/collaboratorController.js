@@ -15,7 +15,7 @@ exports.createOrUpdateCollaborator = async function(req, res) {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    console.log(req.body.bDate);
+
     const collaboratorFields = {};
     if (req.body.clave) collaboratorFields.clave = req.body.clave;
     if (req.body.names) collaboratorFields.names = req.body.names;

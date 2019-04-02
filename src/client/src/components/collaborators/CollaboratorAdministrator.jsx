@@ -16,7 +16,7 @@ import {
   ValidCollaboratorsInput,
   ValidUserInput
 } from "../../validation/collaborators";
-import moment from "moment";
+
 const initialState = {
   view: "administrator",
   index: 0,
@@ -316,7 +316,7 @@ class AdminPage extends Component {
       email,
       password
     };
-    console.log("date input: " + newCollaborator.bDate);
+
     const { errorsUser, isValid } = ValidUserInput(newCollaborator);
     if (isValid) {
       axios
