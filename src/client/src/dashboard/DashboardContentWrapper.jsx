@@ -8,7 +8,8 @@ export class DashboardContentWrapper extends React.Component{
   state = {
     contentLoaded: false,
     indicators: [],
-    gridData: []
+    gridData: [],
+    chartData: {}
   }
 
   componentDidMount = () =>{
@@ -33,16 +34,18 @@ export class DashboardContentWrapper extends React.Component{
         contentLoaded: true
       })
     });
+    
   }
 
   render(){
-
+    console.log(this.state.chartData);
+    console.log(this.props.leng)
     let content = <div></div>;
     if(this.state.contentLoaded){
       content = (
         <div>
           <IndicatorContainer indicators = {this.state.indicators}  />
-          <GraphicChart leng={this.props.leng} />
+          <GraphicChart leng={this.props.leng}/>
           <br/>
           <VirtualizedTable gridData = {this.state.gridData} leng={this.props.leng}/>
         </div>
