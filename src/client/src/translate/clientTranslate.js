@@ -1,7 +1,5 @@
 export function clientLenguaje(x) {
-    let bandera = true;
- 
-    bandera = x === 0 ?true: false;
+  let bandera = true;
 
     let lenguaje=
             {   
@@ -198,7 +196,6 @@ export function clientLenguaje(x) {
                     signIn : "Sign In",
                     recoverPassword : "Recover Password",
                     messageWrongPU : "Incorrect username and / or password.",
-                    accessDenied : "Access Denied",
                     sendEmailMessage : "an email has been sent with the link to change the password to: ",
                     additionalInformation : "Additional Information",
                     regimeWorker : "Worker hiring regime",
@@ -285,3 +282,4 @@ export function clientLenguaje(x) {
             }
         return lenguaje;
     }
+                    accessDenied : "Access Denied",

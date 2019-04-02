@@ -21,15 +21,14 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Settings from "@material-ui/icons/Settings";
 import Menu from "@material-ui/core/Menu";
-import {clientLenguaje} from "../translate/clientTranslate";
-import {changelengTabInfo} from "../components/collaborators/CollaboratorAdministrator";
+import { clientLenguaje } from "../translate/clientTranslate";
+import { changelengTabInfo } from "../components/collaborators/CollaboratorAdministrator";
 import usaFlag from "../img/usaFlag.png";
 import spainFlag from "../img/spainFlag.png";
 
 let leng = clientLenguaje(0);
 const drawerWidth = 240;
 let primaryMenus = ChangeLenguaje(0);
-
 
 const styles = theme => ({
   root: {
@@ -155,16 +154,16 @@ class MiniDrawer extends React.Component {
   };
   onclick = () => {
     let lenguajesIndex = this.props.leng === 0 ? 1 : 0;
-     this.changeleng(lenguajesIndex)
-  }
+    this.changeleng(lenguajesIndex);
+  };
 
-  changeleng = x =>{
-  this.setState({lenguajes:x})
-  leng = clientLenguaje(x);
-  primaryMenus = ChangeLenguaje(x);
-  changelengTabInfo(this.state.lenguajes);
-    this.props.onclick(this.props.name,this.props.index,x)
- }
+  changeleng = x => {
+    this.setState({ lenguajes: x });
+    leng = clientLenguaje(x);
+    primaryMenus = ChangeLenguaje(x);
+    changelengTabInfo(this.state.lenguajes);
+    this.props.onclick(this.props.name, this.props.index, x);
+  };
   render() {
     const { classes, theme } = this.props;
     const {
@@ -172,10 +171,10 @@ class MiniDrawer extends React.Component {
       open,
       onclick,
       handleDrawerOpen,
-      onLogoutClick,
+      onLogoutClick
     } = this.props;
     let openMenu = Boolean(this.state.anchorEl);
-    
+
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -200,7 +199,16 @@ class MiniDrawer extends React.Component {
               {leng.serviceCol}
             </h4>
             <section className={classes.rightToolbar}>
-            <Button onClick={this.onclick}> <img src={leng.language === "ESP" ? spainFlag : usaFlag} width="30px" height="20px" alt="..."/>{leng.language}</Button>
+              <Button onClick={this.onclick}>
+                {" "}
+                <img
+                  src={leng.language === "ESP" ? spainFlag : usaFlag}
+                  width="30px"
+                  height="20px"
+                  alt="..."
+                />
+                {leng.language}
+              </Button>
               <Menu
                 id="menu-appbar"
                 anchorEl={this.state.anchorEl}
@@ -215,9 +223,8 @@ class MiniDrawer extends React.Component {
                 open={openMenu}
                 onClose={this.handleClose}
               >
-              
-              <MenuItem onClick={() => onclick(1)}>{leng.profile}</MenuItem>
-              <MenuItem onClick={onLogoutClick}>{leng.logOut}</MenuItem>
+                <MenuItem onClick={() => onclick(1)}>{leng.profile}</MenuItem>
+                <MenuItem onClick={onLogoutClick}>{leng.logOut}</MenuItem>
               </Menu>
               <Button
                 color="inherit"
@@ -273,7 +280,7 @@ class MiniDrawer extends React.Component {
               [classes.userTextClose]: !open
             })}
           >
-            {"Alejandro Martinez"}
+            {this.props.user.name}
           </h4>
 
           <Divider style={{ marginBottom: "15px", background: "white" }} />
@@ -289,7 +296,7 @@ class MiniDrawer extends React.Component {
                 button
                 key={index}
                 className={classes.menuItem}
-                onClick={() => onclick(menu.text, index,this.state.lenguajes)}
+                onClick={() => onclick(menu.text, index, this.state.lenguajes)}
               >
                 <ListItemIcon className={classes.menuItem}>
                   {menu.icon}
