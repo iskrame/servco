@@ -86,6 +86,7 @@ export function clientLenguaje(x) {
                 origin : " ",
                 addres : " ",
                 edit : " ",
+                delete : " ",
                 single : " ",
                 married : " ",
                 divorced : " ",
@@ -93,7 +94,9 @@ export function clientLenguaje(x) {
                 freeUnion : " ",
                 back : " ",
                 next : " ",
-                save : " "
+                save : " ",
+                deleteCollabModalContent: " ",
+                deleteCollabModalTitle: " "
             }
         if (bandera) {
             lenguaje=
@@ -179,6 +182,7 @@ export function clientLenguaje(x) {
                     origin : "LUGAR DE NACIMIENTO",
                     addres : "DIRECCION",
                     edit : "Editar",
+                    delete : "Eliminar",
                     single : "Soltero",
                     married : "Casado",
                     divorced : "Divorciado",
@@ -186,7 +190,9 @@ export function clientLenguaje(x) {
                     freeUnion : "Union Libre",
                     back : "ATRAS",
                     next : "SIGUIENTE",
-                    save : "GUARDAR"
+                    save : "GUARDAR",
+                    deleteCollabModalContent: "¿Estas seguro de que deseas eliminar a este colaborador?",
+                    deleteCollabModalTitle: "Eliminar Colaborador"
                 }
             
             }else{
@@ -273,6 +279,7 @@ export function clientLenguaje(x) {
                     origin : "ORIGIN",
                     addres : "ADDRESS",
                     edit : "Edit",
+                    delete : "Delete",
                     single : "Single",
                     married : "Married",
                     divorced : "Divorced",
@@ -280,7 +287,9 @@ export function clientLenguaje(x) {
                     freeUnion : "Free Union",
                     back : "BACK",
                     next : "NEXT",
-                    save : "SAVE"
+                    save : "SAVE",
+                    deleteCollabModalContent: "Are you sure you want to delete this collaborator?",
+                    deleteCollabModalTitle: "Delete Collaborator"
                 }
             }
         return lenguaje;
