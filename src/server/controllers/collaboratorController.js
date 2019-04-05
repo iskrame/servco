@@ -172,7 +172,7 @@ exports.createOrUpdateCollaborator = async function(req, res) {
 
 //Get the entire documents of collaborators
 exports.getAllCollaborators = function(req, res) {
-  Collaborator.find()
+  Collaborator.find({ status: true })
     .then(collaborators => {
       if (!collaborators) {
         res
@@ -207,6 +207,7 @@ exports.deleteAll = function(req, res) {
 //Delete a specified collaborator by its id. THE COLLABORATOR WON'T BE DELETED, JUST SHUT DOWN THE ACTIVE FLAG
 exports.deleteById = function(req, res) {
   status = false;
+  console.log("eliminando...")
   Collaborator.findByIdAndUpdate(
     req.params.id,
     { status: status },

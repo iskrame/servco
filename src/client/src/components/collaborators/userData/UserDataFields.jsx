@@ -98,8 +98,9 @@ class UserDataFields extends Component {
             <FormControl className={classes.formControl}>
               <InputLabel>Rol</InputLabel>
               <Select id="rol" name="rol" value={state.rol} onChange={onChange}>
-                <MenuItem value="0">Activo</MenuItem>
-                <MenuItem value="1">Inactivo</MenuItem>
+                <MenuItem value="0">Administrador</MenuItem>
+                <MenuItem value="1">Empleado</MenuItem>
+                <MenuItem value="2">Recursos Humanos</MenuItem>
               </Select>
             </FormControl>
           </Grid>

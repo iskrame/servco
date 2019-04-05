@@ -23,7 +23,7 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   collaboratorController.deleteAll
 );
-router.put(
+router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   collaboratorController.deleteById

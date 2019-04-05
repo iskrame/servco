@@ -8,9 +8,15 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Edit from "@material-ui/icons/Edit";
+import { Edit, Delete } from "@material-ui/icons";
 import { Paper } from "@material-ui/core";
 import { clientLenguaje } from "../../translate/clientTranslate";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 // function getInitialState() {
 import {
   ValidCollaboratorsInput,
@@ -64,13 +70,14 @@ const initialState = {
   tabs: "",
   email: "",
   password: "",
-  status: "",
+  status: 0,
   rol: "",
   zKWebUser: ""
 };
 
 // return initialState;
 // }
+
 export function changelengTabInfo(x) {
   let leng;
   if (x === 0) {
@@ -88,6 +95,8 @@ class AdminPage extends Component {
       gridData: [],
       errors: [],
       errorsUser: [],
+      modalStatus: false,
+      toDelete: 0,
       ...initialState
     };
     this.onChange = this.onChange.bind(this);
@@ -101,43 +110,43 @@ class AdminPage extends Component {
   }
   onClickEdit = id => {
     let data;
+    console.log(id);
     axios({
-      url: "/api/collaborators",
-      method: "get",
-      params: id
+      url: "/api/collaborators/" + id,
+      method: "get"
     })
       .then(res => {
         data = res.data;
-        const date = res.data[0].bDate.split("T");
+        const date = data.bDate.split("T")[0];
         this.setState({
           view: "add",
-          id: data[0]._id,
-          clave: data[0].clave,
-          curp: data[0].curp,
-          rfc: data[0].rfc,
-          names: data[0].names,
-          lastName: data[0].lastName,
-          secondLastName: data[0].secondLastName,
-          city: data[0].city,
-          bDay: date[0],
-          state: data[0].state,
-          country: data[0].country,
-          gender: data[0].gender,
-          civilStatus: data[0].civilStatus,
-          nationality: data[0].nationality,
-          street: data[0].address.street,
-          number: data[0].address.number,
-          fracc: data[0].address.fracc,
-          municipality: data[0].address.municipality,
-          addresState: data[0].address.addresState,
-          zipCode: data[0].address.zipCode,
-          cel: data[0].contactPhones.cel,
-          tel: data[0].contactPhones.tel,
-          other: data[0].contactPhones.other,
-          personalEmail: data[0].contactPhones.personalEmail,
+          id: data._id,
+          clave: data.clave,
+          curp: data.curp,
+          rfc: data.rfc,
+          names: data.names,
+          lastName: data.lastName,
+          secondLastName: data.secondLastName,
+          city: data.city,
+          bDay: date,
+          state: data.state,
+          country: data.country,
+          gender: data.gender,
+          civilStatus: data.civilStatus,
+          nationality: data.nationality,
+          street: data.address.street,
+          number: data.address.number,
+          fracc: data.address.fracc,
+          municipality: data.address.municipality,
+          addresState: data.address.addresState,
+          zipCode: data.address.zipCode,
+          cel: data.contactPhones.cel,
+          tel: data.contactPhones.tel,
+          other: data.contactPhones.other,
+          personalEmail: data.contactPhones.personalEmail,
 
-          email: data[0].email,
-          password: data[0].password
+          email: data.email,
+          password: data.password
         });
       })
       .catch(err => {
@@ -148,6 +157,40 @@ class AdminPage extends Component {
           contentLoaded: true
         });
       });
+  };
+
+  onClickDelete = (e) => {
+
+    axios({
+      url: "/api/collaborators/" + this.state.toDelete,
+      method: "delete"
+    })
+    .then(res => {
+      this.setState({
+        modalStatus: false,
+        toDelete: 0
+      });
+      console.log("eliminado");
+      this.getCollaborators();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  };
+
+  openModal = id => {
+    //console.log(id);
+    this.setState({
+      modalStatus: true,
+      toDelete: id
+    });
+  };
+
+  closeModal = (e) => {
+    this.setState({
+      modalStatus: false,
+      toDelete: 0
+    });
   };
 
   handleChange = (event, index) => {
@@ -350,6 +393,10 @@ class AdminPage extends Component {
         heigth: "10%",
         color: "e0e0e0"
       },
+      deleteButton: {
+        background: "#941a1f",
+        color: "white"
+      },
       columns: {
         id: {
           width: "25%",
@@ -371,6 +418,11 @@ class AdminPage extends Component {
           width: "15%",
           color: "white",
           fontSize: 14
+        },
+        delete: {
+          width: "15%",
+          color: "white",
+          fontSize: 14
         }
       },
       rows: {
@@ -388,9 +440,13 @@ class AdminPage extends Component {
           width: "20%"
         },
         edit: {
-          width: "10%"
+          cursor: "pointer"
+        },
+        delete: {
+          cursor: "pointer"
         }
       }
+      
     };
     let lenguaje = clientLenguaje(this.props.leng);
     const tabs = [
@@ -448,6 +504,9 @@ class AdminPage extends Component {
                   <TableCell style={styles.columns.edit}>
                     {lenguaje.edit}
                   </TableCell>
+                  <TableCell style={styles.columns.delete}>
+                    {lenguaje.delete}
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -474,14 +533,40 @@ class AdminPage extends Component {
                     </TableCell>
                     <TableCell>
                       <Edit
-                        style={{ cursor: "pointer" }}
+                        style={styles.rows.edit}
                         onClick={() => this.onClickEdit(item._id)}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Delete
+                        style={styles.rows.delete}
+                        onClick={() => this.openModal(item._id)}
                       />
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+            <Dialog
+              open={this.state.modalStatus}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{lenguaje.deleteCollabModalTitle}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  {lenguaje.deleteCollabModalContent}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.closeModal} color="default" variant="contained">
+                  {lenguaje.cancel}
+                </Button>
+                <Button onClick={this.onClickDelete} color="primary" variant="contained" autoFocus style={styles.deleteButton}>
+                  {lenguaje.delete}
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Paper>
           <Fab
             style={styles.floatingActionButton}
