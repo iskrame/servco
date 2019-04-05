@@ -128,7 +128,7 @@ export function clientLenguaje(x) {
                     jobLocation : "Ubicacion Laboral",
                     otherJobLocation : "Otra Ubicacion Laboral",
                     journey : "Tipo de Jornada",
-                    beneficiary : "Bneficiario",
+                    beneficiary : "Beneficiario",
                     relationchipBeneficiary : "Parentesco del beneficiario",
                     close : "Cerrar",
                     personalInfo : "Informacion Personal",

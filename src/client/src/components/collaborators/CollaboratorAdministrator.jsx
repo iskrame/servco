@@ -70,7 +70,7 @@ const initialState = {
   tabs: "",
   email: "",
   password: "",
-  status: "",
+  status: 0,
   rol: "",
   zKWebUser: ""
 };
