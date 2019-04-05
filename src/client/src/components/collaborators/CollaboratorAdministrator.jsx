@@ -8,15 +8,17 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { Edit, Delete } from "@material-ui/icons";
+import { Edit, Delete, CheckCircle, RemoveCircle } from "@material-ui/icons";
 import { Paper } from "@material-ui/core";
 import { clientLenguaje } from "../../translate/clientTranslate";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // function getInitialState() {
 import {
   ValidCollaboratorsInput,
@@ -97,6 +99,7 @@ class AdminPage extends Component {
       errorsUser: [],
       modalStatus: false,
       toDelete: 0,
+      showDisabled: false,
       ...initialState
     };
     this.onChange = this.onChange.bind(this);
@@ -159,23 +162,22 @@ class AdminPage extends Component {
       });
   };
 
-  onClickDelete = (e) => {
-
+  onClickDelete = e => {
     axios({
       url: "/api/collaborators/" + this.state.toDelete,
       method: "delete"
     })
-    .then(res => {
-      this.setState({
-        modalStatus: false,
-        toDelete: 0
+      .then(res => {
+        this.setState({
+          modalStatus: false,
+          toDelete: 0
+        });
+        console.log("eliminado");
+        this.getActiveCollaborators();
+      })
+      .catch(err => {
+        console.log(err);
       });
-      console.log("eliminado");
-      this.getCollaborators();
-    })
-    .catch(err => {
-      console.log(err);
-    })
   };
 
   openModal = id => {
@@ -186,7 +188,7 @@ class AdminPage extends Component {
     });
   };
 
-  closeModal = (e) => {
+  closeModal = e => {
     this.setState({
       modalStatus: false,
       toDelete: 0
@@ -238,11 +240,46 @@ class AdminPage extends Component {
   };
   handleCancel = () => {
     this.setState(initialState);
-    this.getCollaborators();
+    this.getActiveCollaborators();
   };
-  getCollaborators() {
+  handleShowAllCollaborators = event => {
+    const { showDisabled } = this.state;
+    this.setState({ showDisabled: !showDisabled }, () => {
+      console.log(this.state.showDisabled);
+      if (this.state.showDisabled) {
+        this.getAllCollaborators();
+      }
+      else {
+        this.getActiveCollaborators();
+      }
+    });          
+  };
+
+  getActiveCollaborators() {
     axios({
-      url: "/api/collaborators",
+      url: "/api/collaborators/active",
+      method: "get"
+    })
+      .then(res => {
+        this.setState({
+          gridData: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .then(() => {
+        this.setState({
+          contentLoaded: true
+        });
+      });
+  }
+
+  getAllCollaborators() {
+    console.log('getall');
+
+    axios({
+      url: "/api/collaborators/all",
       method: "get"
     })
       .then(res => {
@@ -260,7 +297,7 @@ class AdminPage extends Component {
       });
   }
   componentDidMount = () => {
-    this.getCollaborators();
+    this.getActiveCollaborators();
   };
   onsubmit = e => {
     const {
@@ -366,7 +403,7 @@ class AdminPage extends Component {
         .post("/api/collaborators/", newCollaborator)
         .then(res => {
           this.setState(initialState);
-          this.getCollaborators();
+          this.getActiveCollaborators();
         })
         .catch(err => {
           console.log(err);
@@ -446,7 +483,6 @@ class AdminPage extends Component {
           cursor: "pointer"
         }
       }
-      
     };
     let lenguaje = clientLenguaje(this.props.leng);
     const tabs = [
@@ -477,12 +513,24 @@ class AdminPage extends Component {
     ];
 
     if (this.state.view === "administrator") {
+      const { showDisabled } = this.state;
       return (
-        <div>
+        
+        <>
+        <FormControlLabel
+            control={
+              
+              <Checkbox checked={showDisabled} value="showDisabled" onChange={() => this.handleShowAllCollaborators()}/>
+            }
+            label={lenguaje.showUnavailable}
+            style={{ display: 'flex' }}
+
+          />
+          
           <Paper
             style={{
               borderRadius: "5px",
-              boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)"
+              boxShadow: "3px 3px 5px 3px rgba(0,0,0,.2)",
             }}
           >
             <Table>
@@ -507,7 +555,14 @@ class AdminPage extends Component {
                   <TableCell style={styles.columns.delete}>
                     {lenguaje.delete}
                   </TableCell>
+                  {showDisabled &&
+                    <TableCell style={styles.columns.delete}>
+                      {lenguaje.active}
+                    </TableCell>
+                  }
                 </TableRow>
+
+
               </TableHead>
               <TableBody>
                 {this.state.gridData.map((item, index) => (
@@ -543,6 +598,20 @@ class AdminPage extends Component {
                         onClick={() => this.openModal(item._id)}
                       />
                     </TableCell>
+                    {showDisabled &&
+                    <TableCell>
+                      {item.status && 
+                      <CheckCircle
+                      style={styles.rows.delete}
+                      //onClick={() => this.openModal(item._id)}
+                      />}
+                      {!item.status && 
+                      <RemoveCircle
+                      style={styles.rows.delete}
+                      //onClick={() => this.openModal(item._id)}
+                      />}
+                  </TableCell>
+                  }
                   </TableRow>
                 ))}
               </TableBody>
@@ -552,17 +621,29 @@ class AdminPage extends Component {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
-              <DialogTitle id="alert-dialog-title">{lenguaje.deleteCollabModalTitle}</DialogTitle>
+              <DialogTitle id="alert-dialog-title">
+                {lenguaje.deleteCollabModalTitle}
+              </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                   {lenguaje.deleteCollabModalContent}
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={this.closeModal} color="default" variant="contained">
+                <Button
+                  onClick={this.closeModal}
+                  color="default"
+                  variant="contained"
+                >
                   {lenguaje.cancel}
                 </Button>
-                <Button onClick={this.onClickDelete} color="primary" variant="contained" autoFocus style={styles.deleteButton}>
+                <Button
+                  onClick={this.onClickDelete}
+                  color="primary"
+                  variant="contained"
+                  autoFocus
+                  style={styles.deleteButton}
+                >
                   {lenguaje.delete}
                 </Button>
               </DialogActions>
@@ -574,7 +655,7 @@ class AdminPage extends Component {
           >
             <AddIcon />
           </Fab>
-        </div>
+        </>
       );
     } else
       return (

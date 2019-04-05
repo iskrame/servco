@@ -172,18 +172,34 @@ exports.createOrUpdateCollaborator = async function(req, res) {
 
 //Get the entire documents of collaborators
 exports.getAllCollaborators = function(req, res) {
-  Collaborator.find({ status: true })
+  Collaborator.find()
     .then(collaborators => {
       if (!collaborators) {
         res
           .status(404)
-          .json({ nocollaborators: "There are not collaborators" });
+          .json({ nocollaborators: "There are no collaborators" });
       } else {
         res.json(collaborators);
       }
     })
     .catch(err =>
-      res.status(404).json({ nocollaborators: "There are not collaborators" })
+      res.status(404).json({ nocollaborators: "There are no collaborators" })
+    );
+};
+
+exports.getActiveCollaborators = function(req, res) {
+  Collaborator.find({status:true})
+    .then(collaborators => {
+      if (!collaborators) {
+        res
+          .status(404)
+          .json({ nocollaborators: "There are no collaborators" });
+      } else {
+        res.json(collaborators);
+      }
+    })
+    .catch(err =>
+      res.status(404).json({ nocollaborators: "There are no collaborators" })
     );
 };
 
@@ -194,13 +210,13 @@ exports.deleteAll = function(req, res) {
       if (!collaborators) {
         res
           .status(404)
-          .json({ nocollaborators: "There are not collaborators" });
+          .json({ nocollaborators: "There are no collaborators" });
       } else {
         res.json(collaborators);
       }
     })
     .catch(err =>
-      res.status(404).json({ nocollaborators: "There are not collaborators" })
+      res.status(404).json({ nocollaborators: "There are no collaborators" })
     );
 };
 

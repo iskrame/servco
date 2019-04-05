@@ -9,10 +9,16 @@ router.post(
   collaboratorController.createOrUpdateCollaborator
 );
 router.get(
-  "/",
+  "/all",
   passport.authenticate("jwt", { session: false }),
   collaboratorController.getAllCollaborators
 );
+router.get(
+  "/active",
+  passport.authenticate("jwt", { session: false }),
+  collaboratorController.getActiveCollaborators
+);
+
 router.get(
   "/:id",
   passport.authenticate("jwt", { session: false }),
