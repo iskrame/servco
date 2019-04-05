@@ -109,9 +109,9 @@ class Pages extends Component {
             style={{ width: "100%", minHeight: 200 }}
           >
             <div className={classes.drawerHeader} />
-            <center>
+            {/* <center> */}
               <AdminPage leng={this.props.leng} prueba="Prueba" />
-            </center>
+            {/* </center> */}
           </main>
         );
         break;
