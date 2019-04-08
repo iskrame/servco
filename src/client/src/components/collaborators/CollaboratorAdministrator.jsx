@@ -17,8 +17,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+
 // function getInitialState() {
 import {
   ValidCollaboratorsInput,
@@ -99,6 +100,7 @@ class AdminPage extends Component {
       errorsUser: [],
       modalStatus: false,
       toDelete: 0,
+      selectedOption: 2,
       showDisabled: false,
       ...initialState
     };
@@ -242,18 +244,32 @@ class AdminPage extends Component {
     this.setState(initialState);
     this.getActiveCollaborators();
   };
+
   handleShowAllCollaborators = event => {
-    const { showDisabled } = this.state;
-    this.setState({ showDisabled: !showDisabled }, () => {
-      console.log(this.state.showDisabled);
-      if (this.state.showDisabled) {
+
+    this.setState({ selectedOption: event.target.value }, () => {
+      switch(this.state.selectedOption){
+        case 1:
         this.getAllCollaborators();
-      }
-      else {
+        break;
+
+        case 2:
         this.getActiveCollaborators();
+        break;
+
+        case 3: 
+        this.getInactiveCollaborators();
+        break;
+
+        default:
+        break;
       }
-    });          
+    });   
+      
   };
+
+
+
 
   getActiveCollaborators() {
     axios({
@@ -270,14 +286,35 @@ class AdminPage extends Component {
       })
       .then(() => {
         this.setState({
-          contentLoaded: true
+          contentLoaded: true,
+          showDisabled: false
         });
       });
   }
 
-  getAllCollaborators() {
-    console.log('getall');
+  getInactiveCollaborators() {
+    axios({
+      url: "/api/collaborators/inactive",
+      method: "get"
+    })
+      .then(res => {
+        this.setState({
+          gridData: res.data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .then(() => {
+        this.setState({
+          contentLoaded: true,
+          showDisabled: true
+        });
+      });
+  }
 
+
+  getAllCollaborators() {
     axios({
       url: "/api/collaborators/all",
       method: "get"
@@ -292,7 +329,8 @@ class AdminPage extends Component {
       })
       .then(() => {
         this.setState({
-          contentLoaded: true
+          contentLoaded: true,
+          showDisabled: true
         });
       });
   }
@@ -513,11 +551,11 @@ class AdminPage extends Component {
     ];
 
     if (this.state.view === "administrator") {
-      const { showDisabled } = this.state;
+      const { selectedOption, showDisabled } = this.state;
       return (
         
         <>
-        <FormControlLabel
+        {/* <FormControlLabel
             control={
               
               <Checkbox checked={showDisabled} value="showDisabled" onChange={() => this.handleShowAllCollaborators()}/>
@@ -525,7 +563,24 @@ class AdminPage extends Component {
             label={lenguaje.showUnavailable}
             style={{ display: 'flex' }}
 
-          />
+          /> */}
+       {/* <FormControl style={{flexDirection: 'row', justifyContent: 'flex-end'}}> */}
+          <Select
+            value={selectedOption}
+            onChange={this.handleShowAllCollaborators}
+            inputProps={{
+              name: 'age',
+              id: 'age-simple',
+            }}
+            style={{marginBottom:10}}
+          >
+            <MenuItem value={1}>{lenguaje.all}</MenuItem>
+            <MenuItem value={2}>{lenguaje.active}</MenuItem>
+            <MenuItem value={3}>{lenguaje.inactive}</MenuItem>
+          </Select>
+        {/* </FormControl> */}
+
+
           
           <Paper
             style={{

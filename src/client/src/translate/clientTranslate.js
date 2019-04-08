@@ -98,7 +98,9 @@ export function clientLenguaje(x) {
                 deleteCollabModalContent: " ",
                 deleteCollabModalTitle: " ",
                 active: " ",
-                showUnavailable: " ",
+                inactive: " ",
+                all: " ",
+
                 
             }
         if (bandera) {
@@ -196,8 +198,9 @@ export function clientLenguaje(x) {
                     save : "GUARDAR",
                     deleteCollabModalContent: "¿Estas seguro de que deseas eliminar a este colaborador?",
                     deleteCollabModalTitle: "Eliminar Colaborador",
-                    active: "Activo",
-                    showUnavailable: "Mostrar Colaboradores inactivos"
+                    active: "Activos",
+                    inactive: "Inactivos",
+                    all: "Todos",
                 }
             
             }else{
@@ -296,7 +299,8 @@ export function clientLenguaje(x) {
                     deleteCollabModalContent: "Are you sure you want to delete this collaborator?",
                     deleteCollabModalTitle: "Delete Collaborator",
                     active: "Active",
-                    showUnavailable: "Show innactive Collaborators"
+                    inactive: "Inactive",
+                    all: "All",
                 }
             }
         return lenguaje;

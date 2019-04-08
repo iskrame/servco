@@ -203,6 +203,22 @@ exports.getActiveCollaborators = function(req, res) {
     );
 };
 
+exports.getInactiveCollaborators = function(req, res) {
+  Collaborator.find({status:false})
+    .then(collaborators => {
+      if (!collaborators) {
+        res
+          .status(404)
+          .json({ nocollaborators: "There are no collaborators" });
+      } else {
+        res.json(collaborators);
+      }
+    })
+    .catch(err =>
+      res.status(404).json({ nocollaborators: "There are no collaborators" })
+    );
+};
+
 // //Delete all collaborators
 exports.deleteAll = function(req, res) {
   Collaborator.deleteMany()

@@ -20,6 +20,12 @@ router.get(
 );
 
 router.get(
+  "/inactive",
+  passport.authenticate("jwt", { session: false }),
+  collaboratorController.getInactiveCollaborators
+);
+
+router.get(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   collaboratorController.getCollaborator
