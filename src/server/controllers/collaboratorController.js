@@ -142,7 +142,7 @@ exports.createOrUpdateCollaborator = async function(req, res) {
     //If the password is typed, hashed it!!
     if (req.body.password) {
       var salt = await bcrypt.genSalt(10);
-      var hash = await (req.body.password, salt);
+      var hash = await bcrypt.hash(req.body.password, salt);
       collaboratorFields.password = hash;
     }
 
