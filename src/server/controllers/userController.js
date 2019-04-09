@@ -11,6 +11,7 @@ const validateUsersRegisterInput = require("../validation/userRegister");
 const ValidateRecoverPassword = require("../validation/recoverPassword");
 // Load User model
 const Users = require("../models/users");
+const Collaborators = require("../models/collaborators");
 
 const language = require("../src/translate/serverTranslate");
 
@@ -62,7 +63,7 @@ exports.getUserLogin = function(req, res) {
   const password = req.body.password;
 
   //here is finding an user by email
-  Users.findOne({ email }).then(user => {
+  Collaborators.findOne({ email }).then(user => {
     //Check if the email is in the data base
     if (!user) {
       errors.emailnotFound = language().notEmail;
@@ -75,7 +76,7 @@ exports.getUserLogin = function(req, res) {
         const payload = {
           id: user.id,
           email: email,
-          name: email
+          name: user.names + " " + user.lastName
         };
 
         //create the token
@@ -109,7 +110,7 @@ exports.sendingEMail = function(req, res) {
 
   const email = req.body.recoverEmail;
   //here is finding an user by email
-  Users.findOne({ email }).then(user => {
+  Collaborators.findOne({ email }).then(user => {
     //Check if the email is in the data base
     if (!user) {
       errorsEmail.recoverEmail = language().notEmail;
@@ -140,7 +141,7 @@ exports.sendingEMail = function(req, res) {
       from: language().servco,
       to: user.email,
       subject: language().passRecovery,
-      text: `${language().greeting}, Alejandro Martinez.
+      text: `${language().greeting}, ${user.names} ${user.lastName}.
       ${language().msn1}
         
       http://10.0.1.89:3000/recoverpassword/Bearer${token}/${user._id}
@@ -172,7 +173,7 @@ exports.recoverPassword = function(req, res) {
 
   if (!isValid) return res.status(400).json(errors);
 
-  Users.findOne({ _id: req.body._id }).then(user => {
+  Collaborators.findOne({ _id: req.body._id }).then(user => {
     //const to recibe the info of the new user
     const newPassword = new Users({
       password: req.body.password
@@ -183,7 +184,7 @@ exports.recoverPassword = function(req, res) {
         if (err) throw err;
         newPassword.password = hash;
 
-        Users.update(
+        Collaborators.update(
           { _id: req.body.userId },
           {
             $set: { password: newPassword.password }
