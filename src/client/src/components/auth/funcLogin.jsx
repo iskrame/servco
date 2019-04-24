@@ -48,11 +48,11 @@ const styles = theme => ({
     cursor: "pointer"
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit
   },
   dense: {
-    marginTop: 19
+    // marginTop: 19
   }
 });
 function SignIn(props) {
@@ -73,9 +73,11 @@ function SignIn(props) {
               }}
               id="email"
               name="email"
+              className={classNames(classes.textField, classes.dense)}
               autoComplete="email"
               autoFocus
               onChange={props.onChange}
+              fullWidth
             />
             <span style={{ color: "red" }}>{props.errors.email}</span>
           </FormControl>
@@ -85,7 +87,7 @@ function SignIn(props) {
               inputProps={{
                 maxLength: 25
               }}
-              label="Contraseña"
+              label={leng.password}
               className={classNames(classes.textField, classes.dense)}
               name="password"
               type="password"

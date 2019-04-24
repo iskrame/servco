@@ -12,7 +12,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import {clientLenguaje} from "../../translate/clientTranslate";
 
 function RecoverPassword(props) {
-  const leng = clientLenguaje();
+  const leng = clientLenguaje(0);
   return (
     <main>
       <CssBaseline />
