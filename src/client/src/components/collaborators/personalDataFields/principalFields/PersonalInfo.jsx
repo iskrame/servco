@@ -158,7 +158,7 @@ class PersonalInfo extends Component {
                 type="date"
                 id="bDay"
                 name="bDay"
-                label={this.props.leng.bDay}
+                label={this.props.leng.bday}
                 value={state.bDay}
                 onChange={onChangePattern}
                 InputLabelProps={{
