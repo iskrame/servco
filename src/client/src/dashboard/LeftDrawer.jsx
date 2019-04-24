@@ -23,8 +23,9 @@ import Settings from "@material-ui/icons/Settings";
 import Menu from "@material-ui/core/Menu";
 import { clientLenguaje } from "../translate/clientTranslate";
 import { changelengTabInfo } from "../components/collaborators/CollaboratorAdministrator";
-import usaFlag from "../img/usaFlag.png";
-import spainFlag from "../img/spainFlag.png";
+import usaFlag from "../img/usaFlag2.png";
+import mexicoFlag from "../img/mexicoFlag.png";
+import Tooltip from '@material-ui/core/Tooltip';
 
 let leng = clientLenguaje(0);
 const drawerWidth = 240;
@@ -139,6 +140,7 @@ class MiniDrawer extends React.Component {
   state = {
     auth: true,
     anchorEl: null,
+    name: this.props.name,
     lenguajes: 0
   };
   handleChange = event => {
@@ -158,12 +160,18 @@ class MiniDrawer extends React.Component {
   };
 
   changeleng = x => {
-    this.setState({ lenguajes: x });
     leng = clientLenguaje(x);
     primaryMenus = ChangeLenguaje(x);
+    this.setState({ lenguajes: x });
     changelengTabInfo(this.state.lenguajes);
     this.props.onclick(this.props.name, this.props.index, x);
   };
+
+  componentWillReceiveProps(nextProps) {
+    primaryMenus = ChangeLenguaje(nextProps.leng);
+    let index = nextProps.index === "" ? 0 : nextProps.index 
+    this.setState({ name: primaryMenus.menus[index].text });
+  }
   render() {
     const { classes, theme } = this.props;
     const {
@@ -171,7 +179,8 @@ class MiniDrawer extends React.Component {
       open,
       onclick,
       handleDrawerOpen,
-      onLogoutClick
+      onLogoutClick,
+      index
     } = this.props;
     let openMenu = Boolean(this.state.anchorEl);
 
@@ -196,18 +205,19 @@ class MiniDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <h4 color="inherit" style={{ marginTop: "15px" }}>
-              {leng.serviceCol}
+              {index === "" ? leng.serviceCol : this.state.name}
             </h4>
             <section className={classes.rightToolbar}>
               <Button onClick={this.onclick}>
                 {" "}
                 <img
-                  src={leng.language === "ESP" ? spainFlag : usaFlag}
+                  src={leng.language === "ESP" ? mexicoFlag : usaFlag}
                   width="30px"
-                  height="20px"
+                  height="30px"
                   alt="..."
+                  style={{marginRight: "5px"}}
                 />
-                {leng.language}
+                {" " + leng.language}
               </Button>
               <Menu
                 id="menu-appbar"
@@ -223,14 +233,13 @@ class MiniDrawer extends React.Component {
                 open={openMenu}
                 onClose={this.handleClose}
               >
-                <MenuItem onClick={() => onclick(1)}>{leng.profile}</MenuItem>
+                <MenuItem onClick={() => onclick("Perfil",1)}>{leng.profile}</MenuItem>
                 <MenuItem onClick={onLogoutClick}>{leng.logOut}</MenuItem>
               </Menu>
               <Button
                 color="inherit"
                 aria-label="Configuracion"
                 onClick={this.handleMenu}
-                style={{ marginTop: "10px" }}
               >
                 <Settings />
               </Button>
@@ -292,18 +301,20 @@ class MiniDrawer extends React.Component {
             }}
           >
             {primaryMenus.menus.map((menu, index) => (
-              <ListItem
-                button
-                key={index}
-                className={classes.menuItem}
-                onClick={() => onclick(menu.text, index, this.state.lenguajes)}
-              >
-                <ListItemIcon className={classes.menuItem}>
-                  {menu.icon}
-                </ListItemIcon>
+              <Tooltip title={menu.text} placement="right">
+                <ListItem
+                  button
+                  key={index}
+                  className={classes.menuItem}
+                  onClick={() => onclick(menu.text, index, this.state.lenguajes)}
+                >
+                  <ListItemIcon className={classes.menuItem}>
+                    {menu.icon}
+                  </ListItemIcon>
 
-                {menu.text}
-              </ListItem>
+                  {menu.text}
+                </ListItem>
+              </Tooltip>
             ))}
           </List>
         </Drawer>
