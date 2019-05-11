@@ -106,7 +106,7 @@ export function clientLenguaje(x) {
         if (bandera) {
             lenguaje=
                 {
-                    language : "ESP",
+                    language : "ENG",
                     user : "Usuario",
                     password : "Contraseña",
                     signIn : "Ingresar",
@@ -206,7 +206,7 @@ export function clientLenguaje(x) {
             }else{
                 lenguaje=
                 {   
-                    language : "ENG",
+                    language : "ESP",
                     user : "User",
                     password : "Password",
                     signIn : "Sign In",
